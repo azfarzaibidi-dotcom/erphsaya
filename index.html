@@ -2921,6 +2921,10 @@ body::before {
 
 
 /* ===== Liputan DSKP ===== */
+.cov-title-row { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.cov-year-pick { display:flex; align-items:center; gap:8px; }
+.cov-year-pick label { font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; color:var(--brand-green-1,#123c2d); }
+.cov-year-pick select { padding:7px 12px; border:1.5px solid rgba(18,57,45,0.18); border-radius:10px; font-family:'Cairo',sans-serif; font-weight:800; font-size:14px; background:#fff; color:var(--brand-green-1,#123c2d); cursor:pointer; }
 .cov-pills { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
 .cov-pill {
   border:1.5px solid rgba(18,57,45,0.18); background:#fff; color:var(--primary-dark);
@@ -2936,6 +2940,16 @@ body::before {
 .cov-num { font-size:13px; font-weight:800; color:var(--text-light); white-space:nowrap; }
 .cov-bar { height:10px; border-radius:999px; background:rgba(18,57,45,0.08); overflow:hidden; }
 .cov-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#2d8a56,#1a5c38); transition:width .4s ease; }
+.cov-top { cursor:pointer; user-select:none; }
+.cov-chev { display:inline-block; font-size:11px; transition:transform .2s ease; color:var(--brand-gold,#c9a24e); }
+.cov-hint { font-size:12px; color:var(--text-light); margin:-6px 0 14px; }
+.cov-untaught { margin-top:8px; padding:4px 0 2px; }
+.cov-untaught.hidden { display:none; }
+.cov-tj { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:7px 10px; border:1px solid rgba(18,57,45,0.1); border-radius:10px; margin-bottom:6px; background:#fbfaf6; }
+.cov-tj-name { font-family:'Cairo',sans-serif; font-size:14px; color:#333; font-weight:700; flex:1; }
+.cov-tj-btn { border:none; background:linear-gradient(135deg,#1c5639,#123c2d); color:#fff; font-family:'Cairo',sans-serif; font-weight:800; font-size:12.5px; padding:6px 12px; border-radius:999px; cursor:pointer; white-space:nowrap; transition:filter .15s ease; }
+.cov-tj-btn:hover { filter:brightness(1.12); }
+.cov-tj-done { font-size:13px; color:#2d8a56; font-weight:700; padding:4px 2px; }
 
 
 /* ===== Templat aktiviti + Takwim cuti ===== */
@@ -2983,6 +2997,201 @@ body::before {
 .week-del-btn { border:none; background:rgba(255,255,255,0.25); color:#fff; width:30px; height:30px; border-radius:8px; cursor:pointer; font-size:15px; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
 .week-del-btn:hover { background:rgba(255,255,255,0.45); }
 
+/* ===== MODUL KEHADIRAN ===== */
+.kh-controls { display:flex; gap:14px; align-items:flex-end; flex-wrap:wrap; background:#fff; border:1px solid rgba(18,57,45,0.12); border-radius:16px; padding:16px 18px; margin-bottom:16px; box-shadow:0 2px 10px rgba(18,57,45,0.05); }
+.kh-ctrl { display:flex; flex-direction:column; gap:6px; }
+.kh-ctrl label { font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; color:var(--brand-green-1,#123c2d); }
+.kh-ctrl select, .kh-ctrl input { padding:10px 12px; border:1.5px solid rgba(18,57,45,0.16); border-radius:10px; font-family:'Cairo',sans-serif; font-size:15px; background:#fff; min-width:150px; }
+.kh-week { align-items:center; }
+.kh-week-badge { min-width:64px; text-align:center; padding:9px 14px; border-radius:10px; font-family:'Cairo',sans-serif; font-weight:900; font-size:16px; color:#fff; background:linear-gradient(135deg,var(--brand-green-2,#1c5639),var(--brand-green-1,#123c2d)); }
+.kh-load-btn { background:linear-gradient(135deg,var(--brand-gold-lt,#e8c97a),var(--brand-gold,#c9a24e)) !important; color:#10211a !important; font-weight:900 !important; border:none !important; padding:11px 20px !important; border-radius:10px !important; }
+.kh-card { background:#fff; border:1px solid rgba(18,57,45,0.12); border-radius:16px; padding:18px; margin-bottom:22px; box-shadow:0 2px 12px rgba(18,57,45,0.06); }
+.kh-mark-head { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; padding-bottom:12px; border-bottom:2px solid rgba(201,162,78,0.4); }
+.kh-mark-title { font-family:'Cairo',sans-serif; font-weight:800; font-size:15px; color:var(--brand-green-1,#123c2d); }
+.kh-mark-title b { color:#c0392b; }
+.kh-mark-who { font-weight:900; color:var(--brand-green-2,#1c5639); }
+.kh-summary { font-family:'Cairo',sans-serif; font-weight:900; font-size:17px; color:var(--brand-green-1,#123c2d); background:rgba(201,162,78,0.14); padding:6px 14px; border-radius:999px; white-space:nowrap; }
+.kh-roster { display:flex; flex-direction:column; gap:7px; }
+.kh-std { display:flex; align-items:center; gap:10px; padding:9px 12px; border:1px solid rgba(18,57,45,0.1); border-radius:10px; background:#fbfaf6; flex-wrap:wrap; }
+.kh-std.absent { background:#fdecea; border-color:rgba(192,57,43,0.3); }
+.kh-std input[type=checkbox] { width:20px; height:20px; accent-color:#c0392b; cursor:pointer; flex-shrink:0; }
+.kh-std-no { font-family:'Cairo',sans-serif; font-weight:800; color:var(--text-light); font-size:13px; min-width:26px; }
+.kh-std-name { flex:1; font-family:'Cairo',sans-serif; font-weight:700; font-size:14px; color:#333; min-width:160px; }
+.kh-std-sebab { display:none; gap:8px; align-items:center; flex-wrap:wrap; }
+.kh-std.absent .kh-std-sebab { display:flex; }
+.kh-std-sebab select, .kh-std-sebab input { padding:7px 10px; border:1.5px solid rgba(18,57,45,0.16); border-radius:8px; font-family:'Cairo',sans-serif; font-size:13px; background:#fff; }
+.kh-std-sebab input { min-width:140px; }
+.kh-save-row { display:flex; gap:10px; align-items:center; margin-top:16px; flex-wrap:wrap; }
+.kh-save-btn { background:linear-gradient(135deg,var(--brand-green-2,#1c5639),var(--brand-green-1,#123c2d)) !important; color:#fff !important; font-weight:900 !important; border:none !important; padding:11px 22px !important; border-radius:10px !important; }
+.kh-save-msg { font-family:'Cairo',sans-serif; font-weight:700; font-size:13px; color:var(--brand-green-2,#1c5639); }
+.kh-rec-head { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.kh-rec-title { margin:0; }
+.kh-filter-bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.kh-filter-bar select { padding:8px 11px; border:1.5px solid rgba(18,57,45,0.16); border-radius:9px; font-family:'Cairo',sans-serif; font-size:14px; background:#fff; }
+.kh-xls-btn { border-color:var(--brand-green-2,#1c5639) !important; color:var(--brand-green-1,#123c2d) !important; font-weight:800 !important; }
+.kh-rec-list { display:flex; flex-direction:column; gap:10px; }
+.kh-rec { border:1px solid rgba(18,57,45,0.12); border-radius:12px; background:#fff; overflow:hidden; }
+.kh-rec-top { display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; flex-wrap:wrap; }
+.kh-rec-wk { font-family:'Cairo',sans-serif; font-weight:900; font-size:13px; color:#fff; background:var(--brand-green-2,#1c5639); padding:4px 10px; border-radius:999px; white-space:nowrap; }
+.kh-rec-main { flex:1; font-family:'Cairo',sans-serif; font-weight:800; font-size:14px; color:#333; min-width:150px; }
+.kh-rec-main small { display:block; font-weight:600; color:var(--text-light); font-size:12px; margin-top:2px; }
+.kh-rec-count { font-family:'Cairo',sans-serif; font-weight:900; font-size:15px; white-space:nowrap; }
+.kh-rec-count.ok { color:var(--brand-green-2,#1c5639); }
+.kh-rec-count.miss { color:#c0392b; }
+.kh-rec-chev { font-size:12px; color:var(--brand-gold,#c9a24e); }
+.kh-rec-body { display:none; padding:4px 14px 14px; border-top:1px dashed rgba(18,57,45,0.14); }
+.kh-rec-body.open { display:block; }
+.kh-abs-row { display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px solid rgba(18,57,45,0.07); font-family:'Cairo',sans-serif; font-size:13.5px; }
+.kh-abs-name { font-weight:700; color:#333; }
+.kh-abs-sebab { font-weight:800; color:#c0392b; white-space:nowrap; }
+.kh-rec-actions { display:flex; gap:8px; margin-top:12px; }
+.kh-rec-actions button { border:none; border-radius:8px; padding:7px 14px; font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; cursor:pointer; }
+.kh-edit-btn { background:rgba(201,162,78,0.18); color:#8a6d27; }
+.kh-del-btn { background:rgba(192,57,43,0.12); color:#c0392b; }
+.kh-allhadir { color:var(--brand-green-2,#1c5639); font-weight:800; font-family:'Cairo',sans-serif; font-size:13.5px; padding:6px 0; }
+.kh-empty { color:var(--text-light); font-family:'Cairo',sans-serif; font-size:14px; padding:18px 4px; text-align:center; }
+@media (max-width:600px){ .kh-controls { gap:10px; } .kh-ctrl select, .kh-ctrl input { min-width:120px; } }
+
+/* ===== KEHADIRAN GURU (mod Saya) ===== */
+.kh-mode-toggle { display:inline-flex; gap:6px; background:#eef3ee; border:1px solid rgba(18,57,45,0.12); border-radius:12px; padding:5px; margin-bottom:16px; }
+.kh-mode-btn { border:none; background:transparent; color:var(--brand-green-1,#123c2d); font-family:'Cairo',sans-serif; font-weight:800; font-size:14px; padding:9px 16px; border-radius:9px; cursor:pointer; transition:all .15s ease; }
+.kh-mode-btn.active { background:linear-gradient(135deg,var(--brand-green-2,#1c5639),var(--brand-green-1,#123c2d)); color:#fff; box-shadow:0 3px 10px rgba(18,57,45,0.22); }
+.kg-head-row { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+.kg-summary-bar { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-bottom:16px; }
+.kg-stat { background:#fff; border:1px solid rgba(18,57,45,0.12); border-radius:12px; padding:12px 8px; text-align:center; box-shadow:0 2px 8px rgba(18,57,45,0.05); }
+.kg-stat-v { font-family:'Cairo',sans-serif; font-weight:900; font-size:22px; color:var(--brand-green-1,#123c2d); line-height:1.1; }
+.kg-stat-l { font-family:'Cairo',sans-serif; font-weight:700; font-size:11.5px; color:var(--text-light); margin-top:3px; }
+.kg-stat-rate { background:linear-gradient(135deg,var(--brand-green-2,#1c5639),var(--brand-green-1,#123c2d)); }
+.kg-stat-rate .kg-stat-v, .kg-stat-rate .kg-stat-l { color:#fff !important; }
+.kg-legend { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px; }
+.kg-lg { display:inline-flex; align-items:center; gap:6px; font-family:'Cairo',sans-serif; font-weight:700; font-size:12.5px; color:#444; }
+.kg-lg i { width:16px; height:16px; border-radius:4px; border:1px solid rgba(0,0,0,0.12); display:inline-block; }
+.kg-hint { font-family:'Cairo',sans-serif; font-size:12px; color:var(--text-light); margin-bottom:12px; }
+.kg-grid-wrap { overflow-x:auto; border:1px solid rgba(18,57,45,0.12); border-radius:14px; background:#fff; padding:8px; -webkit-overflow-scrolling:touch; }
+table.kg-grid { border-collapse:separate; border-spacing:3px; font-family:'Cairo',sans-serif; }
+table.kg-grid th, table.kg-grid td { text-align:center; }
+.kg-month-row th { font-size:12px; font-weight:900; color:var(--brand-green-1,#123c2d); padding:4px 6px; background:#f2efe3; border-radius:6px; white-space:nowrap; }
+.kg-week-row th { font-size:11px; font-weight:800; color:#fff; background:var(--brand-green-2,#1c5639); padding:4px 0; border-radius:6px; min-width:32px; }
+.kg-corner { background:transparent !important; color:var(--brand-green-1,#123c2d) !important; position:sticky; left:0; z-index:2; }
+.kg-dayname { font-size:11.5px; font-weight:800; color:var(--brand-green-1,#123c2d); background:#f2efe3; padding:0 8px; border-radius:6px; position:sticky; left:0; z-index:1; white-space:nowrap; }
+.kg-cell { width:32px; height:30px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer; border:1px solid transparent; transition:transform .1s ease; user-select:none; }
+.kg-cell:hover { transform:scale(1.12); box-shadow:0 2px 8px rgba(0,0,0,0.18); }
+.kg-locked { cursor:default; }
+.kg-locked:hover { transform:none; box-shadow:none; }
+.kg-hadir { background:#e6f4ec; color:#1c5639; border-color:#9ccdb1; }
+.kg-tugas { background:#2f80c4; color:#fff; }
+.kg-cuti  { background:#e39a3b; color:#fff; }
+.kg-tidak { background:#d64541; color:#fff; }
+.kg-cutiSekolah { background:#f1d64e; color:#7a5c00; border-color:#e0c23a; }
+.kg-rehat { background:#eef0f2; color:#9aa2ab; border-color:#dfe3e7; }
+.kg-dayname.kg-wkend { background:#eceff2; color:#8a9199; }
+.kg-modal-title { font-family:'Cairo',sans-serif; font-weight:900; font-size:17px; color:var(--brand-green-1,#123c2d); margin-bottom:14px; text-align:center; }
+.kg-status-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+.kg-st-btn { border:2px solid rgba(18,57,45,0.14); background:#fff; color:#333; font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; padding:12px 8px; border-radius:10px; cursor:pointer; transition:all .12s ease; }
+.kg-st-btn:hover { border-color:var(--brand-green-2,#1c5639); }
+.kg-st-btn.active[data-st=hadir] { background:#e6f4ec; border-color:#1c5639; color:#1c5639; }
+.kg-st-btn.active[data-st=tugas] { background:#2f80c4; border-color:#2f80c4; color:#fff; }
+.kg-st-btn.active[data-st=cuti] { background:#e39a3b; border-color:#e39a3b; color:#fff; }
+.kg-st-btn.active[data-st=tidak] { background:#d64541; border-color:#d64541; color:#fff; }
+.kg-st-btn.active[data-st=rehat] { background:#eef0f2; border-color:#aab0b7; color:#6b7280; }
+.kg-note-label { display:block; font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; color:var(--brand-green-1,#123c2d); margin-bottom:5px; }
+.kg-note-input { width:100%; box-sizing:border-box; padding:10px 12px; border:1.5px solid rgba(18,57,45,0.16); border-radius:10px; font-family:'Cairo',sans-serif; font-size:14px; margin-bottom:16px; }
+.kg-modal-actions { display:flex; gap:10px; }
+.kg-save { background:linear-gradient(135deg,var(--brand-green-2,#1c5639),var(--brand-green-1,#123c2d)) !important; color:#fff !important; font-weight:900 !important; border:none !important; flex:1; }
+@media (max-width:640px){ .kg-summary-bar { grid-template-columns:repeat(3,1fr); } }
+
+/* ===== MODUL LATIHAN / PENGHANTARAN ===== */
+.kh-std.lt-belum { background:#fdecea; border-color:rgba(192,57,43,0.25); }
+.kh-std.lt-hantar { background:#e7f5ec; border-color:rgba(28,86,57,0.3); }
+.kh-std.lt-lewat { background:#fbf0dd; border-color:rgba(201,140,40,0.35); }
+#ltRoster .kh-std .lt-hantar-cb { width:20px; height:20px; accent-color:#1c5639 !important; cursor:pointer; flex-shrink:0; }
+.lt-lewat-wrap { display:none; align-items:center; gap:5px; font-family:'Cairo',sans-serif; font-weight:800; font-size:12.5px; color:#9a6a1a; cursor:pointer; white-space:nowrap; }
+.kh-std.lt-hantar .lt-lewat-wrap, .kh-std.lt-lewat .lt-lewat-wrap { display:inline-flex; }
+.lt-lewat-wrap input { width:16px; height:16px; accent-color:#e39a3b; cursor:pointer; }
+.lt-badge { font-family:'Cairo',sans-serif; font-weight:800; font-size:11px; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+.lt-badge.b-hantar { background:rgba(28,86,57,0.14); color:#1c5639; }
+.lt-badge.b-lewat { background:rgba(201,140,40,0.16); color:#9a6a1a; }
+.lt-badge.b-belum { background:rgba(192,57,43,0.12); color:#c0392b; }
+.kh-rec-main .lt-tajuk { color:var(--brand-green-1,#123c2d); }
+
+/* ===== MODUL PBD ===== */
+.pbd-tp-sel { padding:7px 10px; border:1.5px solid rgba(18,57,45,0.18); border-radius:9px; font-family:'Cairo',sans-serif; font-weight:800; font-size:14px; background:#fff; cursor:pointer; min-width:92px; }
+.kh-std.pbd-set { background:#f3f8f4; }
+.pbd-tp { display:inline-block; min-width:40px; text-align:center; padding:3px 8px; border-radius:7px; font-family:'Cairo',sans-serif; font-weight:900; font-size:13px; color:#fff; }
+.pbd-tp-0 { background:#d7dde1; color:#7b858c; }
+.pbd-tp-1 { background:#d64541; } .pbd-tp-2 { background:#e67e22; } .pbd-tp-3 { background:#d9a92b; }
+.pbd-tp-4 { background:#7cb342; } .pbd-tp-5 { background:#2d8a56; } .pbd-tp-6 { background:#1c5639; }
+.pbd-raport-table { width:100%; border-collapse:separate; border-spacing:4px; font-family:'Cairo',sans-serif; min-width:560px; }
+.pbd-raport-table th { font-size:12px; font-weight:900; color:#fff; background:var(--brand-green-2,#1c5639); padding:7px 6px; border-radius:7px; }
+.pbd-raport-table th:first-child { background:var(--brand-green-1,#123c2d); text-align:left; }
+.pbd-rap-name { font-weight:800; font-size:13.5px; color:#333; padding:6px 10px; background:#f7f5ef; border-radius:7px; cursor:pointer; white-space:nowrap; }
+.pbd-rap-name:hover { background:#efeadd; }
+.pbd-rap-cell { text-align:center; padding:4px; }
+.pbd-kes { font-weight:900; }
+.pbd-detail-row td { padding:0 4px 8px; }
+.pbd-detail-box { background:#fbfaf6; border:1px solid rgba(18,57,45,0.12); border-radius:10px; padding:10px 12px; }
+.pbd-detail-bidang { font-weight:900; color:var(--brand-green-1,#123c2d); font-size:13px; margin:8px 0 4px; }
+.pbd-detail-tajuk { display:flex; justify-content:space-between; gap:10px; align-items:center; padding:4px 0; border-bottom:1px dashed rgba(18,57,45,0.1); font-size:13px; }
+.pbd-tab-row { display:flex; align-items:center; gap:10px; margin-bottom:9px; }
+.pbd-tab-label { width:48px; font-family:'Cairo',sans-serif; font-weight:900; font-size:13px; color:var(--brand-green-1,#123c2d); flex-shrink:0; }
+.pbd-tab-barwrap { flex:1; background:#eef0f2; border-radius:999px; height:26px; overflow:hidden; }
+.pbd-tab-bar { height:100%; border-radius:999px; display:flex; align-items:center; justify-content:flex-end; padding-right:9px; color:#fff; font-family:'Cairo',sans-serif; font-weight:900; font-size:12.5px; min-width:26px; transition:width .5s ease; }
+.pbd-tab-count { width:70px; font-family:'Cairo',sans-serif; font-weight:800; font-size:12.5px; color:var(--text-light); flex-shrink:0; }
+.pbd-legend { display:flex; gap:12px; flex-wrap:wrap; margin:6px 0 16px; }
+.pbd-legend span { display:inline-flex; align-items:center; gap:6px; font-family:'Cairo',sans-serif; font-weight:700; font-size:12px; color:#444; }
+.pbd-legend i { width:14px; height:14px; border-radius:4px; display:inline-block; }
+.pbd-summary-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:18px; }
+.pbd-sc { background:#fff; border:1px solid rgba(18,57,45,0.12); border-radius:12px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(18,57,45,0.05); }
+.pbd-sc-v { font-family:'Cairo',sans-serif; font-weight:900; font-size:24px; }
+.pbd-sc-l { font-family:'Cairo',sans-serif; font-weight:700; font-size:12px; color:var(--text-light); margin-top:3px; }
+@media (max-width:600px){ .pbd-summary-cards { grid-template-columns:1fr; } }
+
+
+/* ===== UNIFY 2027 — satu tema hijau + emas (dashboard ikut identiti app) ===== */
+:root{
+  --brand-green-0:#0c241b;
+  --brand-green-1:#123c2d;
+  --brand-green-2:#1c5639;
+  --brand-gold:#c9a24e;
+  --brand-gold-lt:#e8c97a;
+}
+#mainApp .dashboard-hero{ background:#0c241b !important; }
+#mainApp .dash-hero-mask{
+  background:linear-gradient(118deg, var(--brand-green-0) 0%, var(--brand-green-1) 52%, var(--brand-green-2) 100%) !important;
+}
+#mainApp .dash-hero-kicker,
+#mainApp .dash-hero-title .accent{ color:var(--brand-gold-lt) !important; }
+#mainApp .dash-hero-photo{ border-left:3px solid rgba(201,162,78,0.35) !important; }
+#mainApp .dashboard-hero .dashboard-action{ border-color:rgba(255,255,255,0.4) !important; }
+#mainApp .dashboard-hero .dashboard-action.primary{
+  background:linear-gradient(135deg, var(--brand-gold-lt), var(--brand-gold)) !important;
+  border-color:transparent !important; color:#10211a !important;
+  box-shadow:0 8px 18px rgba(201,162,78,0.32) !important;
+}
+#mainApp .dashboard-hero .dashboard-action.primary:hover{
+  background:linear-gradient(135deg,#f0dca0,#caa24e) !important;
+}
+#mainApp .dashboard-stat::before{ height:4px !important; }
+#mainApp .dashboard-stat:nth-child(1)::before{ background:var(--brand-green-2) !important; }
+#mainApp .dashboard-stat:nth-child(2)::before{ background:var(--brand-gold) !important; }
+#mainApp .dashboard-stat:nth-child(3)::before{ background:var(--brand-green-1) !important; }
+#mainApp .dashboard-stat:nth-child(4)::before{ background:var(--brand-gold-lt) !important; }
+#mainApp .dashboard-stat-value{ color:var(--brand-green-1) !important; }
+#mainApp .dashboard-panel-title{
+  color:var(--brand-green-1) !important;
+  border-bottom-color:rgba(201,162,78,0.4) !important;
+}
+#mainApp .dashboard-panel .agenda-section-title,
+#mainApp .dashboard-panel .agenda-section-title span,
+#mainApp .dashboard-panel .agenda-time{ color:var(--brand-green-2) !important; }
+#mainApp .dashboard-panel .agenda-pill{
+  background:rgba(201,162,78,0.15) !important; color:#8a6d27 !important;
+}
+#mainApp .dashboard-panel .agenda-extra-form button{
+  background:linear-gradient(135deg, var(--brand-green-2), var(--brand-green-1)) !important; color:#fff !important;
+}
+.wk-row.exam .wk-status{ background:var(--brand-gold) !important; }
+#mainApp .dashboard-stat{ border-radius:14px !important; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -3041,6 +3250,9 @@ body::before {
     <div class="nav-tab active" onclick="switchTab('dashboard')" id="tabDashboard">🏠 Dashboard</div>
     <div class="nav-tab" onclick="switchTab('form')" id="tabForm">📝 RPH</div>
     <div class="nav-tab" onclick="switchTab('schedule')" id="tabSchedule">🗓 Jadual</div>
+    <div class="nav-tab" onclick="switchTab('kehadiran')" id="tabKehadiran">✅ Kehadiran</div>
+    <div class="nav-tab" onclick="switchTab('latihan')" id="tabLatihan">📥 Latihan</div>
+    <div class="nav-tab" onclick="switchTab('pbd')" id="tabPbd">📊 PBD</div>
     <div class="nav-tab" onclick="switchTab('history')" id="tabHistory">📂 Laporan</div>
   </div>
 
@@ -3086,7 +3298,16 @@ body::before {
       <div id="weekSummaryBody"></div>
     </div>
     <div class="dashboard-panel" style="margin-top:18px">
-      <div class="dashboard-panel-title">Liputan DSKP</div>
+      <div class="cov-title-row">
+        <div class="dashboard-panel-title" style="margin:0;border:none">Liputan DSKP</div>
+        <div class="cov-year-pick">
+          <label>Tahun</label>
+          <select id="coverageYear" onchange="coverageYear=this.value; renderCoverage();">
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+          </select>
+        </div>
+      </div>
       <div id="coveragePills" class="cov-pills">
         <button type="button" class="cov-pill" data-tk="T3" onclick="renderCoverage('T3')">T3</button>
         <button type="button" class="cov-pill" data-tk="T4" onclick="renderCoverage('T4')">T4</button>
@@ -3121,9 +3342,12 @@ body::before {
     <div class="card" style="margin-bottom:12px">
       <div class="card-body" style="padding:12px 16px">
         <label style="font-weight:700;color:var(--primary-dark);margin-bottom:10px;display:block">🗂 Jenis Sesi</label>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
           <label id="jenisPdP" onclick="setJenisSesi('pdp')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:2px solid var(--primary);border-radius:10px;cursor:pointer;font-weight:700;background:rgba(26,92,56,0.08);color:var(--primary);transition:all 0.2s">
             <input type="radio" name="jenisSesi" value="pdp" checked style="accent-color:var(--primary)"> 📚 PdP
+          </label>
+          <label id="jenisPdPR" onclick="setJenisSesi('pdpr')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:2px solid #ddd;border-radius:10px;cursor:pointer;font-weight:700;color:#888;transition:all 0.2s">
+            <input type="radio" name="jenisSesi" value="pdpr" style="accent-color:var(--primary)"> 🏠 PdPR
           </label>
           <label id="jenisPeperiksaan" onclick="setJenisSesi('peperiksaan')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:2px solid #ddd;border-radius:10px;cursor:pointer;font-weight:700;color:#888;transition:all 0.2s">
             <input type="radio" name="jenisSesi" value="peperiksaan" style="accent-color:var(--primary)"> 📝 Peperiksaan
@@ -3291,6 +3515,12 @@ body::before {
             <span class="sebab-tag" onclick="toggleSebab(this)">لا يوجد</span>
           </div>
           <input type="text" id="sebabLain" placeholder="سبب آخر...">
+        </div>
+        <div class="field" id="buktiField" style="display:none">
+          <label>📸 Bukti Gambar PdPR (screenshot Telegram, dll.)</label>
+          <input type="file" id="buktiInput" accept="image/*" multiple onchange="handleBuktiUpload(event)" style="padding:8px;border:1.5px dashed var(--primary);border-radius:10px;width:100%;box-sizing:border-box;cursor:pointer">
+          <div id="buktiPreview" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px"></div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:6px">Gambar dikecilkan automatik supaya ringan. Maksimum 6 keping.</div>
         </div>
       </div>
     </div>
@@ -3652,6 +3882,195 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
     <div id="historyList"></div>
   </div>
 
+  <!-- TAB: KEHADIRAN -->
+  <div id="pageKehadiran" class="container hidden">
+    <div class="kh-mode-toggle">
+      <button id="khTabMurid" class="kh-mode-btn active" onclick="kgSwitchMode('murid')" type="button">👥 Kehadiran Murid</button>
+      <button id="khTabGuru" class="kh-mode-btn" onclick="kgSwitchMode('guru')" type="button">🧑‍🏫 Kehadiran Saya</button>
+    </div>
+
+    <div id="khModeMurid">
+    <div class="kh-controls">
+      <div class="kh-ctrl">
+        <label>Kelas</label>
+        <select id="khKelas" onchange="khKelasChanged()"></select>
+      </div>
+      <div class="kh-ctrl">
+        <label>Tarikh</label>
+        <input type="date" id="khTarikh" onchange="khDateChanged()">
+      </div>
+      <div class="kh-ctrl kh-week">
+        <label>Minggu</label>
+        <div id="khMinggu" class="kh-week-badge">—</div>
+      </div>
+      <button class="btn kh-load-btn" onclick="khLoadMarking()" type="button">📋 Tanda Kehadiran</button>
+    </div>
+
+    <div id="khMarkCard" class="kh-card hidden">
+      <div class="kh-mark-head">
+        <div class="kh-mark-title">Tanda yang <b>TIDAK HADIR</b> sahaja <span id="khMarkWho" class="kh-mark-who"></span></div>
+        <div class="kh-summary"><span id="khHadir">0</span>/<span id="khJumlah">0</span> hadir</div>
+      </div>
+      <div id="khRoster" class="kh-roster"></div>
+      <div class="kh-save-row">
+        <button class="btn kh-save-btn" onclick="khSave()" type="button">💾 Simpan Kehadiran</button>
+        <button class="btn btn-outline" onclick="khCloseMarking()" type="button">Tutup</button>
+        <span id="khSaveMsg" class="kh-save-msg"></span>
+      </div>
+    </div>
+
+    <div class="kh-rec-head">
+      <div class="dashboard-panel-title kh-rec-title">Rekod Kehadiran</div>
+      <div class="kh-filter-bar">
+        <select id="khFilterKelas" onchange="khLoadRecords()"><option value="">Semua Kelas</option></select>
+        <select id="khFilterMinggu" onchange="khLoadRecords()"><option value="">Semua Minggu</option></select>
+        <button class="btn btn-outline kh-xls-btn" onclick="khExportExcel()" type="button">📊 Export Excel</button>
+      </div>
+    </div>
+    <div id="khRecordsList" class="kh-rec-list"></div>
+    </div><!-- /khModeMurid -->
+
+    <div id="khModeGuru" class="hidden" dir="ltr">
+      <div class="kg-head-row">
+        <div class="dashboard-panel-title kh-rec-title">Kedatangan Saya ke Sekolah (2027)</div>
+        <button class="btn btn-outline kh-xls-btn" onclick="kgExportExcel()" type="button">📊 Export Excel</button>
+      </div>
+      <div class="kg-summary-bar" id="kgSummary"></div>
+      <div class="kg-legend">
+        <span class="kg-lg"><i style="background:#e6f4ec;border-color:#9ccdb1"></i> Hadir</span>
+        <span class="kg-lg"><i style="background:#2f80c4"></i> Tugas Rasmi/Luar</span>
+        <span class="kg-lg"><i style="background:#e39a3b"></i> Cuti/Sakit</span>
+        <span class="kg-lg"><i style="background:#d64541"></i> Tidak Hadir</span>
+        <span class="kg-lg"><i style="background:#f1d64e;border-color:#e0c23a"></i> Cuti Sekolah (auto)</span>
+        <span class="kg-lg"><i style="background:#eef0f2;border-color:#dfe3e7"></i> Rehat (hujung minggu)</span>
+      </div>
+      <div class="kg-hint">Tekan mana-mana kotak hari untuk tetapkan status &amp; catatan. Cuti sekolah berwarna kuning automatik dari Takwim.</div>
+      <div class="kg-grid-wrap"><div id="kgGrid"></div></div>
+    </div>
+  </div>
+
+  <!-- TAB: LATIHAN / PENGHANTARAN KERJA -->
+  <div id="pageLatihan" class="container hidden">
+    <div class="kh-controls">
+      <div class="kh-ctrl" style="flex:1;min-width:200px">
+        <label>Tajuk Latihan</label>
+        <input type="text" id="ltTajuk" placeholder="cth: Latihan Bab 2 — Sifat Wajib">
+      </div>
+      <div class="kh-ctrl">
+        <label>Kelas</label>
+        <select id="ltKelas" onchange="ltKelasChanged()"></select>
+      </div>
+      <div class="kh-ctrl">
+        <label>Tarikh</label>
+        <input type="date" id="ltTarikh" onchange="ltDateChanged()">
+      </div>
+      <div class="kh-ctrl kh-week">
+        <label>Minggu</label>
+        <div id="ltMinggu" class="kh-week-badge">—</div>
+      </div>
+      <button class="btn kh-load-btn" onclick="ltLoadMarking()" type="button">📋 Senarai Penghantaran</button>
+    </div>
+
+    <div id="ltMarkCard" class="kh-card hidden">
+      <div class="kh-mark-head">
+        <div class="kh-mark-title">Tanda yang <b>DAH HANTAR</b> <span id="ltMarkWho" class="kh-mark-who"></span></div>
+        <div class="kh-summary"><span id="ltHantar">0</span>/<span id="ltJumlah">0</span> hantar</div>
+      </div>
+      <div id="ltRoster" class="kh-roster"></div>
+      <div class="kh-save-row">
+        <button class="btn kh-save-btn" onclick="ltSave()" type="button">💾 Simpan</button>
+        <button class="btn btn-outline" onclick="ltCloseMarking()" type="button">Tutup</button>
+        <span id="ltSaveMsg" class="kh-save-msg"></span>
+      </div>
+    </div>
+
+    <div class="kh-rec-head">
+      <div class="dashboard-panel-title kh-rec-title">Rekod Latihan</div>
+      <div class="kh-filter-bar">
+        <select id="ltFilterKelas" onchange="ltLoadRecords()"><option value="">Semua Kelas</option></select>
+        <select id="ltFilterMinggu" onchange="ltLoadRecords()"><option value="">Semua Minggu</option></select>
+        <button class="btn btn-outline kh-xls-btn" onclick="ltExportExcel()" type="button">📊 Export Excel</button>
+      </div>
+    </div>
+    <div id="ltRecordsList" class="kh-rec-list"></div>
+  </div>
+
+  <!-- TAB: PBD (Pentaksiran Bilik Darjah) -->
+  <div id="pagePbd" class="container hidden">
+    <div class="kh-mode-toggle">
+      <button id="pbdTabRekod" class="kh-mode-btn active" onclick="pbdSwitchMode('rekod')" type="button">✍️ Rekod TP</button>
+      <button id="pbdTabLaporan" class="kh-mode-btn" onclick="pbdSwitchMode('laporan')" type="button">📋 Laporan Murid</button>
+      <button id="pbdTabTaburan" class="kh-mode-btn" onclick="pbdSwitchMode('taburan')" type="button">📊 Taburan TP</button>
+    </div>
+
+    <!-- MOD REKOD -->
+    <div id="pbdModeRekod">
+      <div class="kh-controls">
+        <div class="kh-ctrl"><label>Kelas</label><select id="pbdKelas" onchange="pbdRekodKelasChanged()"></select></div>
+        <div class="kh-ctrl"><label>Bidang</label><select id="pbdBidang" onchange="pbdBidangChanged()"></select></div>
+        <div class="kh-ctrl" style="flex:1;min-width:200px"><label>Tajuk</label><select id="pbdTajuk"></select></div>
+        <button class="btn kh-load-btn" onclick="pbdLoadMarking()" type="button">📝 Nilai Murid</button>
+      </div>
+      <div id="pbdMarkCard" class="kh-card hidden">
+        <div class="kh-mark-head">
+          <div class="kh-mark-title">Tahap Penguasaan <span id="pbdMarkWho" class="kh-mark-who"></span></div>
+          <div class="kh-summary"><span id="pbdDinilai">0</span>/<span id="pbdJumlah">0</span> dinilai</div>
+        </div>
+        <div id="pbdRoster" class="kh-roster"></div>
+        <div class="kh-save-row">
+          <button class="btn kh-save-btn" onclick="pbdSave()" type="button">💾 Simpan</button>
+          <button class="btn btn-outline" onclick="pbdCloseMarking()" type="button">Tutup</button>
+          <span id="pbdSaveMsg" class="kh-save-msg"></span>
+        </div>
+      </div>
+      <div class="kh-rec-head">
+        <div class="dashboard-panel-title kh-rec-title">Rekod Penilaian</div>
+        <div class="kh-filter-bar">
+          <select id="pbdFilterKelas" onchange="pbdLoadRecords()"><option value="">Semua Kelas</option></select>
+        </div>
+      </div>
+      <div id="pbdRecordsList" class="kh-rec-list"></div>
+    </div>
+
+    <!-- MOD LAPORAN -->
+    <div id="pbdModeLaporan" class="hidden" dir="ltr">
+      <div class="kh-rec-head">
+        <div class="kh-filter-bar">
+          <label style="font-family:'Cairo',sans-serif;font-weight:800;color:var(--brand-green-1,#123c2d)">Kelas</label>
+          <select id="pbdRaportKelas" onchange="pbdLoadRaport()"></select>
+          <button class="btn btn-outline kh-xls-btn" onclick="pbdExportExcel()" type="button">📊 Export Excel</button>
+        </div>
+      </div>
+      <div class="kg-hint">Tekan nama murid untuk lihat TP setiap tajuk.</div>
+      <div id="pbdRaport" class="kg-grid-wrap"></div>
+    </div>
+
+    <!-- MOD TABURAN -->
+    <div id="pbdModeTaburan" class="hidden" dir="ltr">
+      <div class="kh-rec-head">
+        <div class="kh-filter-bar">
+          <label style="font-family:'Cairo',sans-serif;font-weight:800;color:var(--brand-green-1,#123c2d)">Kelas</label>
+          <select id="pbdTaburanKelas" onchange="pbdLoadTaburan()"></select>
+        </div>
+      </div>
+      <div id="pbdTaburan"></div>
+    </div>
+  </div>
+
+<!-- KEHADIRAN GURU MODAL -->
+<div id="kgModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center;padding:20px">
+  <div class="modal-card" style="background:#fff;border-radius:16px;padding:22px;width:100%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,0.2)">
+    <div id="kgModalTitle" class="kg-modal-title">Tarikh</div>
+    <div id="kgStatusGrid" class="kg-status-grid"></div>
+    <label class="kg-note-label">Catatan (pilihan)</label>
+    <input type="text" id="kgCatatan" class="kg-note-input" placeholder="cth: Kursus di PPD, MC, mesyuarat...">
+    <div class="kg-modal-actions">
+      <button class="btn kg-save" onclick="kgSaveCell()" type="button">💾 Simpan</button>
+      <button class="btn btn-outline" onclick="kgCloseModal()" type="button">Batal</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- API KEY MODAL -->
 <div id="apiKeyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px">
@@ -3704,6 +4123,14 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
         <input type="text" id="pelajarNewName" placeholder="Nama penuh pelajar baharu..." style="flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:15px" onkeydown="if(event.key==='Enter'){event.preventDefault();addPelajar();}">
         <button class="btn btn-accent" onclick="addPelajar()" style="padding:8px 16px;font-size:15px;white-space:nowrap">+ Tambah</button>
       </div>
+      <details style="margin-bottom:12px;border:1.5px dashed var(--border);border-radius:8px;padding:8px 10px">
+        <summary style="cursor:pointer;font-weight:700;color:var(--primary-dark);font-size:14px">📋 Tampal senarai (bulk) — copy dari Excel</summary>
+        <div style="margin-top:8px">
+          <textarea id="pelajarBulkText" placeholder="Tampal nama di sini — satu nama satu baris&#10;AHMAD BIN ALI&#10;SITI BINTI OMAR" style="width:100%;min-height:120px;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.5;resize:vertical;box-sizing:border-box"></textarea>
+          <div style="font-size:12px;color:var(--text-light);margin:6px 0 8px;line-height:1.4">Satu nama satu baris. Nombor di depan (cth "1. ") &amp; ruang lebih dibuang automatik. Nama berganda dilangkau.</div>
+          <button class="btn btn-accent" onclick="bulkAddPelajar()" style="padding:8px 16px;font-size:14px">+ Tambah Semua</button>
+        </div>
+      </details>
       <div style="font-size:14px;color:var(--text-light);margin-bottom:8px">Jumlah: <span id="pelajarCount" style="font-weight:700;color:var(--primary)">0</span> orang</div>
       <div id="pelajarList" style="border:1.5px solid #eee;border-radius:8px;max-height:320px;overflow-y:auto;margin-bottom:14px"></div>
       <div style="display:flex;gap:10px">
@@ -3765,7 +4192,12 @@ async function loadRoster() {
   }
 }
 
-function getAllKelas() { return Object.keys(adamData).sort(); }
+function getAllKelas() {
+  const ordered = [], seen = new Set();
+  ['T3','T4','T5','T6'].forEach(t => ((TING_META[t]||{}).kelas || []).forEach(k => { if(!seen.has(k)){ seen.add(k); ordered.push(k); } }));
+  Object.keys(adamData).forEach(k => { if(!seen.has(k)){ seen.add(k); ordered.push(k); } });
+  return ordered;
+}
 
 function openPelajarModal() {
   const sel = document.getElementById('pelajarKelasSel');
@@ -3825,6 +4257,24 @@ function addPelajar() {
   pelajarWorkingList.push(nama);
   inp.value = ''; inp.focus();
   renderPelajarList();
+}
+
+function bulkAddPelajar() {
+  const ta = document.getElementById('pelajarBulkText');
+  if(!ta) return;
+  const names = (ta.value || '').split(/\r?\n/)
+    .map(l => l.replace(/^\s*\d+[.)\-]?\s*/, '').replace(/\t/g, ' ').trim().replace(/\s+/g, ' ').toUpperCase())
+    .filter(Boolean);
+  if(!names.length) { showToast('⚠️ Tampal senarai nama dulu'); return; }
+  let added = 0, dup = 0;
+  const seen = new Set(pelajarWorkingList.map(n => n.toUpperCase()));
+  names.forEach(n => {
+    if(seen.has(n)) { dup++; return; }
+    seen.add(n); pelajarWorkingList.push(n); added++;
+  });
+  ta.value = '';
+  renderPelajarList();
+  showToast(`✅ ${added} nama ditambah${dup > 0 ? ` · ${dup} berganda dilangkau` : ''}`);
 }
 
 async function savePelajar() {
@@ -3946,10 +4396,10 @@ function handleProfilePhoto(event) {
 
 // ===== KONFIG TINGKATAN (T3/T4/T5/T6) =====
 const TING_META = {
-  T3: { table:'erph_records_t3', kelas:['3 ALI'], primary:'#1d4ed8', light:'#3b82f6', dark:'#1e3a8a', arab:'٣', ordinal:'الثالث', label:'📕 Tingkatan 3 — Usul Al-Din', subtitle:'أصول الدين | الصف الثالث', subjek:'أصول الدين' },
-  T4: { table:'erph_records',    kelas:['4 UTHMAN','4 GABUNG'], primary:'#7c3aed', light:'#9d5af7', dark:'#5b21b6', arab:'٤', ordinal:'الرابع', label:'📘 Tingkatan 4 — Usul Al-Din', subtitle:'أصول الدين | الصف الرابع', subjek:'أصول الدين' },
-  T5: { table:'erph_records_t5', kelas:['5 ABU BAKAR','5 UMAR','5 GABUNG'], primary:'#1a5c38', light:'#2d8a56', dark:'#0f3d25', arab:'٥', ordinal:'الخامس', label:'📗 Tingkatan 5 — Usul Al-Din', subtitle:'أصول الدين | الصف الخامس', subjek:'أصول الدين' },
-  T6: { table:'erph_records_t6', kelas:['6 ABU BAKAR','6 UMAR','6 GABUNG'], primary:'#9d174d', light:'#db2777', dark:'#701a3e', arab:'٦', ordinal:'السادس', label:'📙 Tingkatan 6 — Tauhid & Mantiq', subtitle:'التوحيد والمنطق | الصف السادس', subjek:'التوحيد والمنطق' },
+  T3: { table:'erph_records_t3', kelas:['3 ABU BAKAR','3 UMAR','3 UTHMAN','3 ALI'], primary:'#1d4ed8', light:'#3b82f6', dark:'#1e3a8a', arab:'٣', ordinal:'الثالث', label:'📕 Tingkatan 3 — Usul Al-Din', subtitle:'أصول الدين | الصف الثالث', subjek:'أصول الدين' },
+  T4: { table:'erph_records',    kelas:['4 ABU BAKAR','4 UMAR','4 UTHMAN','4 ALI'], primary:'#7c3aed', light:'#9d5af7', dark:'#5b21b6', arab:'٤', ordinal:'الرابع', label:'📘 Tingkatan 4 — Usul Al-Din', subtitle:'أصول الدين | الصف الرابع', subjek:'أصول الدين' },
+  T5: { table:'erph_records_t5', kelas:['5 ABU BAKAR','5 UMAR','5 UTHMAN','5 ALI'], primary:'#1a5c38', light:'#2d8a56', dark:'#0f3d25', arab:'٥', ordinal:'الخامس', label:'📗 Tingkatan 5 — Usul Al-Din', subtitle:'أصول الدين | الصف الخامس', subjek:'أصول الدين' },
+  T6: { table:'erph_records_t6', kelas:['6 ABU BAKAR','6 UMAR','6 UTHMAN','6 ALI'], primary:'#9d174d', light:'#db2777', dark:'#701a3e', arab:'٦', ordinal:'السادس', label:'📙 Tingkatan 6 — Tauhid & Mantiq', subtitle:'التوحيد والمنطق | الصف السادس', subjek:'التوحيد والمنطق' },
 };
 
 function getTable() { return (TING_META[currentTingkatan]||{}).table; }
@@ -3993,50 +4443,51 @@ function getTingkatanSubtitle(tingkatan) {
   return (TING_META[tingkatan]||TING_META.T4).subtitle;
 }
 
-const LEARNING_WEEKS_2026 = [
-  { week:1, start:'2026-01-12', end:'2026-01-16' },
-  { week:2, start:'2026-01-19', end:'2026-01-23' },
-  { week:3, start:'2026-01-26', end:'2026-01-30' },
-  { week:4, start:'2026-02-02', end:'2026-02-06' },
-  { week:5, start:'2026-02-09', end:'2026-02-13' },
-  { week:6, start:'2026-02-16', end:'2026-02-20' },
-  { week:7, start:'2026-02-23', end:'2026-02-27' },
-  { week:8, start:'2026-03-02', end:'2026-03-06' },
-  { week:9, start:'2026-03-09', end:'2026-03-13' },
-  { week:10, start:'2026-03-16', end:'2026-03-20' },
-  { week:11, start:'2026-03-30', end:'2026-04-03' },
-  { week:12, start:'2026-04-06', end:'2026-04-10' },
-  { week:13, start:'2026-04-13', end:'2026-04-17' },
-  { week:14, start:'2026-04-20', end:'2026-04-24' },
-  { week:15, start:'2026-04-27', end:'2026-05-01' },
-  { week:16, start:'2026-05-04', end:'2026-05-08' },
-  { week:17, start:'2026-05-11', end:'2026-05-15' },
-  { week:18, start:'2026-05-18', end:'2026-05-22' },
-  { week:19, start:'2026-06-08', end:'2026-06-12' },
-  { week:20, start:'2026-06-15', end:'2026-06-19' },
-  { week:21, start:'2026-06-22', end:'2026-06-26' },
-  { week:22, start:'2026-06-29', end:'2026-07-03' },
-  { week:23, start:'2026-07-06', end:'2026-07-10' },
-  { week:24, start:'2026-07-13', end:'2026-07-17' },
-  { week:25, start:'2026-07-20', end:'2026-07-24' },
-  { week:26, start:'2026-07-27', end:'2026-07-31' },
-  { week:27, start:'2026-08-03', end:'2026-08-07' },
-  { week:28, start:'2026-08-10', end:'2026-08-14' },
-  { week:29, start:'2026-08-17', end:'2026-08-21' },
-  { week:30, start:'2026-08-24', end:'2026-08-28' },
-  { week:31, start:'2026-09-07', end:'2026-09-11' },
-  { week:32, start:'2026-09-14', end:'2026-09-18' },
-  { week:33, start:'2026-09-21', end:'2026-09-25' },
-  { week:34, start:'2026-09-28', end:'2026-10-02' },
-  { week:35, start:'2026-10-05', end:'2026-10-09' },
-  { week:36, start:'2026-10-12', end:'2026-10-16' },
-  { week:37, start:'2026-10-19', end:'2026-10-23' },
-  { week:38, start:'2026-10-26', end:'2026-10-30' },
-  { week:39, start:'2026-11-02', end:'2026-11-06' },
-  { week:40, start:'2026-11-09', end:'2026-11-13' },
-  { week:41, start:'2026-11-16', end:'2026-11-20' },
-  { week:42, start:'2026-11-23', end:'2026-11-27' },
-  { week:43, start:'2026-11-30', end:'2026-12-04' }
+const LEARNING_WEEKS = [
+  { week:1, start:'2027-01-04', end:'2027-01-08' },
+  { week:2, start:'2027-01-11', end:'2027-01-15' },
+  { week:3, start:'2027-01-18', end:'2027-01-22' },
+  { week:4, start:'2027-01-25', end:'2027-01-29' },
+  { week:5, start:'2027-02-01', end:'2027-02-05' },
+  { week:6, start:'2027-02-08', end:'2027-02-12' },
+  { week:7, start:'2027-02-15', end:'2027-02-19' },
+  { week:8, start:'2027-02-22', end:'2027-02-26' },
+  { week:9, start:'2027-03-01', end:'2027-03-05' },
+  { week:10, start:'2027-03-15', end:'2027-03-19' },
+  { week:11, start:'2027-03-22', end:'2027-03-26' },
+  { week:12, start:'2027-03-29', end:'2027-04-02' },
+  { week:13, start:'2027-04-05', end:'2027-04-09' },
+  { week:14, start:'2027-04-12', end:'2027-04-16' },
+  { week:15, start:'2027-04-19', end:'2027-04-23' },
+  { week:16, start:'2027-04-26', end:'2027-04-30' },
+  { week:17, start:'2027-05-03', end:'2027-05-07' },
+  { week:18, start:'2027-05-10', end:'2027-05-14' },
+  { week:19, start:'2027-05-17', end:'2027-05-21' },
+  { week:20, start:'2027-06-07', end:'2027-06-11' },
+  { week:21, start:'2027-06-14', end:'2027-06-18' },
+  { week:22, start:'2027-06-21', end:'2027-06-25' },
+  { week:23, start:'2027-06-28', end:'2027-07-02' },
+  { week:24, start:'2027-07-05', end:'2027-07-09' },
+  { week:25, start:'2027-07-12', end:'2027-07-16' },
+  { week:26, start:'2027-07-19', end:'2027-07-23' },
+  { week:27, start:'2027-07-26', end:'2027-07-30' },
+  { week:28, start:'2027-08-02', end:'2027-08-06' },
+  { week:29, start:'2027-08-09', end:'2027-08-13' },
+  { week:30, start:'2027-08-16', end:'2027-08-20' },
+  { week:31, start:'2027-08-23', end:'2027-08-27' },
+  { week:32, start:'2027-09-06', end:'2027-09-10' },
+  { week:33, start:'2027-09-13', end:'2027-09-17' },
+  { week:34, start:'2027-09-20', end:'2027-09-24' },
+  { week:35, start:'2027-09-27', end:'2027-10-01' },
+  { week:36, start:'2027-10-04', end:'2027-10-08' },
+  { week:37, start:'2027-10-11', end:'2027-10-15' },
+  { week:38, start:'2027-10-18', end:'2027-10-22' },
+  { week:39, start:'2027-10-25', end:'2027-10-29' },
+  { week:40, start:'2027-11-01', end:'2027-11-05' },
+  { week:41, start:'2027-11-08', end:'2027-11-12' },
+  { week:42, start:'2027-11-15', end:'2027-11-19' },
+  { week:43, start:'2027-11-22', end:'2027-11-26' },
+  { week:44, start:'2027-11-29', end:'2027-12-03' }
 ];
 
 const WEEKDAY_INFO = [
@@ -4796,6 +5247,7 @@ function initApp() {
   initSchedulePlanner();
   updateDraftInfo();
   refreshTemplatePicker();
+  seed2027Holidays();
   renderHolidays();
   switchTab('dashboard');
   loadRoster();
@@ -4803,7 +5255,7 @@ function initApp() {
 
 // ===== TABS =====
 function switchTab(tab) {
-  ['dashboard','form','history','schedule'].forEach(t => {
+  ['dashboard','form','history','schedule','kehadiran','latihan','pbd'].forEach(t => {
     document.getElementById(`page${t.charAt(0).toUpperCase()+t.slice(1)}`).classList.add('hidden');
     document.getElementById(`tab${t.charAt(0).toUpperCase()+t.slice(1)}`)?.classList.remove('active');
   });
@@ -4815,21 +5267,24 @@ function switchTab(tab) {
   document.getElementById(`tab${tab.charAt(0).toUpperCase()+tab.slice(1)}`)?.classList.add('active');
   if(tab === 'history') loadHistory();
   if(tab === 'schedule') renderPlannerSlots();
+  if(tab === 'kehadiran') initKehadiran();
+  if(tab === 'latihan') initLatihan();
+  if(tab === 'pbd') initPBD();
   if(tab === 'dashboard') renderDashboard();
   setTimeout(() => activePage.classList.remove('page-motion'), 420);
 }
 
 function getLearningWeekForDate(date = new Date()) {
   const iso = formatDateForQuery(date);
-  return LEARNING_WEEKS_2026.find(w => iso >= w.start && iso <= w.end) || null;
+  return LEARNING_WEEKS.find(w => iso >= w.start && iso <= w.end) || null;
 }
 
 function getCurrentWeekNo() {
   const cur = getLearningWeekForDate();
   if(cur) return cur.week;
   const iso = formatDateForQuery(new Date());
-  let best = LEARNING_WEEKS_2026[0];
-  for(const w of LEARNING_WEEKS_2026){ if(w.start <= iso) best = w; }
+  let best = LEARNING_WEEKS[0];
+  for(const w of LEARNING_WEEKS){ if(w.start <= iso) best = w; }
   return best.week;
 }
 
@@ -4935,6 +5390,21 @@ function deleteActivityTemplate() {
 }
 
 // ===== TAKWIM CUTI =====
+function holidaySeedKey(){ return `erph_holseed_2027_${(currentUser&&currentUser.username)||'azfar'}`; }
+function seed2027Holidays(){
+  if(localStorage.getItem(holidaySeedKey())) return;
+  const base2027 = [
+    { start:'2027-03-06', end:'2027-03-14', nama:'Cuti Penggal 1' },
+    { start:'2027-05-22', end:'2027-06-06', nama:'Cuti Pertengahan Tahun' },
+    { start:'2027-08-28', end:'2027-09-05', nama:'Cuti Penggal 2' },
+    { start:'2027-12-04', end:'2027-12-31', nama:'Cuti Akhir Tahun' }
+  ];
+  const list = getHolidays();
+  base2027.forEach(h => { if(!list.some(x => x.start===h.start && x.end===h.end)) list.push(h); });
+  list.sort((a,b)=>a.start.localeCompare(b.start));
+  saveHolidaysList(list);
+  localStorage.setItem(holidaySeedKey(), '1');
+}
 function holidayKey() { return `erph_holidays_${(currentUser&&currentUser.username)||'azfar'}`; }
 function getHolidays() { try { return JSON.parse(localStorage.getItem(holidayKey())||'[]')||[]; } catch(_) { return []; } }
 function saveHolidaysList(list) { localStorage.setItem(holidayKey(), JSON.stringify(list)); }
@@ -5037,7 +5507,7 @@ async function renderWeekSummary() {
   const box = document.getElementById('weekSummaryBody');
   if(!box || !currentUser) return;
 
-  const week = getLearningWeekForDate(new Date()) || LEARNING_WEEKS_2026.find(w => w.week === getCurrentWeekNo());
+  const week = getLearningWeekForDate(new Date()) || LEARNING_WEEKS.find(w => w.week === getCurrentWeekNo());
   if(!week) { box.innerHTML = '<div style="color:var(--text-light);font-size:14px">Di luar minggu persekolahan.</div>'; return; }
 
   const slots = getActiveTimetable();
@@ -5102,12 +5572,18 @@ async function renderWeekSummary() {
 }
 
 let coverageTingkatan = null;
+let coverageYear = null;
 async function renderCoverage(tk) {
   const box = document.getElementById('coverageBody');
   if(!box || !currentUser) return;
   tk = tk || coverageTingkatan || currentTingkatan || 'T4';
   coverageTingkatan = tk;
   document.querySelectorAll('#coveragePills .cov-pill').forEach(p => p.classList.toggle('active', p.dataset.tk === tk));
+
+  const yearSel = document.getElementById('coverageYear');
+  const year = coverageYear || (yearSel && yearSel.value) || String(new Date().getFullYear());
+  coverageYear = year;
+  if(yearSel && yearSel.value !== year) yearSel.value = year;
 
   const DB = { T3:DB_T3, T4:DB_T4, T5:DB_T5, T6:DB_T6 }[tk];
   const table = (TING_META[tk] || {}).table;
@@ -5116,24 +5592,1154 @@ async function renderCoverage(tk) {
 
   box.innerHTML = '<div style="color:var(--text-light);font-size:14px">Mengira liputan...</div>';
   let recs = [];
-  try { recs = await sb('GET', `${table}?cikgu_username=eq.${currentUser.username}&select=mahara,maudhu`) || []; }
+  try { recs = await sb('GET', `${table}?cikgu_username=eq.${currentUser.username}&select=mahara,maudhu,tarikh`) || []; }
   catch(e) { box.innerHTML = '<div style="color:var(--danger);font-size:14px">Ralat memuat data.</div>'; return; }
+  recs = recs.filter(r => String(r.tarikh || '').slice(0, 4) === year);
 
-  let totAll = 0, covAll = 0;
+  window.__covReg = [];
+  let totAll = 0, covAll = 0, untaughtAll = 0;
   const rows = bidangs.map(b => {
     const topics = (DB[b].topics) || [];
     const total = topics.length;
     const taught = new Set(recs.filter(r => (r.mahara||'') === b && topics.includes(r.maudhu)).map(r => r.maudhu));
     const covered = taught.size;
+    const untaught = topics.filter(t => !taught.has(t));
+    untaughtAll += untaught.length;
     totAll += total; covAll += covered;
     const pct = total ? Math.round(covered / total * 100) : 0;
+    const tjHtml = untaught.length
+      ? untaught.map(t => {
+          const idx = window.__covReg.push({ tk, bidang:b, tajuk:t }) - 1;
+          return `<div class="cov-tj"><span class="cov-tj-name" dir="rtl">${escapeHtml(t)}</span><button type="button" class="cov-tj-btn" onclick="fillRphFromReg(${idx})">+ Isi RPH</button></div>`;
+        }).join('')
+      : '<div class="cov-tj-done">✓ Semua tajuk sudah diajar</div>';
     return `<div class="cov-row">
-      <div class="cov-top"><span class="cov-name" dir="rtl">${escapeHtml(b)}</span><span class="cov-num">${covered}/${total} · ${pct}%</span></div>
+      <div class="cov-top" onclick="toggleCov(this)" role="button">
+        <span class="cov-name" dir="rtl">${escapeHtml(b)}</span>
+        <span class="cov-num">${covered}/${total} · ${pct}% <span class="cov-chev">▾</span></span>
+      </div>
       <div class="cov-bar"><div class="cov-fill" style="width:${pct}%"></div></div>
+      <div class="cov-untaught hidden">${tjHtml}</div>
     </div>`;
   }).join('');
   const pctAll = totAll ? Math.round(covAll / totAll * 100) : 0;
-  box.innerHTML = `<div class="cov-head">Keseluruhan: ${covAll}/${totAll} tajuk (${pctAll}%)</div>${rows}`;
+  const headExtra = untaughtAll ? ` · <span style="color:var(--danger)">${untaughtAll} tajuk belum diajar</span>` : ' · ✓ lengkap';
+  box.innerHTML = `<div class="cov-head">Keseluruhan: ${covAll}/${totAll} tajuk (${pctAll}%)${headExtra}</div><div class="cov-hint">Tekan nama bidang untuk lihat tajuk belum diajar &amp; terus isi RPH.</div>${rows}`;
+}
+
+function toggleCov(topEl) {
+  const row = topEl.closest('.cov-row');
+  const u = row && row.querySelector('.cov-untaught');
+  if(!u) return;
+  u.classList.toggle('hidden');
+  const chev = topEl.querySelector('.cov-chev');
+  if(chev) chev.style.transform = u.classList.contains('hidden') ? '' : 'rotate(180deg)';
+}
+
+function fillRphFromReg(idx) {
+  const item = (window.__covReg || [])[idx];
+  if(item) fillRphForTopic(item.tk, item.bidang, item.tajuk);
+}
+
+function fillRphForTopic(tk, bidang, tajuk) {
+  switchTingkatan(tk);            // tukar tingkatan: reset borang + isi semula pilihan المهارة
+  switchTab('form');
+  const maharaSel = document.getElementById('mahara');
+  const maudhuSel = document.getElementById('maudhu');
+  if(maharaSel) { maharaSel.value = bidang; onMaharaChange(); }
+  if(maudhuSel) { maudhuSel.value = tajuk; onMaudhuChange(); }
+  showToast(`📝 Borang disedia — ${tajuk}`);
+  setTimeout(() => {
+    const anchor = document.getElementById('mahara');
+    if(anchor && anchor.scrollIntoView) anchor.scrollIntoView({ behavior:'smooth', block:'center' });
+  }, 140);
+}
+
+// ===== MODUL KEHADIRAN =====
+const KH_SEBAB = ['Sakit (MC)','Kebenaran','Program Sekolah','Tanpa Sebab (TS)','Ponteng','Lain-lain'];
+let KH_RECORDS = [];
+
+function khTingkatanForKelas(k){ return 'T' + String(k||'').trim().charAt(0); }
+function khHariLabel(iso){
+  if(!iso) return '';
+  const p = String(iso).split('-'); if(p.length<3) return '';
+  const d = new Date(+p[0], +p[1]-1, +p[2]);
+  return ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'][d.getDay()] || '';
+}
+function khMingguForIso(iso){
+  const arr = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  const w = arr.find(w => iso >= w.start && iso <= w.end);
+  return w ? w.week : null;
+}
+function khFmtTarikh(iso){
+  if(!iso) return '';
+  const p = String(iso).split('-'); if(p.length<3) return iso;
+  return `${p[2]}/${p[1]}/${p[0]}`;
+}
+
+function khFillKelasOptions(){
+  const kelasList = getAllKelas();
+  [['khKelas','<option value="">-- Pilih Kelas --</option>'], ['khFilterKelas','<option value="">Semua Kelas</option>']].forEach(([id, head]) => {
+    const sel = document.getElementById(id); if(!sel) return;
+    const cur = sel.value;
+    sel.innerHTML = head + kelasList.map(k => `<option value="${k}">${k}</option>`).join('');
+    if(cur) sel.value = cur;
+  });
+}
+function khFillMingguFilter(){
+  const sel = document.getElementById('khFilterMinggu'); if(!sel || sel.options.length > 1) return;
+  const arr = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  sel.innerHTML = '<option value="">Semua Minggu</option>' + arr.map(w => `<option value="${w.week}">M${w.week}</option>`).join('');
+}
+function khUpdateMingguBadge(){
+  const iso = (document.getElementById('khTarikh') || {}).value || '';
+  const wk = khMingguForIso(iso);
+  const badge = document.getElementById('khMinggu');
+  if(badge) badge.textContent = wk ? ('M' + wk) : '—';
+}
+
+function initKehadiran(){
+  if(!currentUser) return;
+  khFillKelasOptions();
+  khFillMingguFilter();
+  const t = document.getElementById('khTarikh');
+  if(t && !t.value) t.valueAsDate = new Date();
+  khUpdateMingguBadge();
+  khLoadRecords();
+}
+
+function khKelasChanged(){
+  const card = document.getElementById('khMarkCard');
+  if(card && !card.classList.contains('hidden')) khLoadMarking();
+}
+function khDateChanged(){
+  khUpdateMingguBadge();
+  const card = document.getElementById('khMarkCard');
+  if(card && !card.classList.contains('hidden')) khLoadMarking();
+}
+
+function khLoadMarking(){
+  const kelas = (document.getElementById('khKelas') || {}).value;
+  const iso = (document.getElementById('khTarikh') || {}).value;
+  if(!kelas){ showToast('⚠️ Pilih kelas dulu'); return; }
+  if(!iso){ showToast('⚠️ Pilih tarikh dulu'); return; }
+  const existing = KH_RECORDS.find(r => r.kelas === kelas && r.tarikh === iso);
+  const absentMap = {};
+  if(existing && Array.isArray(existing.tidak_hadir)) existing.tidak_hadir.forEach(a => { if(a && a.nama) absentMap[a.nama] = a.sebab || ''; });
+  khRenderRoster(kelas, absentMap);
+  document.getElementById('khMarkWho').textContent = `· ${kelas} · ${khHariLabel(iso)} ${khFmtTarikh(iso)}`;
+  document.getElementById('khSaveMsg').textContent = existing ? '✏️ Mengedit rekod sedia ada' : '';
+  const card = document.getElementById('khMarkCard');
+  card.classList.remove('hidden');
+  card.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function khRenderRoster(kelas, absentMap){
+  const roster = (adamData[kelas] || []).slice();
+  const box = document.getElementById('khRoster');
+  if(!roster.length){ box.innerHTML = '<div class="kh-empty">Tiada senarai murid untuk kelas ini. Isi dulu di "Urus Senarai Pelajar".</div>'; khRecalc(); return; }
+  const sebabOpts = KH_SEBAB.map(s => `<option value="${s}">${s}</option>`).join('');
+  box.innerHTML = roster.map((nama, i) => {
+    const isAbs = Object.prototype.hasOwnProperty.call(absentMap, nama);
+    return `<div class="kh-std${isAbs ? ' absent' : ''}">
+      <input type="checkbox" ${isAbs ? 'checked' : ''} onchange="khToggleAbsent(this)">
+      <span class="kh-std-no">${i+1}.</span>
+      <span class="kh-std-name" dir="auto">${escapeHtml(nama)}</span>
+      <span class="kh-std-sebab">
+        <select class="kh-sebab-sel" onchange="khSebabChanged(this)"><option value="">-- Sebab --</option>${sebabOpts}</select>
+        <input type="text" class="kh-sebab-lain" placeholder="Nyatakan sebab..." style="display:none">
+      </span>
+    </div>`;
+  }).join('');
+  const rows = box.querySelectorAll('.kh-std');
+  roster.forEach((nama, i) => {
+    const sebab = absentMap[nama];
+    if(sebab === undefined) return;
+    const row = rows[i]; if(!row) return;
+    const sel = row.querySelector('.kh-sebab-sel');
+    const lain = row.querySelector('.kh-sebab-lain');
+    if(KH_SEBAB.includes(sebab)){ sel.value = sebab; }
+    else if(sebab){ sel.value = 'Lain-lain'; lain.style.display = ''; lain.value = sebab; }
+  });
+  khRecalc();
+}
+
+function khToggleAbsent(cb){
+  const row = cb.closest('.kh-std');
+  if(row) row.classList.toggle('absent', cb.checked);
+  khRecalc();
+}
+function khSebabChanged(sel){
+  const wrap = sel.closest('.kh-std-sebab');
+  const lain = wrap ? wrap.querySelector('.kh-sebab-lain') : null;
+  if(lain) lain.style.display = (sel.value === 'Lain-lain') ? '' : 'none';
+}
+function khRecalc(){
+  const rows = document.querySelectorAll('#khRoster .kh-std');
+  const total = rows.length;
+  let absent = 0;
+  rows.forEach(r => { const cb = r.querySelector('input[type=checkbox]'); if(cb && cb.checked) absent++; });
+  const j = document.getElementById('khJumlah'); if(j) j.textContent = total;
+  const h = document.getElementById('khHadir'); if(h) h.textContent = total - absent;
+}
+function khGatherAbsent(){
+  const out = [];
+  document.querySelectorAll('#khRoster .kh-std').forEach(row => {
+    const cb = row.querySelector('input[type=checkbox]');
+    if(!cb || !cb.checked) return;
+    const nama = row.querySelector('.kh-std-name').textContent;
+    const sel = row.querySelector('.kh-sebab-sel');
+    let sebab = sel ? sel.value : '';
+    if(sebab === 'Lain-lain'){ sebab = (row.querySelector('.kh-sebab-lain').value || '').trim() || 'Lain-lain'; }
+    out.push({ nama, sebab: sebab || 'Tanpa Sebab (TS)' });
+  });
+  return out;
+}
+
+async function khSave(){
+  const kelas = document.getElementById('khKelas').value;
+  const iso = document.getElementById('khTarikh').value;
+  if(!kelas || !iso){ showToast('⚠️ Pilih kelas & tarikh'); return; }
+  const jumlah = document.querySelectorAll('#khRoster .kh-std').length;
+  if(!jumlah){ showToast('⚠️ Tiada murid untuk ditanda'); return; }
+  const absent = khGatherAbsent();
+  const hadir = jumlah - absent.length;
+  const payload = {
+    cikgu_username: currentUser.username,
+    tingkatan: khTingkatanForKelas(kelas),
+    kelas, tarikh: iso, minggu: khMingguForIso(iso),
+    jumlah, hadir, tidak_hadir: absent
+  };
+  const msg = document.getElementById('khSaveMsg');
+  msg.textContent = 'Menyimpan...';
+  try {
+    await sb('DELETE', `erph_kehadiran?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&kelas=eq.${encodeURIComponent(kelas)}&tarikh=eq.${iso}`);
+    await sb('POST', 'erph_kehadiran', payload);
+    showToast(`✅ Kehadiran disimpan — ${kelas} ${khFmtTarikh(iso)} (${hadir}/${jumlah})`);
+    msg.textContent = '✅ Disimpan';
+    await khLoadRecords();
+  } catch(e){
+    msg.textContent = '';
+    showToast('❌ Gagal simpan: ' + String(e.message || '').slice(0, 90));
+  }
+}
+function khCloseMarking(){ document.getElementById('khMarkCard').classList.add('hidden'); }
+
+async function khLoadRecords(){
+  if(!currentUser) return;
+  khFillMingguFilter();
+  const box = document.getElementById('khRecordsList');
+  if(!box) return;
+  box.innerHTML = '<div class="kh-empty">Memuatkan rekod...</div>';
+  let recs = [];
+  try { recs = await sb('GET', `erph_kehadiran?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=*&order=tarikh.desc`) || []; }
+  catch(e){ box.innerHTML = '<div class="kh-empty">Ralat memuat rekod. (Jadual erph_kehadiran mungkin belum dibuat di Supabase.)</div>'; return; }
+  KH_RECORDS = recs;
+  const fk = document.getElementById('khFilterKelas').value;
+  const fm = document.getElementById('khFilterMinggu').value;
+  let view = recs;
+  if(fk) view = view.filter(r => r.kelas === fk);
+  if(fm) view = view.filter(r => String(r.minggu) === String(fm));
+  if(!view.length){ box.innerHTML = '<div class="kh-empty">Tiada rekod kehadiran lagi.</div>'; return; }
+  box.innerHTML = view.map(r => {
+    const absent = Array.isArray(r.tidak_hadir) ? r.tidak_hadir : [];
+    const miss = absent.length;
+    const body = miss
+      ? absent.map(a => `<div class="kh-abs-row"><span class="kh-abs-name" dir="auto">${escapeHtml(a.nama||'')}</span><span class="kh-abs-sebab">${escapeHtml(a.sebab||'')}</span></div>`).join('')
+      : '<div class="kh-allhadir">✓ Semua murid hadir</div>';
+    return `<div class="kh-rec">
+      <div class="kh-rec-top" onclick="khToggleRec(this)">
+        <span class="kh-rec-wk">M${r.minggu || '?'}</span>
+        <span class="kh-rec-main">${escapeHtml(r.kelas||'')} <small>${khHariLabel(r.tarikh)} · ${khFmtTarikh(r.tarikh)}</small></span>
+        <span class="kh-rec-count ${miss ? 'miss' : 'ok'}">${r.hadir}/${r.jumlah}</span>
+        <span class="kh-rec-chev">▾</span>
+      </div>
+      <div class="kh-rec-body">
+        ${body}
+        <div class="kh-rec-actions">
+          <button class="kh-edit-btn" onclick="khEditRecord(${r.id})" type="button">✏️ Edit</button>
+          <button class="kh-del-btn" onclick="khDeleteRecord(${r.id})" type="button">🗑️ Padam</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function khToggleRec(top){
+  const body = top.nextElementSibling;
+  if(!body) return;
+  body.classList.toggle('open');
+  const chev = top.querySelector('.kh-rec-chev');
+  if(chev) chev.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+function khEditRecord(id){
+  const r = KH_RECORDS.find(x => String(x.id) === String(id));
+  if(!r) return;
+  document.getElementById('khKelas').value = r.kelas;
+  document.getElementById('khTarikh').value = r.tarikh;
+  khUpdateMingguBadge();
+  khLoadMarking();
+}
+async function khDeleteRecord(id){
+  if(!confirm('Padam rekod kehadiran ini?')) return;
+  try { await sb('DELETE', `erph_kehadiran?id=eq.${id}`); showToast('🗑️ Rekod dipadam'); await khLoadRecords(); }
+  catch(e){ showToast('❌ Gagal padam'); }
+}
+
+function khXmlEsc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ---- penjana .xlsx tulen (tiada library luar) ----
+const KH_CRC_TABLE = (function(){
+  const t = new Uint32Array(256);
+  for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++){ c = (c&1) ? (0xEDB88320 ^ (c>>>1)) : (c>>>1); } t[n]=c>>>0; }
+  return t;
+})();
+function khCrc32(u8){
+  let c = 0xFFFFFFFF;
+  for(let i=0;i<u8.length;i++){ c = KH_CRC_TABLE[(c ^ u8[i]) & 0xFF] ^ (c>>>8); }
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function khZip(files){ // files: [{name, data:Uint8Array}] — kaedah STORE (tanpa mampatan)
+  const enc = new TextEncoder();
+  const u16 = n => [n&0xFF,(n>>>8)&0xFF];
+  const u32 = n => [n&0xFF,(n>>>8)&0xFF,(n>>>16)&0xFF,(n>>>24)&0xFF];
+  const parts = [], central = [];
+  let offset = 0;
+  files.forEach(f => {
+    const nameB = enc.encode(f.name), data = f.data, crc = khCrc32(data);
+    const local = new Uint8Array([].concat(
+      u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(data.length), u32(data.length), u16(nameB.length), u16(0)));
+    parts.push(local, nameB, data);
+    central.push(new Uint8Array([].concat(
+      u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(data.length), u32(data.length),
+      u16(nameB.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset))), nameB);
+    offset += local.length + nameB.length + data.length;
+  });
+  let cenSize = 0; central.forEach(c => cenSize += c.length);
+  const eocd = new Uint8Array([].concat(
+    u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+    u32(cenSize), u32(offset), u16(0)));
+  const all = parts.concat(central, [eocd]);
+  let total = 0; all.forEach(c => total += c.length);
+  const out = new Uint8Array(total);
+  let p = 0; all.forEach(c => { out.set(c, p); p += c.length; });
+  return out;
+}
+function khColLetter(n){ let s=''; n++; while(n>0){ const m=(n-1)%26; s=String.fromCharCode(65+m)+s; n=Math.floor((n-1)/26); } return s; }
+
+const KH_STYLES_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FF123C2D"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFC0392B"/><name val="Calibri"/></font></fonts><fills count="4"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF123C2D"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE8E2CF"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="5"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="2" fillId="3" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="0" xfId="0" applyFont="1" applyAlignment="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+
+function khSheetXml(recs){
+  const H = ['Minggu','Hari','Tarikh','Jumlah','Hadir','Tidak Hadir','Nama Tidak Hadir & Sebab'];
+  const cStr = (col,row,s,val) => `<c r="${khColLetter(col)}${row}"${s!=null?` s="${s}"`:''} t="inlineStr"><is><t xml:space="preserve">${khXmlEsc(val)}</t></is></c>`;
+  const cNum = (col,row,s,val) => `<c r="${khColLetter(col)}${row}"${s!=null?` s="${s}"`:''}><v>${val}</v></c>`;
+  const rowsXml = [], merges = [];
+  let r = 0;
+  r++; rowsXml.push(`<row r="${r}">${H.map((h,i)=>cStr(i,r,1,h)).join('')}</row>`);
+  let lastWk = null;
+  const sorted = recs.slice().sort((a,b)=>(a.minggu||0)-(b.minggu||0)||String(a.tarikh||'').localeCompare(String(b.tarikh||'')));
+  sorted.forEach(rec => {
+    const absent = Array.isArray(rec.tidak_hadir) ? rec.tidak_hadir : [];
+    if(rec.minggu !== lastWk){ lastWk = rec.minggu; r++;
+      rowsXml.push(`<row r="${r}">${cStr(0,r,2,'MINGGU '+(rec.minggu||'?'))}</row>`);
+      merges.push(`A${r}:G${r}`);
+    }
+    r++;
+    const names = absent.length ? absent.map(a=>`${a.nama||''} — ${a.sebab||''}`).join('\n') : 'Semua hadir';
+    rowsXml.push(`<row r="${r}">`
+      + cStr(0,r,null,'M'+(rec.minggu||''))
+      + cStr(1,r,null,khHariLabel(rec.tarikh))
+      + cStr(2,r,null,khFmtTarikh(rec.tarikh))
+      + cNum(3,r,null,rec.jumlah||0)
+      + cNum(4,r,null,rec.hadir||0)
+      + cNum(5,r,absent.length?3:null,absent.length)
+      + cStr(6,r,4,names)
+      + `</row>`);
+  });
+  const cols = `<cols><col min="1" max="1" width="8" customWidth="1"/><col min="2" max="2" width="10" customWidth="1"/><col min="3" max="3" width="13" customWidth="1"/><col min="4" max="4" width="8" customWidth="1"/><col min="5" max="5" width="8" customWidth="1"/><col min="6" max="6" width="11" customWidth="1"/><col min="7" max="7" width="50" customWidth="1"/></cols>`;
+  const mergeXml = merges.length ? `<mergeCells count="${merges.length}">${merges.map(m=>`<mergeCell ref="${m}"/>`).join('')}</mergeCells>` : '';
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${cols}<sheetData>${rowsXml.join('')}</sheetData>${mergeXml}</worksheet>`;
+}
+
+function khExportExcel(){
+  const fk = document.getElementById('khFilterKelas').value;
+  const fm = document.getElementById('khFilterMinggu').value;
+  let view = KH_RECORDS.slice();
+  if(fk) view = view.filter(r => r.kelas === fk);
+  if(fm) view = view.filter(r => String(r.minggu) === String(fm));
+  if(!view.length){ showToast('⚠️ Tiada rekod untuk dieksport'); return; }
+
+  const byKelas = {};
+  view.forEach(r => { (byKelas[r.kelas] = byKelas[r.kelas] || []).push(r); });
+  const kelasList = Object.keys(byKelas).sort();
+
+  const used = {};
+  const sheetMeta = kelasList.map((kelas, i) => {
+    let nm = (kelas.replace(/[:\\\/\?\*\[\]]/g,' ').trim().slice(0,31)) || ('Kelas'+(i+1));
+    const base = nm; let k = 2;
+    while(used[nm.toLowerCase()]){ nm = (base.slice(0,27)+' '+k).slice(0,31); k++; }
+    used[nm.toLowerCase()] = 1;
+    return { kelas, name: nm, file: `sheet${i+1}.xml` };
+  });
+
+  const enc = new TextEncoder();
+  const files = [];
+  const ctOverrides = sheetMeta.map(m => `<Override PartName="/xl/worksheets/${m.file}" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('');
+  files.push({ name:'[Content_Types].xml', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${ctOverrides}</Types>`) });
+  files.push({ name:'_rels/.rels', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`) });
+  const sheetsXml = sheetMeta.map((m,i) => `<sheet name="${khXmlEsc(m.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('');
+  files.push({ name:'xl/workbook.xml', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheetsXml}</sheets></workbook>`) });
+  const relsXml = sheetMeta.map((m,i) => `<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/${m.file}"/>`).join('')
+    + `<Relationship Id="rId${sheetMeta.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`;
+  files.push({ name:'xl/_rels/workbook.xml.rels', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${relsXml}</Relationships>`) });
+  files.push({ name:'xl/styles.xml', data: enc.encode(KH_STYLES_XML) });
+  sheetMeta.forEach(m => { files.push({ name:`xl/worksheets/${m.file}`, data: enc.encode(khSheetXml(byKelas[m.kelas])) }); });
+
+  const zip = khZip(files);
+  const blob = new Blob([zip], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const tag = (fk ? fk.replace(/\s+/g,'_') : 'semua') + (fm ? ('_M'+fm) : '');
+  a.href = url; a.download = `kehadiran_${tag}.xlsx`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+  showToast('📊 Fail Excel (.xlsx, tab ikut kelas) dimuat turun');
+}
+
+// ===== KEHADIRAN GURU (kedatangan sendiri ke sekolah) =====
+const KG_STATUS = {
+  hadir: { label:'Hadir', emoji:'✅' },
+  tugas: { label:'Tugas Rasmi/Luar', emoji:'💼' },
+  cuti:  { label:'Cuti/Sakit', emoji:'🏖️' },
+  tidak: { label:'Tidak Hadir', emoji:'❌' },
+  rehat: { label:'Rehat', emoji:'⚪' }
+};
+const KG_DAYS = ['Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu','Ahad'];
+const KG_BTN_WEEKDAY = ['hadir','tugas','cuti','tidak'];
+const KG_BTN_WEEKEND = ['rehat','hadir','tugas','tidak'];
+function kgIsWeekend(iso){ const p=iso.split('-'); const g=new Date(+p[0],+p[1]-1,+p[2]).getDay(); return g===6 || g===0; }
+function kgDefaultStatus(iso){ return kgIsWeekend(iso) ? 'rehat' : 'hadir'; }
+const KG_BULAN = ['Januari','Februari','Mac','April','Mei','Jun','Julai','Ogos','September','Oktober','November','Disember'];
+let KG_MAP = {};        // { 'YYYY-MM-DD': {status, catatan} }
+let KG_PICK = 'hadir';
+let KG_OPEN_ISO = null;
+
+function kgAddDays(iso, n){
+  const p = iso.split('-'); const d = new Date(+p[0], +p[1]-1, +p[2]); d.setDate(d.getDate()+n);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function kgSwitchMode(mode){
+  const murid = document.getElementById('khModeMurid');
+  const guru = document.getElementById('khModeGuru');
+  document.getElementById('khTabMurid').classList.toggle('active', mode === 'murid');
+  document.getElementById('khTabGuru').classList.toggle('active', mode === 'guru');
+  murid.classList.toggle('hidden', mode !== 'murid');
+  guru.classList.toggle('hidden', mode !== 'guru');
+  if(mode === 'guru') kgInit();
+}
+
+async function kgInit(){
+  if(!currentUser) return;
+  await kgLoadData();
+  kgRenderGrid();
+  kgRenderSummary();
+}
+async function kgLoadData(){
+  KG_MAP = {};
+  try {
+    const rows = await sb('GET', `erph_hadir_guru?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=tarikh,status,catatan`) || [];
+    rows.forEach(r => { if(r.tarikh) KG_MAP[r.tarikh] = { status: r.status || 'hadir', catatan: r.catatan || '' }; });
+  } catch(e){ /* jadual mungkin belum dibuat */ }
+}
+function kgStatusFor(iso){
+  if(isHoliday(iso)) return 'cutiSekolah';
+  const o = KG_MAP[iso];
+  return o ? o.status : kgDefaultStatus(iso);
+}
+
+function kgRenderGrid(){
+  const box = document.getElementById('kgGrid');
+  if(!box) return;
+  const weeks = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  if(!weeks.length){ box.innerHTML = '<div class="kh-empty">Takwim minggu belum diset.</div>'; return; }
+  const groups = [];
+  weeks.forEach(w => {
+    const mon = +w.start.split('-')[1]-1;
+    const last = groups[groups.length-1];
+    if(last && last.mon === mon) last.weeks.push(w); else groups.push({ mon, weeks:[w] });
+  });
+  const monthRow = `<tr class="kg-month-row"><th class="kg-corner"></th>${groups.map(g => `<th colspan="${g.weeks.length}">${KG_BULAN[g.mon]}</th>`).join('')}</tr>`;
+  const weekRow = `<tr class="kg-week-row"><th class="kg-corner">Hari</th>${weeks.map(w => `<th title="${w.start} → ${w.end}">M${w.week}</th>`).join('')}</tr>`;
+  const bodyRows = KG_DAYS.map((dayName, di) => {
+    const cells = weeks.map(w => {
+      const iso = kgAddDays(w.start, di);
+      const st = kgStatusFor(iso);
+      const locked = (st === 'cutiSekolah');
+      const dd = iso.split('-')[2];
+      const hasNote = !!(KG_MAP[iso] && KG_MAP[iso].catatan);
+      const stLabel = (st === 'cutiSekolah') ? 'Cuti Sekolah' : KG_STATUS[st].label;
+      const title = `${dayName} ${khFmtTarikh(iso)} — ${stLabel}${hasNote ? ' ('+KG_MAP[iso].catatan+')' : ''}`;
+      return `<td class="kg-cell kg-${st}${locked ? ' kg-locked' : ''}" ${locked ? '' : `onclick="kgOpenCell('${iso}')"`} title="${khXmlEsc(title)}">${dd}${hasNote ? '<sup>•</sup>' : ''}</td>`;
+    }).join('');
+    return `<tr><th class="kg-dayname${di >= 5 ? ' kg-wkend' : ''}">${dayName}</th>${cells}</tr>`;
+  }).join('');
+  box.innerHTML = `<table class="kg-grid"><thead>${monthRow}${weekRow}</thead><tbody>${bodyRows}</tbody></table>`;
+}
+
+function kgRenderSummary(){
+  const box = document.getElementById('kgSummary');
+  if(!box) return;
+  const weeks = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  const todayIso = formatDateForQuery(new Date());
+  let sekolah = 0, hadir = 0, tugas = 0, cuti = 0, tidak = 0;
+  weeks.forEach(w => {
+    for(let di = 0; di < 5; di++){
+      const iso = kgAddDays(w.start, di);
+      if(iso > todayIso) continue;
+      if(isHoliday(iso)) continue;
+      sekolah++;
+      const st = (KG_MAP[iso] && KG_MAP[iso].status) || 'hadir';
+      if(st === 'tugas') tugas++; else if(st === 'cuti') cuti++; else if(st === 'tidak') tidak++; else hadir++;
+    }
+  });
+  const rate = sekolah ? Math.round((hadir + tugas) / sekolah * 100) : 0;
+  const stat = (v,l,c) => `<div class="kg-stat"><div class="kg-stat-v"${c?` style="color:${c}"`:''}>${v}</div><div class="kg-stat-l">${l}</div></div>`;
+  box.innerHTML = stat(sekolah,'Hari Sekolah')
+    + stat(hadir,'Hadir','#1c5639')
+    + stat(tugas,'Tugas Rasmi','#2f80c4')
+    + stat(cuti,'Cuti/Sakit','#e39a3b')
+    + stat(tidak,'Tidak Hadir','#d64541')
+    + `<div class="kg-stat kg-stat-rate"><div class="kg-stat-v">${rate}%</div><div class="kg-stat-l">% Kehadiran</div></div>`;
+}
+
+function kgOpenCell(iso){
+  KG_OPEN_ISO = iso;
+  KG_PICK = (KG_MAP[iso] && KG_MAP[iso].status) || kgDefaultStatus(iso);
+  const p = iso.split('-');
+  const dIdx = (new Date(+p[0], +p[1]-1, +p[2]).getDay() + 6) % 7;
+  document.getElementById('kgModalTitle').textContent = `${KG_DAYS[dIdx] || ''} · ${khFmtTarikh(iso)}`;
+  // butang status ikut jenis hari
+  const set = kgIsWeekend(iso) ? KG_BTN_WEEKEND : KG_BTN_WEEKDAY;
+  document.getElementById('kgStatusGrid').innerHTML = set.map(st =>
+    `<button type="button" class="kg-st-btn" data-st="${st}" onclick="kgPickStatus('${st}')">${KG_STATUS[st].emoji} ${KG_STATUS[st].label}</button>`
+  ).join('');
+  document.getElementById('kgCatatan').value = (KG_MAP[iso] && KG_MAP[iso].catatan) || '';
+  kgHighlightPick();
+  document.getElementById('kgModal').style.display = 'flex';
+}
+function kgPickStatus(st){ KG_PICK = st; kgHighlightPick(); }
+function kgHighlightPick(){
+  document.querySelectorAll('#kgModal .kg-st-btn').forEach(b => b.classList.toggle('active', b.dataset.st === KG_PICK));
+}
+function kgCloseModal(){ document.getElementById('kgModal').style.display = 'none'; KG_OPEN_ISO = null; }
+
+async function kgSaveCell(){
+  const iso = KG_OPEN_ISO; if(!iso) return;
+  const status = KG_PICK;
+  const catatan = (document.getElementById('kgCatatan').value || '').trim();
+  try {
+    await sb('DELETE', `erph_hadir_guru?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&tarikh=eq.${iso}`);
+    if(status === kgDefaultStatus(iso)){ delete KG_MAP[iso]; }
+    else {
+      await sb('POST', 'erph_hadir_guru', { cikgu_username: currentUser.username, tarikh: iso, status, catatan });
+      KG_MAP[iso] = { status, catatan };
+    }
+    showToast('✅ Dikemaskini');
+    kgCloseModal(); kgRenderGrid(); kgRenderSummary();
+  } catch(e){ showToast('❌ Gagal simpan: ' + String(e.message || '').slice(0, 80)); }
+}
+
+function kgExportExcel(){
+  const weeks = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  if(!weeks.length){ showToast('⚠️ Takwim belum diset'); return; }
+  const H = ['Minggu','Tarikh','Hari','Status','Catatan'];
+  const cStr = (col,row,s,val) => `<c r="${khColLetter(col)}${row}"${s!=null?` s="${s}"`:''} t="inlineStr"><is><t xml:space="preserve">${khXmlEsc(val)}</t></is></c>`;
+  const rowsXml = []; let r = 0;
+  r++; rowsXml.push(`<row r="${r}">${H.map((h,i)=>cStr(i,r,1,h)).join('')}</row>`);
+  weeks.forEach(w => {
+    for(let di = 0; di < 7; di++){
+      const iso = kgAddDays(w.start, di);
+      if(isHoliday(iso)) continue;
+      const o = KG_MAP[iso];
+      if(di >= 5 && !o) continue;        // hujung minggu: masuk hanya bila ada rekod
+      const st = o ? o.status : kgDefaultStatus(iso);
+      const label = KG_STATUS[st] ? KG_STATUS[st].label : st;
+      const sStyle = st === 'tidak' ? 3 : null;
+      r++;
+      rowsXml.push(`<row r="${r}">`
+        + cStr(0,r,null,'M'+w.week)
+        + cStr(1,r,null,khFmtTarikh(iso))
+        + cStr(2,r,null,KG_DAYS[di])
+        + cStr(3,r,sStyle,label)
+        + cStr(4,r,4,(o && o.catatan) || '')
+        + `</row>`);
+    }
+  });
+  const cols = `<cols><col min="1" max="1" width="8"/><col min="2" max="2" width="14"/><col min="3" max="3" width="10"/><col min="4" max="4" width="18"/><col min="5" max="5" width="36"/></cols>`;
+  const sheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${cols}<sheetData>${rowsXml.join('')}</sheetData></worksheet>`;
+  const enc = new TextEncoder();
+  const files = [
+    { name:'[Content_Types].xml', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`) },
+    { name:'_rels/.rels', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`) },
+    { name:'xl/workbook.xml', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Kehadiran Saya 2027" sheetId="1" r:id="rId1"/></sheets></workbook>`) },
+    { name:'xl/_rels/workbook.xml.rels', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`) },
+    { name:'xl/styles.xml', data: enc.encode(KH_STYLES_XML) },
+    { name:'xl/worksheets/sheet1.xml', data: enc.encode(sheet) }
+  ];
+  const zip = khZip(files);
+  const blob = new Blob([zip], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'kehadiran_saya_2027.xlsx';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+  showToast('📊 Kehadiran Saya dieksport (.xlsx)');
+}
+
+// ===== MODUL LATIHAN / PENGHANTARAN KERJA =====
+let LT_RECORDS = [];
+
+function ltFillKelasOptions(){
+  const kelasList = getAllKelas();
+  [['ltKelas','<option value="">-- Pilih Kelas --</option>'], ['ltFilterKelas','<option value="">Semua Kelas</option>']].forEach(([id, head]) => {
+    const sel = document.getElementById(id); if(!sel) return;
+    const cur = sel.value;
+    sel.innerHTML = head + kelasList.map(k => `<option value="${k}">${k}</option>`).join('');
+    if(cur) sel.value = cur;
+  });
+}
+function ltFillMingguFilter(){
+  const sel = document.getElementById('ltFilterMinggu'); if(!sel || sel.options.length > 1) return;
+  const arr = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  sel.innerHTML = '<option value="">Semua Minggu</option>' + arr.map(w => `<option value="${w.week}">M${w.week}</option>`).join('');
+}
+function ltUpdateMingguBadge(){
+  const iso = (document.getElementById('ltTarikh') || {}).value || '';
+  const wk = khMingguForIso(iso);
+  const b = document.getElementById('ltMinggu'); if(b) b.textContent = wk ? ('M'+wk) : '—';
+}
+function initLatihan(){
+  if(!currentUser) return;
+  ltFillKelasOptions(); ltFillMingguFilter();
+  const t = document.getElementById('ltTarikh'); if(t && !t.value) t.valueAsDate = new Date();
+  ltUpdateMingguBadge(); ltLoadRecords();
+}
+function ltKelasChanged(){ const c = document.getElementById('ltMarkCard'); if(c && !c.classList.contains('hidden')) ltLoadMarking(); }
+function ltDateChanged(){ ltUpdateMingguBadge(); const c = document.getElementById('ltMarkCard'); if(c && !c.classList.contains('hidden')) ltLoadMarking(); }
+
+function ltLoadMarking(){
+  const kelas = (document.getElementById('ltKelas') || {}).value;
+  const iso = (document.getElementById('ltTarikh') || {}).value;
+  const tajuk = ((document.getElementById('ltTajuk') || {}).value || '').trim();
+  if(!kelas){ showToast('⚠️ Pilih kelas dulu'); return; }
+  if(!tajuk){ showToast('⚠️ Isi tajuk latihan dulu'); return; }
+  if(!iso){ showToast('⚠️ Pilih tarikh dulu'); return; }
+  const existing = LT_RECORDS.find(r => r.kelas === kelas && r.tarikh === iso && (r.tajuk||'') === tajuk);
+  const map = {};
+  if(existing && Array.isArray(existing.penghantaran)) existing.penghantaran.forEach(p => { if(p && p.nama) map[p.nama] = p.status || 'hantar'; });
+  ltRenderRoster(kelas, map);
+  document.getElementById('ltMarkWho').textContent = `· ${kelas} · ${khHariLabel(iso)} ${khFmtTarikh(iso)}`;
+  document.getElementById('ltSaveMsg').textContent = existing ? '✏️ Mengedit rekod sedia ada' : '';
+  const card = document.getElementById('ltMarkCard'); card.classList.remove('hidden'); card.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function ltRenderRoster(kelas, map){
+  const roster = (adamData[kelas] || []).slice();
+  const box = document.getElementById('ltRoster');
+  if(!roster.length){ box.innerHTML = '<div class="kh-empty">Tiada senarai murid untuk kelas ini. Isi dulu di "Urus Senarai Pelajar".</div>'; ltRecalc(); return; }
+  box.innerHTML = roster.map((nama, i) => {
+    const st = map[nama];
+    const cls = st === 'hantar' ? 'lt-hantar' : (st === 'lewat' ? 'lt-lewat' : 'lt-belum');
+    const checked = (st === 'hantar' || st === 'lewat') ? 'checked' : '';
+    const lewatChk = st === 'lewat' ? 'checked' : '';
+    return `<div class="kh-std ${cls}">
+      <input type="checkbox" class="lt-hantar-cb" ${checked} onchange="ltToggleHantar(this)">
+      <span class="kh-std-no">${i+1}.</span>
+      <span class="kh-std-name" dir="auto">${escapeHtml(nama)}</span>
+      <label class="lt-lewat-wrap"><input type="checkbox" class="lt-lewat" ${lewatChk} onchange="ltToggleLewat(this)"> Lewat</label>
+    </div>`;
+  }).join('');
+  ltRecalc();
+}
+function ltRowStatus(row){
+  const cb = row.querySelector('.lt-hantar-cb');
+  if(!cb || !cb.checked) return 'belum';
+  const lw = row.querySelector('.lt-lewat');
+  return (lw && lw.checked) ? 'lewat' : 'hantar';
+}
+function ltApplyRowClass(row){
+  const st = ltRowStatus(row);
+  row.classList.remove('lt-belum','lt-hantar','lt-lewat');
+  row.classList.add('lt-'+st);
+}
+function ltToggleHantar(cb){
+  const row = cb.closest('.kh-std');
+  if(!cb.checked){ const lw = row.querySelector('.lt-lewat'); if(lw) lw.checked = false; }
+  ltApplyRowClass(row); ltRecalc();
+}
+function ltToggleLewat(cb){ ltApplyRowClass(cb.closest('.kh-std')); ltRecalc(); }
+function ltRecalc(){
+  const rows = document.querySelectorAll('#ltRoster .kh-std');
+  let hantar = 0;
+  rows.forEach(r => { const s = ltRowStatus(r); if(s === 'hantar' || s === 'lewat') hantar++; });
+  const h = document.getElementById('ltHantar'); if(h) h.textContent = hantar;
+  const j = document.getElementById('ltJumlah'); if(j) j.textContent = rows.length;
+}
+function ltGather(){
+  const out = [];
+  document.querySelectorAll('#ltRoster .kh-std').forEach(row => {
+    const st = ltRowStatus(row);
+    if(st === 'belum') return;
+    out.push({ nama: row.querySelector('.kh-std-name').textContent, status: st });
+  });
+  return out;
+}
+async function ltSave(){
+  const kelas = document.getElementById('ltKelas').value;
+  const iso = document.getElementById('ltTarikh').value;
+  const tajuk = (document.getElementById('ltTajuk').value || '').trim();
+  if(!kelas || !iso || !tajuk){ showToast('⚠️ Lengkapkan tajuk, kelas & tarikh'); return; }
+  const jumlah = document.querySelectorAll('#ltRoster .kh-std').length;
+  if(!jumlah){ showToast('⚠️ Tiada murid'); return; }
+  const list = ltGather();
+  const hantar = list.filter(p => p.status === 'hantar').length;
+  const lewat = list.filter(p => p.status === 'lewat').length;
+  const payload = { cikgu_username: currentUser.username, tingkatan: khTingkatanForKelas(kelas), kelas, tajuk, tarikh: iso, minggu: khMingguForIso(iso), jumlah, hantar, lewat, penghantaran: list };
+  const msg = document.getElementById('ltSaveMsg'); msg.textContent = 'Menyimpan...';
+  try {
+    await sb('DELETE', `erph_latihan?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&kelas=eq.${encodeURIComponent(kelas)}&tarikh=eq.${iso}&tajuk=eq.${encodeURIComponent(tajuk)}`);
+    await sb('POST', 'erph_latihan', payload);
+    showToast(`✅ Latihan disimpan — ${kelas} (${hantar+lewat}/${jumlah} hantar)`);
+    msg.textContent = '✅ Disimpan';
+    await ltLoadRecords();
+  } catch(e){ msg.textContent = ''; showToast('❌ Gagal simpan: ' + String(e.message || '').slice(0, 90)); }
+}
+function ltCloseMarking(){ document.getElementById('ltMarkCard').classList.add('hidden'); }
+
+async function ltLoadRecords(){
+  if(!currentUser) return;
+  ltFillMingguFilter();
+  const box = document.getElementById('ltRecordsList'); if(!box) return;
+  box.innerHTML = '<div class="kh-empty">Memuatkan rekod...</div>';
+  let recs = [];
+  try { recs = await sb('GET', `erph_latihan?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=*&order=tarikh.desc`) || []; }
+  catch(e){ box.innerHTML = '<div class="kh-empty">Ralat memuat rekod. (Jadual erph_latihan mungkin belum dibuat di Supabase.)</div>'; return; }
+  LT_RECORDS = recs;
+  const fk = document.getElementById('ltFilterKelas').value;
+  const fm = document.getElementById('ltFilterMinggu').value;
+  let view = recs;
+  if(fk) view = view.filter(r => r.kelas === fk);
+  if(fm) view = view.filter(r => String(r.minggu) === String(fm));
+  if(!view.length){ box.innerHTML = '<div class="kh-empty">Tiada rekod latihan lagi.</div>'; return; }
+  box.innerHTML = view.map(r => {
+    const list = Array.isArray(r.penghantaran) ? r.penghantaran : [];
+    const submitted = list.length;
+    const belumCount = (r.jumlah || 0) - submitted;
+    const roster = (adamData[r.kelas] || []);
+    const submittedNames = new Set(list.map(p => p.nama));
+    const belumList = roster.length ? roster.filter(n => !submittedNames.has(n)) : [];
+    const lewatList = list.filter(p => p.status === 'lewat');
+    let body = '';
+    if(belumCount > 0){
+      body += `<div class="lt-sec"><b style="color:#c0392b">Belum hantar (${belumCount}):</b>${
+        belumList.length ? belumList.map(n => `<div class="kh-abs-row"><span class="kh-abs-name" dir="auto">${escapeHtml(n)}</span></div>`).join('') : ` <span style="color:var(--text-light)">— ${belumCount} murid</span>`
+      }</div>`;
+    } else {
+      body += `<div class="kh-allhadir">✓ Semua murid dah hantar</div>`;
+    }
+    if(lewatList.length){
+      body += `<div class="lt-sec" style="margin-top:8px"><b style="color:#9a6a1a">Lewat (${lewatList.length}):</b>${lewatList.map(p => `<div class="kh-abs-row"><span class="kh-abs-name" dir="auto">${escapeHtml(p.nama)}</span><span class="lt-badge b-lewat">Lewat</span></div>`).join('')}</div>`;
+    }
+    return `<div class="kh-rec">
+      <div class="kh-rec-top" onclick="khToggleRec(this)">
+        <span class="kh-rec-wk">M${r.minggu || '?'}</span>
+        <span class="kh-rec-main"><span class="lt-tajuk">${escapeHtml(r.tajuk || '(tiada tajuk)')}</span> <small>${escapeHtml(r.kelas || '')} · ${khFmtTarikh(r.tarikh)}</small></span>
+        <span class="kh-rec-count ${belumCount > 0 ? 'miss' : 'ok'}">${submitted}/${r.jumlah}</span>
+        <span class="kh-rec-chev">▾</span>
+      </div>
+      <div class="kh-rec-body">
+        ${body}
+        <div class="kh-rec-actions">
+          <button class="kh-edit-btn" onclick="ltEditRecord(${r.id})" type="button">✏️ Edit</button>
+          <button class="kh-del-btn" onclick="ltDeleteRecord(${r.id})" type="button">🗑️ Padam</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function ltEditRecord(id){
+  const r = LT_RECORDS.find(x => String(x.id) === String(id)); if(!r) return;
+  document.getElementById('ltKelas').value = r.kelas;
+  document.getElementById('ltTarikh').value = r.tarikh;
+  document.getElementById('ltTajuk').value = r.tajuk || '';
+  ltUpdateMingguBadge(); ltLoadMarking();
+}
+async function ltDeleteRecord(id){
+  if(!confirm('Padam rekod latihan ini?')) return;
+  try { await sb('DELETE', `erph_latihan?id=eq.${id}`); showToast('🗑️ Rekod dipadam'); await ltLoadRecords(); }
+  catch(e){ showToast('❌ Gagal padam'); }
+}
+
+function ltSheetXml(recs, kelas){
+  const H = ['Minggu','Tarikh','Tajuk','Nama','Status'];
+  const cStr = (col,row,s,val) => `<c r="${khColLetter(col)}${row}"${s!=null?` s="${s}"`:''} t="inlineStr"><is><t xml:space="preserve">${khXmlEsc(val)}</t></is></c>`;
+  const rowsXml = []; let r = 0;
+  r++; rowsXml.push(`<row r="${r}">${H.map((h,i)=>cStr(i,r,1,h)).join('')}</row>`);
+  const roster = (adamData[kelas] || []);
+  const label = { hantar:'Dah Hantar', lewat:'Lewat', belum:'Belum Hantar' };
+  const sorted = recs.slice().sort((a,b)=>(a.minggu||0)-(b.minggu||0)||String(a.tarikh||'').localeCompare(String(b.tarikh||''))||String(a.tajuk||'').localeCompare(String(b.tajuk||'')));
+  sorted.forEach(rec => {
+    const list = Array.isArray(rec.penghantaran) ? rec.penghantaran : [];
+    const smap = {}; list.forEach(p => { if(p && p.nama) smap[p.nama] = p.status; });
+    const names = roster.length ? roster : list.map(p => p.nama);
+    let lastWk = null;
+    if(rec.minggu !== lastWk){ /* no band, keep flat */ }
+    names.forEach(nama => {
+      const st = smap[nama] || 'belum';
+      const sStyle = st === 'belum' ? 3 : null;
+      r++;
+      rowsXml.push(`<row r="${r}">`
+        + cStr(0,r,null,'M'+(rec.minggu||''))
+        + cStr(1,r,null,khFmtTarikh(rec.tarikh))
+        + cStr(2,r,null,rec.tajuk||'')
+        + cStr(3,r,null,nama)
+        + cStr(4,r,sStyle,label[st]||st)
+        + `</row>`);
+    });
+  });
+  const cols = `<cols><col min="1" max="1" width="8"/><col min="2" max="2" width="13"/><col min="3" max="3" width="30"/><col min="4" max="4" width="34"/><col min="5" max="5" width="14"/></cols>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${cols}<sheetData>${rowsXml.join('')}</sheetData></worksheet>`;
+}
+function ltExportExcel(){
+  const fk = document.getElementById('ltFilterKelas').value;
+  const fm = document.getElementById('ltFilterMinggu').value;
+  let view = LT_RECORDS.slice();
+  if(fk) view = view.filter(r => r.kelas === fk);
+  if(fm) view = view.filter(r => String(r.minggu) === String(fm));
+  if(!view.length){ showToast('⚠️ Tiada rekod untuk dieksport'); return; }
+  const byKelas = {};
+  view.forEach(r => { (byKelas[r.kelas] = byKelas[r.kelas] || []).push(r); });
+  const kelasList = Object.keys(byKelas).sort();
+  const used = {};
+  const sheetMeta = kelasList.map((kelas, i) => {
+    let nm = (kelas.replace(/[:\\\/\?\*\[\]]/g,' ').trim().slice(0,31)) || ('Kelas'+(i+1));
+    const base = nm; let k = 2;
+    while(used[nm.toLowerCase()]){ nm = (base.slice(0,27)+' '+k).slice(0,31); k++; }
+    used[nm.toLowerCase()] = 1;
+    return { kelas, name: nm, file: `sheet${i+1}.xml` };
+  });
+  const enc = new TextEncoder();
+  const files = [];
+  const ctOverrides = sheetMeta.map(m => `<Override PartName="/xl/worksheets/${m.file}" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('');
+  files.push({ name:'[Content_Types].xml', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${ctOverrides}</Types>`) });
+  files.push({ name:'_rels/.rels', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`) });
+  const sheetsXml = sheetMeta.map((m,i) => `<sheet name="${khXmlEsc(m.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('');
+  files.push({ name:'xl/workbook.xml', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheetsXml}</sheets></workbook>`) });
+  const relsXml = sheetMeta.map((m,i) => `<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/${m.file}"/>`).join('')
+    + `<Relationship Id="rId${sheetMeta.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`;
+  files.push({ name:'xl/_rels/workbook.xml.rels', data: enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${relsXml}</Relationships>`) });
+  files.push({ name:'xl/styles.xml', data: enc.encode(KH_STYLES_XML) });
+  sheetMeta.forEach(m => { files.push({ name:`xl/worksheets/${m.file}`, data: enc.encode(ltSheetXml(byKelas[m.kelas], m.kelas)) }); });
+  const zip = khZip(files);
+  const blob = new Blob([zip], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const tag = (fk ? fk.replace(/\s+/g,'_') : 'semua') + (fm ? ('_M'+fm) : '');
+  a.href = url; a.download = `latihan_${tag}.xlsx`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+  showToast('📊 Latihan dieksport (.xlsx, tab ikut kelas)');
+}
+
+// ===== MODUL PBD (Pentaksiran Bilik Darjah) =====
+const PBD_TP_COLORS = {0:'#d7dde1',1:'#d64541',2:'#e67e22',3:'#d9a92b',4:'#7cb342',5:'#2d8a56',6:'#1c5639'};
+let PBD_RECORDS = [];
+
+function pbdDBFor(tk){ return ({ T3:(typeof DB_T3!=='undefined'?DB_T3:{}), T4:(typeof DB_T4!=='undefined'?DB_T4:{}), T5:(typeof DB_T5!=='undefined'?DB_T5:{}), T6:(typeof DB_T6!=='undefined'?DB_T6:{}) })[tk] || {}; }
+function pbdAvgTP(arr){ if(!arr || !arr.length) return 0; return Math.round(arr.reduce((a,b)=>a+(+b||0),0)/arr.length); }
+function pbdTpBadge(tp){ return `<span class="pbd-tp pbd-tp-${tp||0}">${tp?('TP'+tp):'—'}</span>`; }
+
+function pbdFillKelas(ids){
+  const kelasList = getAllKelas();
+  ids.forEach(([id, head]) => {
+    const sel = document.getElementById(id); if(!sel) return;
+    const cur = sel.value;
+    sel.innerHTML = head + kelasList.map(k=>`<option value="${k}">${k}</option>`).join('');
+    if(cur) sel.value = cur;
+  });
+}
+function initPBD(){
+  if(!currentUser) return;
+  pbdFillKelas([['pbdKelas','<option value="">-- Pilih Kelas --</option>'],['pbdFilterKelas','<option value="">Semua Kelas</option>'],['pbdRaportKelas','<option value="">-- Pilih Kelas --</option>'],['pbdTaburanKelas','<option value="">-- Pilih Kelas --</option>']]);
+  pbdLoadRecords();
+}
+function pbdSwitchMode(mode){
+  [['rekod','pbdModeRekod','pbdTabRekod'],['laporan','pbdModeLaporan','pbdTabLaporan'],['taburan','pbdModeTaburan','pbdTabTaburan']].forEach(([m,pane,tab])=>{
+    document.getElementById(pane).classList.toggle('hidden', m!==mode);
+    document.getElementById(tab).classList.toggle('active', m===mode);
+  });
+  if(mode==='laporan') pbdLoadRaport();
+  if(mode==='taburan') pbdLoadTaburan();
+}
+
+async function pbdFetch(){
+  PBD_RECORDS = await sb('GET', `erph_pbd?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=*&order=id.desc`) || [];
+  return PBD_RECORDS;
+}
+
+// --- REKOD ---
+function pbdRekodKelasChanged(){
+  const kelas = document.getElementById('pbdKelas').value;
+  const DB = pbdDBFor(khTingkatanForKelas(kelas));
+  document.getElementById('pbdBidang').innerHTML = '<option value="">-- Pilih Bidang --</option>' + Object.keys(DB).map(b=>`<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
+  document.getElementById('pbdTajuk').innerHTML = '<option value="">-- Pilih Tajuk --</option>';
+  document.getElementById('pbdMarkCard').classList.add('hidden');
+}
+function pbdBidangChanged(){
+  const kelas = document.getElementById('pbdKelas').value;
+  const bidang = document.getElementById('pbdBidang').value;
+  const topics = ((pbdDBFor(khTingkatanForKelas(kelas))[bidang]||{}).topics) || [];
+  document.getElementById('pbdTajuk').innerHTML = '<option value="">-- Pilih Tajuk --</option>' + topics.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+}
+function pbdLoadMarking(){
+  const kelas=document.getElementById('pbdKelas').value;
+  const bidang=document.getElementById('pbdBidang').value;
+  const tajuk=document.getElementById('pbdTajuk').value;
+  if(!kelas){ showToast('⚠️ Pilih kelas'); return; }
+  if(!bidang){ showToast('⚠️ Pilih bidang'); return; }
+  if(!tajuk){ showToast('⚠️ Pilih tajuk'); return; }
+  const existing = PBD_RECORDS.find(r=>r.kelas===kelas && r.bidang===bidang && r.tajuk===tajuk);
+  const map={};
+  if(existing && Array.isArray(existing.penilaian)) existing.penilaian.forEach(p=>{ if(p&&p.nama) map[p.nama]=p.tp; });
+  pbdRenderRoster(kelas, map);
+  document.getElementById('pbdMarkWho').textContent = `· ${kelas}`;
+  document.getElementById('pbdSaveMsg').textContent = existing ? '✏️ Mengedit penilaian sedia ada' : '';
+  const card=document.getElementById('pbdMarkCard'); card.classList.remove('hidden'); card.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function pbdRenderRoster(kelas, map){
+  const roster=(adamData[kelas]||[]).slice();
+  const box=document.getElementById('pbdRoster');
+  if(!roster.length){ box.innerHTML='<div class="kh-empty">Tiada senarai murid. Isi di "Urus Senarai Pelajar".</div>'; pbdRecalc(); return; }
+  const opts=[1,2,3,4,5,6].map(n=>`<option value="${n}">TP${n}</option>`).join('');
+  box.innerHTML = roster.map((nama,i)=>`<div class="kh-std${map[nama]?' pbd-set':''}">
+      <span class="kh-std-no">${i+1}.</span>
+      <span class="kh-std-name" dir="auto">${escapeHtml(nama)}</span>
+      <select class="pbd-tp-sel" onchange="pbdOnTp(this)"><option value="">—</option>${opts}</select>
+    </div>`).join('');
+  const rows=box.querySelectorAll('.kh-std');
+  roster.forEach((nama,i)=>{ if(map[nama]){ rows[i].querySelector('.pbd-tp-sel').value=String(map[nama]); } });
+  pbdRecalc();
+}
+function pbdOnTp(sel){ sel.closest('.kh-std').classList.toggle('pbd-set', !!sel.value); pbdRecalc(); }
+function pbdRecalc(){
+  const rows=document.querySelectorAll('#pbdRoster .kh-std');
+  let n=0; rows.forEach(r=>{ const s=r.querySelector('.pbd-tp-sel'); if(s&&s.value) n++; });
+  document.getElementById('pbdDinilai').textContent=n;
+  document.getElementById('pbdJumlah').textContent=rows.length;
+}
+function pbdGather(){
+  const out=[];
+  document.querySelectorAll('#pbdRoster .kh-std').forEach(row=>{
+    const sel=row.querySelector('.pbd-tp-sel'); if(!sel||!sel.value) return;
+    out.push({ nama:row.querySelector('.kh-std-name').textContent, tp:parseInt(sel.value) });
+  });
+  return out;
+}
+async function pbdSave(){
+  const kelas=document.getElementById('pbdKelas').value;
+  const bidang=document.getElementById('pbdBidang').value;
+  const tajuk=document.getElementById('pbdTajuk').value;
+  if(!kelas||!bidang||!tajuk){ showToast('⚠️ Lengkapkan kelas, bidang & tajuk'); return; }
+  const list=pbdGather();
+  if(!list.length){ showToast('⚠️ Belum nilai mana-mana murid'); return; }
+  const payload={ cikgu_username:currentUser.username, tingkatan:khTingkatanForKelas(kelas), kelas, bidang, tajuk, penilaian:list };
+  const msg=document.getElementById('pbdSaveMsg'); msg.textContent='Menyimpan...';
+  try{
+    await sb('DELETE', `erph_pbd?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&kelas=eq.${encodeURIComponent(kelas)}&bidang=eq.${encodeURIComponent(bidang)}&tajuk=eq.${encodeURIComponent(tajuk)}`);
+    await sb('POST','erph_pbd',payload);
+    showToast(`✅ TP disimpan — ${kelas} · ${list.length} murid`);
+    msg.textContent='✅ Disimpan';
+    await pbdLoadRecords();
+  }catch(e){ msg.textContent=''; showToast('❌ Gagal simpan: '+String(e.message||'').slice(0,80)); }
+}
+function pbdCloseMarking(){ document.getElementById('pbdMarkCard').classList.add('hidden'); }
+
+async function pbdLoadRecords(){
+  if(!currentUser) return;
+  const box=document.getElementById('pbdRecordsList'); if(!box) return;
+  box.innerHTML='<div class="kh-empty">Memuatkan...</div>';
+  try{ await pbdFetch(); }
+  catch(e){ box.innerHTML='<div class="kh-empty">Ralat memuat. (Jadual erph_pbd mungkin belum dibuat di Supabase.)</div>'; return; }
+  const fk=document.getElementById('pbdFilterKelas').value;
+  let view=PBD_RECORDS; if(fk) view=view.filter(r=>r.kelas===fk);
+  if(!view.length){ box.innerHTML='<div class="kh-empty">Tiada rekod penilaian lagi.</div>'; return; }
+  box.innerHTML=view.map(r=>{
+    const list=Array.isArray(r.penilaian)?r.penilaian:[];
+    const avg=pbdAvgTP(list.map(p=>p.tp));
+    return `<div class="kh-rec">
+      <div class="kh-rec-top" onclick="khToggleRec(this)">
+        <span class="kh-rec-wk" dir="rtl">${escapeHtml(r.bidang||'')}</span>
+        <span class="kh-rec-main"><span class="lt-tajuk" dir="rtl">${escapeHtml(r.tajuk||'')}</span> <small>${escapeHtml(r.kelas||'')} · ${list.length} murid</small></span>
+        ${pbdTpBadge(avg)}
+        <span class="kh-rec-chev">▾</span>
+      </div>
+      <div class="kh-rec-body">
+        ${list.map(p=>`<div class="kh-abs-row"><span class="kh-abs-name" dir="auto">${escapeHtml(p.nama)}</span>${pbdTpBadge(p.tp)}</div>`).join('')||'<div class="kh-empty">Tiada</div>'}
+        <div class="kh-rec-actions">
+          <button class="kh-edit-btn" onclick="pbdEditRecord(${r.id})" type="button">✏️ Edit</button>
+          <button class="kh-del-btn" onclick="pbdDeleteRecord(${r.id})" type="button">🗑️ Padam</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function pbdEditRecord(id){
+  const r=PBD_RECORDS.find(x=>String(x.id)===String(id)); if(!r) return;
+  document.getElementById('pbdKelas').value=r.kelas; pbdRekodKelasChanged();
+  document.getElementById('pbdBidang').value=r.bidang; pbdBidangChanged();
+  document.getElementById('pbdTajuk').value=r.tajuk;
+  pbdLoadMarking();
+}
+async function pbdDeleteRecord(id){
+  if(!confirm('Padam rekod penilaian ini?')) return;
+  try{ await sb('DELETE',`erph_pbd?id=eq.${id}`); showToast('🗑️ Dipadam'); await pbdLoadRecords(); }
+  catch(e){ showToast('❌ Gagal padam'); }
+}
+
+// --- AGREGAT 3-TINGKAT (tajuk → bidang → keseluruhan) ---
+function pbdAggregate(kelas){
+  const DB = pbdDBFor(khTingkatanForKelas(kelas));
+  const bidangs = Object.keys(DB);
+  const roster = (adamData[kelas]||[]).slice();
+  const recs = PBD_RECORDS.filter(r=>r.kelas===kelas);
+  const data = {};
+  recs.forEach(r=>{
+    (r.penilaian||[]).forEach(p=>{
+      if(!p||!p.nama) return;
+      (data[p.nama]=data[p.nama]||{});
+      (data[p.nama][r.bidang]=data[p.nama][r.bidang]||[]).push({tajuk:r.tajuk, tp:p.tp});
+    });
+  });
+  const names = roster.length ? roster.slice() : Object.keys(data);
+  const students = names.map(nama=>{
+    const detail = data[nama]||{}; const byBidang={}; const allTps=[];
+    bidangs.forEach(b=>{ const arr=(detail[b]||[]).map(x=>x.tp); byBidang[b]=arr.length?pbdAvgTP(arr):0; arr.forEach(t=>allTps.push(t)); });
+    Object.keys(detail).forEach(b=>{ if(!bidangs.includes(b)) (detail[b]||[]).forEach(x=>allTps.push(x.tp)); });
+    return { nama, byBidang, overall: allTps.length?pbdAvgTP(allTps):0, detail };
+  });
+  return { bidangs, students };
+}
+
+// --- LAPORAN MURID ---
+async function pbdLoadRaport(){
+  const kelas=document.getElementById('pbdRaportKelas').value;
+  const box=document.getElementById('pbdRaport'); if(!box) return;
+  if(!kelas){ box.innerHTML='<div class="kh-empty">Pilih kelas untuk lihat laporan.</div>'; return; }
+  try{ await pbdFetch(); }catch(e){ box.innerHTML='<div class="kh-empty">Ralat memuat.</div>'; return; }
+  const {bidangs, students}=pbdAggregate(kelas);
+  if(!students.length){ box.innerHTML='<div class="kh-empty">Tiada murid untuk kelas ini.</div>'; return; }
+  const head=`<tr><th>Murid</th>${bidangs.map(b=>`<th dir="rtl">${escapeHtml(b)}</th>`).join('')}<th>Keseluruhan</th></tr>`;
+  const rows=students.map((s,i)=>{
+    const cells=bidangs.map(b=>`<td class="pbd-rap-cell">${pbdTpBadge(s.byBidang[b])}</td>`).join('');
+    return `<tr>
+      <td class="pbd-rap-name" onclick="pbdToggleDetail(${i})">${escapeHtml(s.nama)}</td>
+      ${cells}
+      <td class="pbd-rap-cell pbd-kes">${pbdTpBadge(s.overall)}</td>
+    </tr>
+    <tr class="pbd-detail-row hidden" id="pbdDetail${i}"><td colspan="${bidangs.length+2}">${pbdDetailHtml(s, bidangs)}</td></tr>`;
+  }).join('');
+  box.innerHTML = `<table class="pbd-raport-table"><thead>${head}</thead><tbody>${rows}</tbody></table>`;
+}
+function pbdDetailHtml(s, bidangs){
+  let h='<div class="pbd-detail-box">'; let any=false;
+  bidangs.forEach(b=>{
+    const arr=(s.detail[b]||[]); if(!arr.length) return; any=true;
+    h+=`<div class="pbd-detail-bidang" dir="rtl">${escapeHtml(b)} ${pbdTpBadge(s.byBidang[b])}</div>`;
+    arr.forEach(x=>{ h+=`<div class="pbd-detail-tajuk"><span dir="rtl">${escapeHtml(x.tajuk)}</span>${pbdTpBadge(x.tp)}</div>`; });
+  });
+  if(!any) h+='<div style="color:var(--text-light)">Belum ada penilaian.</div>';
+  return h+'</div>';
+}
+function pbdToggleDetail(i){ const el=document.getElementById('pbdDetail'+i); if(el) el.classList.toggle('hidden'); }
+
+// --- TABURAN TP ---
+async function pbdLoadTaburan(){
+  const kelas=document.getElementById('pbdTaburanKelas').value;
+  const box=document.getElementById('pbdTaburan'); if(!box) return;
+  if(!kelas){ box.innerHTML='<div class="kh-empty">Pilih kelas untuk lihat taburan.</div>'; return; }
+  try{ await pbdFetch(); }catch(e){ box.innerHTML='<div class="kh-empty">Ralat memuat.</div>'; return; }
+  const {bidangs, students}=pbdAggregate(kelas);
+  const assessed=students.filter(s=>s.overall>0);
+  if(!assessed.length){ box.innerHTML='<div class="kh-empty">Belum ada penilaian untuk kelas ini.</div>'; return; }
+  const dist=[0,0,0,0,0,0,0];
+  assessed.forEach(s=>dist[s.overall]++);
+  const total=assessed.length;
+  const avgAll=pbdAvgTP(assessed.map(s=>s.overall));
+  const bars=[1,2,3,4,5,6].map(tp=>{
+    const c=dist[tp], pct=total?Math.round(c/total*100):0;
+    return `<div class="pbd-tab-row"><span class="pbd-tab-label">TP${tp}</span><div class="pbd-tab-barwrap"><div class="pbd-tab-bar" style="width:${pct}%;background:${PBD_TP_COLORS[tp]}">${pct>8?pct+'%':''}</div></div><span class="pbd-tab-count">${c} murid</span></div>`;
+  }).join('');
+  const cards=`<div class="pbd-summary-cards">
+    <div class="pbd-sc"><div class="pbd-sc-v" style="color:var(--brand-green-1,#123c2d)">${total}</div><div class="pbd-sc-l">Murid Dinilai</div></div>
+    <div class="pbd-sc"><div class="pbd-sc-v">${pbdTpBadge(avgAll)}</div><div class="pbd-sc-l">TP Purata Kelas</div></div>
+    <div class="pbd-sc"><div class="pbd-sc-v" style="color:#2d8a56">${dist[4]+dist[5]+dist[6]}</div><div class="pbd-sc-l">Menguasai (TP4+)</div></div>
+  </div>`;
+  const bidangAvg=bidangs.map(b=>{
+    const tps=assessed.map(s=>s.byBidang[b]).filter(v=>v>0);
+    const a=tps.length?pbdAvgTP(tps):0;
+    return `<div class="pbd-tab-row"><span class="pbd-tab-label" style="width:auto;min-width:72px" dir="rtl">${escapeHtml(b)}</span><div class="pbd-tab-barwrap"><div class="pbd-tab-bar" style="width:${a/6*100}%;background:${PBD_TP_COLORS[a]}">${a?('TP'+a):''}</div></div></div>`;
+  }).join('');
+  box.innerHTML = cards
+    + '<div class="dashboard-panel-title" style="margin:6px 0 10px">Taburan TP Keseluruhan</div>'+bars
+    + '<div class="dashboard-panel-title" style="margin:18px 0 10px">Purata TP ikut Bidang</div>'+bidangAvg;
+}
+
+// --- EXPORT EXCEL ---
+function pbdSheetXml(kelas){
+  const {bidangs, students}=pbdAggregate(kelas);
+  const H=['Murid'].concat(bidangs, ['Keseluruhan']);
+  const cStr=(c,r,s,v)=>`<c r="${khColLetter(c)}${r}"${s!=null?` s="${s}"`:''} t="inlineStr"><is><t xml:space="preserve">${khXmlEsc(v)}</t></is></c>`;
+  const cNum=(c,r,s,v)=>`<c r="${khColLetter(c)}${r}"${s!=null?` s="${s}"`:''}><v>${v}</v></c>`;
+  const rows=[]; let r=0;
+  r++; rows.push(`<row r="${r}">${H.map((h,i)=>cStr(i,r,1,h)).join('')}</row>`);
+  students.forEach(s=>{
+    r++;
+    let cells=cStr(0,r,null,s.nama);
+    bidangs.forEach((b,bi)=>{ const v=s.byBidang[b]; cells+= v?cNum(bi+1,r,null,v):cStr(bi+1,r,null,''); });
+    cells+= s.overall?cNum(bidangs.length+1,r,null,s.overall):cStr(bidangs.length+1,r,null,'');
+    rows.push(`<row r="${r}">${cells}</row>`);
+  });
+  const cols=`<cols><col min="1" max="1" width="34"/><col min="2" max="${bidangs.length+2}" width="13"/></cols>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${cols}<sheetData>${rows.join('')}</sheetData></worksheet>`;
+}
+function pbdExportExcel(){
+  const classes=[...new Set(PBD_RECORDS.map(r=>r.kelas))].sort();
+  if(!classes.length){ showToast('⚠️ Tiada rekod untuk dieksport'); return; }
+  const used={};
+  const sheetMeta=classes.map((kelas,i)=>{
+    let nm=(kelas.replace(/[:\\\/\?\*\[\]]/g,' ').trim().slice(0,31))||('Kelas'+(i+1));
+    const base=nm; let k=2; while(used[nm.toLowerCase()]){ nm=(base.slice(0,27)+' '+k).slice(0,31); k++; } used[nm.toLowerCase()]=1;
+    return { kelas, name:nm, file:`sheet${i+1}.xml` };
+  });
+  const enc=new TextEncoder(); const files=[];
+  const ct=sheetMeta.map(m=>`<Override PartName="/xl/worksheets/${m.file}" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('');
+  files.push({name:'[Content_Types].xml', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${ct}</Types>`)});
+  files.push({name:'_rels/.rels', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`)});
+  const sheetsXml=sheetMeta.map((m,i)=>`<sheet name="${khXmlEsc(m.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('');
+  files.push({name:'xl/workbook.xml', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheetsXml}</sheets></workbook>`)});
+  const rels=sheetMeta.map((m,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/${m.file}"/>`).join('')+`<Relationship Id="rId${sheetMeta.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`;
+  files.push({name:'xl/_rels/workbook.xml.rels', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${rels}</Relationships>`)});
+  files.push({name:'xl/styles.xml', data:enc.encode(KH_STYLES_XML)});
+  sheetMeta.forEach(m=>{ files.push({name:`xl/worksheets/${m.file}`, data:enc.encode(pbdSheetXml(m.kelas))}); });
+  const zip=khZip(files);
+  const blob=new Blob([zip], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='pbd_tp.xlsx';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  showToast('📊 PBD dieksport (.xlsx, tab ikut kelas)');
 }
 
 function renderDashboard() {
@@ -5233,7 +6839,7 @@ function addDaysISO(iso, days) {
 
 function getSelectedPlannerWeek() {
   const weekNo = parseInt(document.getElementById('plannerWeek')?.value) || getCurrentWeekNo();
-  return LEARNING_WEEKS_2026.find(w => w.week === weekNo) || getLearningWeekForDate() || LEARNING_WEEKS_2026[LEARNING_WEEKS_2026.length - 1];
+  return LEARNING_WEEKS.find(w => w.week === weekNo) || getLearningWeekForDate() || LEARNING_WEEKS[LEARNING_WEEKS.length - 1];
 }
 
 function getPlannerKey() {
@@ -5248,7 +6854,7 @@ function initSchedulePlanner() {
   const rules = document.getElementById('plannerDayRules');
   if(!weekSel || !classSel || !rules) return;
 
-  weekSel.innerHTML = LEARNING_WEEKS_2026.map(w =>
+  weekSel.innerHTML = LEARNING_WEEKS.map(w =>
     `<option value="${w.week}">Minggu ${w.week} (${formatPlannerDate(w.start)} - ${formatPlannerDate(w.end)})</option>`
   ).join('');
   weekSel.value = String(getCurrentWeekNo());
@@ -7089,9 +8695,53 @@ function collectFormData() {
     pencapai_jumlah: document.getElementById('pencapaiJumlah').value,
     sebab_tag: sebabActive ? sebabActive.textContent.trim() : '',
     sebab_lain: document.getElementById('sebabLain').value,
+    bukti: buktiImages.slice(),
     saved_at: new Date().toISOString()
   };
 }
+
+// ===== BUKTI GAMBAR PdPR =====
+let buktiImages = [];
+function compressImage(file, maxDim = 1000, quality = 0.6) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let { width:w, height:h } = img;
+        if(w > maxDim || h > maxDim){ const s = maxDim / Math.max(w, h); w = Math.round(w*s); h = Math.round(h*s); }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+async function handleBuktiUpload(ev) {
+  const files = Array.from(ev.target.files || []);
+  if(!files.length) return;
+  for(const f of files){
+    if(buktiImages.length >= 6){ showToast('⚠️ Maksimum 6 gambar'); break; }
+    if(!/^image\//.test(f.type)) continue;
+    try { buktiImages.push(await compressImage(f)); } catch(e){ showToast('❌ Gagal proses gambar'); }
+  }
+  ev.target.value = '';
+  renderBuktiPreview();
+}
+function renderBuktiPreview() {
+  const box = document.getElementById('buktiPreview');
+  if(!box) return;
+  box.innerHTML = buktiImages.map((src, i) => `<div style="position:relative;width:92px;height:92px;border-radius:10px;overflow:hidden;border:1px solid #ccc">
+    <img src="${src}" style="width:100%;height:100%;object-fit:cover;cursor:pointer" onclick="window.open('').document.write('<img src=\\'${src}\\' style=\\'max-width:100%\\'>')">
+    <button type="button" onclick="removeBukti(${i})" style="position:absolute;top:3px;right:3px;background:rgba(192,57,43,0.92);color:#fff;border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:900;line-height:1">✕</button>
+  </div>`).join('');
+}
+function removeBukti(i){ buktiImages.splice(i, 1); renderBuktiPreview(); }
 
 function applyMtSelection(values) {
   const selected = new Set((values || []).map(String));
@@ -7155,6 +8805,8 @@ function loadDraft() {
   const objektifAuto = document.getElementById('objektifAuto');
   if(objektifAuto) objektifAuto.value = draft.objektif_auto || '';
   autoGrowObjektif();
+  buktiImages = Array.isArray(draft.bukti) ? draft.bukti.slice() : [];
+  renderBuktiPreview();
   document.getElementById('pencapai').value = draft.pencapai || '';
   document.getElementById('pencapaiJumlah').value = draft.pencapai_jumlah || '';
   document.getElementById('sebabLain').value = draft.sebab_lain || '';
@@ -7199,7 +8851,9 @@ async function submitRPH() {
     pencapai: parseInt(form.pencapai)||null,
     pencapai_jumlah: parseInt(form.pencapai_jumlah)||null,
     sebab_tangguh: form.sebab_tag || form.sebab_lain,
-    murid_ghaiab: form.murid_ghaiab || []
+    murid_ghaiab: form.murid_ghaiab || [],
+    jenis_sesi: currentJenisSesi === 'pdpr' ? 'pdpr' : 'pdp',
+    bukti: form.bukti || []
   };
 
   if(!data.tarikh || !data.kelas || !data.mahara || !data.maudhu) {
@@ -7207,7 +8861,7 @@ async function submitRPH() {
   }
 
   try {
-    if(editingRecord && editingRecord.jenis === 'pdp') {
+    if(editingRecord && (editingRecord.jenis === 'pdp' || editingRecord.jenis === 'pdpr')) {
       await sb('PATCH', `${editingRecord.table}?id=eq.${editingRecord.id}`, data);
       showToast('✅ RPH berjaya dikemas kini!');
       exitEditMode();
@@ -7305,6 +8959,9 @@ function resetForm() {
   const objektifAuto = document.getElementById('objektifAuto');
   if(objektifAuto) objektifAuto.value = '';
   updateDraftInfo();
+  buktiImages = [];
+  renderBuktiPreview();
+  if(typeof setJenisSesi === 'function') setJenisSesi('pdp');
 }
 
 // ===== JENIS SESI =====
@@ -7313,7 +8970,7 @@ let currentJenisSesi = 'pdp';
 function setJenisSesi(jenis) {
   currentJenisSesi = jenis;
   // Update card styles
-  const cards = { pdp:'jenisPdP', lisan:'jenisLisan', peperiksaan:'jenisPeperiksaan' };
+  const cards = { pdp:'jenisPdP', pdpr:'jenisPdPR', lisan:'jenisLisan', peperiksaan:'jenisPeperiksaan' };
   Object.entries(cards).forEach(([key, id]) => {
     const el = document.getElementById(id);
     if(!el) return;
@@ -7327,13 +8984,16 @@ function setJenisSesi(jenis) {
       el.style.color = '#888';
     }
   });
-  // Show/hide forms
-  document.getElementById('formPdP').style.display = jenis==='pdp' ? '' : 'none';
-  document.getElementById('btnRowPdP').style.display = jenis==='pdp' ? '' : 'none';
+  // Show/hide forms (PdP & PdPR guna borang yang sama)
+  const isPdpLike = (jenis === 'pdp' || jenis === 'pdpr');
+  document.getElementById('formPdP').style.display = isPdpLike ? '' : 'none';
+  document.getElementById('btnRowPdP').style.display = isPdpLike ? '' : 'none';
   document.getElementById('formLisan').style.display = jenis==='lisan' ? '' : 'none';
   document.getElementById('formPeperiksaan').style.display = jenis==='peperiksaan' ? '' : 'none';
+  const buktiField = document.getElementById('buktiField');
+  if(buktiField) buktiField.style.display = (jenis === 'pdpr') ? '' : 'none';
   // Populate kelas dropdowns for lisan/peperiksaan
-  if(jenis !== 'pdp') {
+  if(jenis === 'peperiksaan' || jenis === 'lisan') {
     syncExamKelasOptions();
     // Set today
     const today = new Date().toISOString().split('T')[0];
@@ -7572,7 +9232,7 @@ async function editRPH(id) {
     r = data[0];
   } catch(e) { showToast('❌ Ralat: ' + e.message); return; }
 
-  const jenis = r.jenis_sesi === 'peperiksaan' ? 'peperiksaan' : 'pdp';
+  const jenis = r.jenis_sesi === 'peperiksaan' ? 'peperiksaan' : (r.jenis_sesi === 'pdpr' ? 'pdpr' : 'pdp');
   editingRecord = { id, table, tingkatan, jenis };
 
   // Align tingkatan (colour scheme, DSKP source, kelas dropdown)
@@ -7585,7 +9245,7 @@ async function editRPH(id) {
     setJenisSesi('peperiksaan');
     fillPepForm(r);
   } else {
-    setJenisSesi('pdp');
+    setJenisSesi(jenis);
     fillPdpForm(r);
   }
 
@@ -7617,7 +9277,7 @@ async function duplicateRPH(id) {
     document.getElementById('pepCatatan').value = '';
     showToast('Salinan peperiksaan dimuatkan. Semak tarikh dan kehadiran.');
   } else {
-    setJenisSesi('pdp');
+    setJenisSesi(r.jenis_sesi === 'pdpr' ? 'pdpr' : 'pdp');
     fillPdpForm(r);
     prepareDuplicatedPdpDefaults();
     showToast('Salinan RPH dimuatkan. Semak tarikh, minggu dan kehadiran.');
@@ -7689,6 +9349,9 @@ function fillPdpForm(r) {
   document.getElementById('pencapai').value = r.pencapai ?? '';
   document.getElementById('pencapaiJumlah').value = r.pencapai_jumlah ?? '';
   calcPencapai();
+
+  buktiImages = Array.isArray(r.bukti) ? r.bukti.slice() : [];
+  renderBuktiPreview();
 
   // Sebab tangguh: match a tag, else drop into "sebab lain"
   const sebab = r.sebab_tangguh || '';
@@ -7821,6 +9484,13 @@ async function exportBulkPDF() {
   } catch(e) { showToast('❌ Ralat: ' + e.message); }
 }
 
+function buktiPdfBlock(r, barStyle){
+  if(!Array.isArray(r.bukti) || !r.bukti.length) return '';
+  return `<div style="${barStyle}">Bukti PdPR</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;border:1px solid #ccc;padding:6px">
+      ${r.bukti.map(src=>`<img src="${src}" style="max-width:31%;max-height:170px;border:1px solid #ddd;border-radius:4px;object-fit:contain">`).join('')}
+    </div>`;
+}
 function renderBulkPDF(records) {
   const bulkTingkatan = getTingkatanByTable(getTable());
   const allHtml = records.map((r, idx) => {
@@ -7885,6 +9555,7 @@ function renderBulkPDF(records) {
         ${(r.murid_ghaiab&&r.murid_ghaiab.length>0)?`<tr><td style="padding:4px 6px;font-weight:600;color:#c0392b;border:1px solid #ccc;vertical-align:top">Tidak Hadir</td><td colspan="3" style="padding:4px 6px;border:1px solid #ccc;direction:rtl;font-size:10px">${r.murid_ghaiab.map(m=>typeof m==='object'?m.nama+(m.sebab?' ('+m.sebab+')':''):m).join('<br>')}</td></tr>`:''}
         <tr><td style="padding:4px 6px;font-weight:600;color:#555;border:1px solid #ccc;vertical-align:top">التأمل</td><td colspan="3" style="padding:4px 6px;direction:rtl;border:1px solid #ccc">${safeText(r.refleksi)}</td></tr>
       </table>
+      ${buktiPdfBlock(r, bBar)}
       <table style="width:100%;margin-top:8px;font-size:10px">
         <tr>
           <td style="text-align:center;padding:5px;width:50%"><div style="color:#555;margin-bottom:16px">Disediakan oleh:</div><div style="border-top:1px solid #333;padding-top:3px">${safeText(r.cikgu_nama,'')}</div></td>
@@ -8154,6 +9825,7 @@ async function loadHistory() {
             <div class="record-meta-pills">
               <span class="record-pill">${safeText(r.tarikh,'')}</span>
               <span class="record-pill">Minggu ${safeText(r.minggu)}</span>
+              ${r.jenis_sesi === 'pdpr' ? '<span class="record-pill" style="background:#e7e0f7;color:#6b3fc0">🏠 PdPR</span>' : ''}
             </div>
           </div>
         </div>
@@ -8163,6 +9835,7 @@ async function loadHistory() {
               ${bodyInfo}
             </div>
           </div>
+          ${(Array.isArray(r.bukti) && r.bukti.length) ? `<div class="record-section record-section-soft"><div style="font-weight:700;color:var(--primary-dark);margin-bottom:8px">📸 Bukti PdPR (${r.bukti.length})</div><div style="display:flex;flex-wrap:wrap;gap:8px">${r.bukti.map(src=>`<img src="${src}" style="width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid #ccc;cursor:pointer" onclick="event.stopPropagation();window.open('').document.write('<img src=\\'${src}\\' style=\\'max-width:100%\\'>')">`).join('')}</div></div>` : ''}
           <div class="record-action-row">
             <button class="btn btn-accent" onclick="event.stopPropagation();editRPH('${r.id}')">✏️ Edit</button>
             <button class="btn btn-outline" onclick="event.stopPropagation();duplicateRPH('${r.id}')">Salin RPH</button>
@@ -8316,6 +9989,7 @@ async function exportPDF(recordId) {
       ${r.sebab_tangguh&&r.sebab_tangguh!=='لا يوجد'?`<tr><td style="padding:4px 6px;font-weight:600;color:#c0392b;border:1px solid #ccc">سبب التأجيل</td><td colspan="3" style="padding:4px 6px;color:#c0392b;border:1px solid #ccc">${safeText(r.sebab_tangguh)}</td></tr>`:''}
     </table>
 
+    ${buktiPdfBlock(r, _bar)}
     <table style="width:100%;margin-top:10px;font-size:10.5px">
       <tr>
         <td style="text-align:center;padding:5px;width:50%">
