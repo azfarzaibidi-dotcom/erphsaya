@@ -3261,7 +3261,8 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 #mainApp .dash-hero-title .accent{ color:#c9a24e !important; }
 #mainApp .dash-hero-left #dashboardWelcome div,#mainApp .dash-hero-left p,#mainApp .dash-hero-left span{ color:#55655c !important; }
 #mainApp .dash-hero-left #dashboardWelcome .dash-hero-title,#mainApp .dash-hero-left #dashboardWelcome .dash-hero-kicker{ color:inherit !important; }
-#mainApp .dash-hero-photo{ position:absolute !important; right:3% !important; bottom:0 !important; left:auto !important; top:auto !important; height:120% !important; width:auto !important; max-width:44% !important; object-fit:contain !important; object-position:bottom !important; border:none !important; border-left:none !important; border-radius:0 !important; box-shadow:none !important; filter:drop-shadow(0 20px 22px rgba(15,40,30,.26)) !important; z-index:2 !important; }
+#mainApp .dashboard-hero{ margin-top:22px !important; }
+#mainApp .dash-hero-photo{ position:absolute !important; right:3% !important; bottom:0 !important; left:auto !important; top:auto !important; height:108% !important; width:auto !important; max-width:42% !important; object-fit:contain !important; object-position:bottom !important; border:none !important; border-left:none !important; border-radius:0 !important; box-shadow:none !important; filter:drop-shadow(0 18px 20px rgba(15,40,30,.24)) !important; z-index:2 !important; }
 #mainApp .dashboard-hero .dashboard-action{ background:#fff !important; color:#16533c !important; border:1.5px solid #e2e8e3 !important; box-shadow:none !important; }
 #mainApp .dashboard-hero .dashboard-action.primary{ background:linear-gradient(135deg,#1c7a57,#16533c) !important; color:#fff !important; border:none !important; box-shadow:0 10px 22px rgba(28,122,87,.26) !important; }
 #mainApp .dashboard-hero .dashboard-action.primary:hover{ filter:brightness(1.08); }
@@ -3277,6 +3278,8 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 
  .lp-hero h1{ font-size:30px; } }
 
+/* Kecikkan paparan dashboard sahaja (~saiz 10) — form RPH kekal */
+#mainApp #pageDashboard{ zoom: 0.62; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -3307,7 +3310,7 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 </div>
 
 <!-- ===== MAIN APP ===== -->
-<div id="mainApp" class="hidden" style="font-size:21px">
+<div id="mainApp" class="hidden" style="font-size:16px">
   <div class="app-shell" dir="ltr">
     <div class="side-overlay" id="sideOverlay" onclick="toggleSide(false)"></div>
     <aside class="app-side" id="appSide">
@@ -4041,6 +4044,11 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
 
   <!-- TAB: LATIHAN / PENGHANTARAN KERJA -->
   <div id="pageLatihan" class="container hidden">
+    <div class="kh-mode-toggle">
+      <button id="ltTabRekod" class="kh-mode-btn active" onclick="ltSwitchMode('rekod')" type="button">✍️ Rekod Latihan</button>
+      <button id="ltTabLaporan" class="kh-mode-btn" onclick="ltSwitchMode('laporan')" type="button">📋 Laporan Murid</button>
+    </div>
+    <div id="ltModeRekod">
     <div class="kh-controls">
       <div class="kh-ctrl" style="flex:1;min-width:200px">
         <label>Tajuk Latihan</label>
@@ -4083,6 +4091,19 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
       </div>
     </div>
     <div id="ltRecordsList" class="kh-rec-list"></div>
+    </div><!-- /ltModeRekod -->
+
+    <div id="ltModeLaporan" class="hidden" dir="ltr">
+      <div class="kh-rec-head">
+        <div class="kh-filter-bar">
+          <label style="font-family:'Cairo',sans-serif;font-weight:800;color:var(--brand-green-1,#123c2d)">Kelas</label>
+          <select id="ltRaportKelas" onchange="ltLoadRaport()"></select>
+          <button class="btn btn-outline kh-xls-btn" onclick="ltRaportExport()" type="button">📊 Export Excel</button>
+        </div>
+      </div>
+      <div class="kg-hint">Tekan nama murid untuk lihat status setiap latihan.</div>
+      <div id="ltRaport" class="kg-grid-wrap"></div>
+    </div>
   </div>
 
   <!-- TAB: PBD (Pentaksiran Bilik Darjah) -->
@@ -6306,12 +6327,97 @@ let LT_RECORDS = [];
 
 function ltFillKelasOptions(){
   const kelasList = getAllKelas();
-  [['ltKelas','<option value="">-- Pilih Kelas --</option>'], ['ltFilterKelas','<option value="">Semua Kelas</option>']].forEach(([id, head]) => {
+  [['ltKelas','<option value="">-- Pilih Kelas --</option>'], ['ltFilterKelas','<option value="">Semua Kelas</option>'], ['ltRaportKelas','<option value="">-- Pilih Kelas --</option>']].forEach(([id, head]) => {
     const sel = document.getElementById(id); if(!sel) return;
     const cur = sel.value;
     sel.innerHTML = head + kelasList.map(k => `<option value="${k}">${k}</option>`).join('');
     if(cur) sel.value = cur;
   });
+}
+async function ltFetch(){
+  LT_RECORDS = await sb('GET', `erph_latihan?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=*&order=tarikh.desc`) || [];
+  return LT_RECORDS;
+}
+function ltSwitchMode(mode){
+  document.getElementById('ltModeRekod').classList.toggle('hidden', mode!=='rekod');
+  document.getElementById('ltModeLaporan').classList.toggle('hidden', mode!=='laporan');
+  document.getElementById('ltTabRekod').classList.toggle('active', mode==='rekod');
+  document.getElementById('ltTabLaporan').classList.toggle('active', mode==='laporan');
+  if(mode==='laporan') ltLoadRaport();
+}
+function ltAggregate(kelas){
+  const recs = LT_RECORDS.filter(r => r.kelas === kelas);
+  const total = recs.length;
+  const roster = (adamData[kelas] || []).slice();
+  const names = roster.length ? roster.slice() : [...new Set(recs.flatMap(r => (r.penghantaran||[]).map(p => p.nama)))];
+  const students = names.map(nama => {
+    let hantar=0, lewat=0; const detail=[];
+    recs.forEach(r => {
+      const p = (r.penghantaran||[]).find(x => x.nama === nama);
+      const st = p ? (p.status || 'hantar') : 'belum';
+      if(st === 'hantar') hantar++; else if(st === 'lewat') lewat++;
+      detail.push({ tajuk:r.tajuk, minggu:r.minggu, tarikh:r.tarikh, status:st });
+    });
+    const belum = total - hantar - lewat;
+    const pct = total ? Math.round((hantar+lewat)/total*100) : 0;
+    return { nama, hantar, lewat, belum, total, pct, detail };
+  });
+  return { total, students };
+}
+function ltPctColor(p){ return p>=80 ? '#1c7a57' : (p>=50 ? '#9a6a1a' : '#c0392b'); }
+async function ltLoadRaport(){
+  const kelas = document.getElementById('ltRaportKelas').value;
+  const box = document.getElementById('ltRaport'); if(!box) return;
+  if(!kelas){ box.innerHTML = '<div class="kh-empty">Pilih kelas untuk lihat laporan.</div>'; return; }
+  try{ await ltFetch(); }catch(e){ box.innerHTML = '<div class="kh-empty">Ralat memuat.</div>'; return; }
+  const { total, students } = ltAggregate(kelas);
+  if(!total){ box.innerHTML = '<div class="kh-empty">Tiada latihan untuk kelas ini lagi.</div>'; return; }
+  const head = `<tr><th>Murid</th><th>Hantar</th><th>Lewat</th><th>Belum</th><th>% Hantar</th></tr>`;
+  const rows = students.map((s,i) => `<tr>
+      <td class="pbd-rap-name" onclick="ltToggleDetail(${i})">${escapeHtml(s.nama)}</td>
+      <td class="pbd-rap-cell" style="color:#1c7a57;font-weight:800">${s.hantar}</td>
+      <td class="pbd-rap-cell" style="color:#9a6a1a;font-weight:800">${s.lewat}</td>
+      <td class="pbd-rap-cell" style="color:#c0392b;font-weight:800">${s.belum}</td>
+      <td class="pbd-rap-cell" style="color:${ltPctColor(s.pct)};font-weight:900">${s.pct}%</td>
+    </tr>
+    <tr class="pbd-detail-row hidden" id="ltDetail${i}"><td colspan="5">${ltRaportDetailHtml(s)}</td></tr>`).join('');
+  box.innerHTML = `<table class="pbd-raport-table" style="min-width:480px"><thead>${head}</thead><tbody>${rows}</tbody></table>`;
+}
+function ltRaportDetailHtml(s){
+  const badge = st => st==='hantar' ? '<span class="lt-badge b-hantar">Hantar</span>' : (st==='lewat' ? '<span class="lt-badge b-lewat">Lewat</span>' : '<span class="lt-badge b-belum">Belum</span>');
+  const items = s.detail.map(d => `<div class="pbd-detail-tajuk"><span>M${d.minggu||'?'} · ${escapeHtml(d.tajuk||'(tiada tajuk)')}</span>${badge(d.status)}</div>`).join('');
+  return `<div class="pbd-detail-box">${items || '<div style="color:var(--text-light)">Tiada latihan.</div>'}</div>`;
+}
+function ltToggleDetail(i){ const el=document.getElementById('ltDetail'+i); if(el) el.classList.toggle('hidden'); }
+function ltRaportSheetXml(kelas){
+  const { students } = ltAggregate(kelas);
+  const H = ['Murid','Jumlah Latihan','Hantar','Lewat','Belum','% Hantar'];
+  const cStr=(c,r,s,v)=>`<c r="${khColLetter(c)}${r}"${s!=null?` s="${s}"`:''} t="inlineStr"><is><t xml:space="preserve">${khXmlEsc(v)}</t></is></c>`;
+  const cNum=(c,r,s,v)=>`<c r="${khColLetter(c)}${r}"${s!=null?` s="${s}"`:''}><v>${v}</v></c>`;
+  const rows=[]; let r=0;
+  r++; rows.push(`<row r="${r}">${H.map((h,i)=>cStr(i,r,1,h)).join('')}</row>`);
+  students.forEach(s=>{ r++;
+    rows.push(`<row r="${r}">`+cStr(0,r,null,s.nama)+cNum(1,r,null,s.total)+cNum(2,r,null,s.hantar)+cNum(3,r,null,s.lewat)+cNum(4,r,s.belum>0?3:null,s.belum)+cStr(5,r,null,s.pct+'%')+`</row>`);
+  });
+  const cols=`<cols><col min="1" max="1" width="34"/><col min="2" max="6" width="13"/></cols>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${cols}<sheetData>${rows.join('')}</sheetData></worksheet>`;
+}
+function ltRaportExport(){
+  const classes=[...new Set(LT_RECORDS.map(r=>r.kelas))].sort();
+  if(!classes.length){ showToast('⚠️ Tiada rekod'); return; }
+  const used={}; const sheetMeta=classes.map((kelas,i)=>{ let nm=(kelas.replace(/[:\\\/\?\*\[\]]/g,' ').trim().slice(0,31))||('Kelas'+(i+1)); const base=nm; let k=2; while(used[nm.toLowerCase()]){ nm=(base.slice(0,27)+' '+k).slice(0,31); k++; } used[nm.toLowerCase()]=1; return {kelas,name:nm,file:`sheet${i+1}.xml`}; });
+  const enc=new TextEncoder(); const files=[];
+  const ct=sheetMeta.map(m=>`<Override PartName="/xl/worksheets/${m.file}" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('');
+  files.push({name:'[Content_Types].xml', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${ct}</Types>`)});
+  files.push({name:'_rels/.rels', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`)});
+  files.push({name:'xl/workbook.xml', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheetMeta.map((m,i)=>`<sheet name="${khXmlEsc(m.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`)});
+  files.push({name:'xl/_rels/workbook.xml.rels', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheetMeta.map((m,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/${m.file}"/>`).join('')}<Relationship Id="rId${sheetMeta.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`)});
+  files.push({name:'xl/styles.xml', data:enc.encode(KH_STYLES_XML)});
+  sheetMeta.forEach(m=>{ files.push({name:`xl/worksheets/${m.file}`, data:enc.encode(ltRaportSheetXml(m.kelas))}); });
+  const zip=khZip(files); const blob=new Blob([zip],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='laporan_latihan.xlsx';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(()=>URL.revokeObjectURL(url),1500);
+  showToast('📊 Laporan latihan dieksport (.xlsx)');
 }
 function ltFillMingguFilter(){
   const sel = document.getElementById('ltFilterMinggu'); if(!sel || sel.options.length > 1) return;
