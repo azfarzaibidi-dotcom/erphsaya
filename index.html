@@ -3252,7 +3252,7 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 .app-main{ background:#f4f7f3; }
 .app-topbar{ background:rgba(255,255,255,.88) !important; }
 /* HERO light + pop-out */
-#mainApp .dashboard-hero{ background:linear-gradient(120deg,#ffffff,#e9f3ec) !important; border:1px solid #e8ede9 !important; border-radius:24px !important; overflow:visible !important; box-shadow:0 14px 36px rgba(18,60,45,.07) !important; position:relative !important; }
+#mainApp .dashboard-hero{ background:linear-gradient(120deg,#ffffff,#e9f3ec) !important; border:1px solid #e8ede9 !important; border-radius:24px !important; overflow:hidden !important; box-shadow:0 14px 36px rgba(18,60,45,.07) !important; position:relative !important; min-height:300px !important; }
 #mainApp .dashboard-hero::after{ content:''; position:absolute; right:4%; bottom:-6px; width:300px; height:300px; max-width:38%; border-radius:50%; background:radial-gradient(circle at 50% 42%,#e7f2ec,#d9e9df); z-index:1; }
 #mainApp .dash-hero-mask{ display:none !important; }
 #mainApp .dash-hero-left{ position:relative; z-index:3; max-width:60%; color:#2a3a32 !important; }
@@ -3261,8 +3261,8 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 #mainApp .dash-hero-title .accent{ color:#c9a24e !important; }
 #mainApp .dash-hero-left #dashboardWelcome div,#mainApp .dash-hero-left p,#mainApp .dash-hero-left span{ color:#55655c !important; }
 #mainApp .dash-hero-left #dashboardWelcome .dash-hero-title,#mainApp .dash-hero-left #dashboardWelcome .dash-hero-kicker{ color:inherit !important; }
-#mainApp .dashboard-hero{ margin-top:22px !important; }
-#mainApp .dash-hero-photo{ position:absolute !important; right:3% !important; bottom:0 !important; left:auto !important; top:auto !important; height:108% !important; width:auto !important; max-width:42% !important; object-fit:contain !important; object-position:bottom !important; border:none !important; border-left:none !important; border-radius:0 !important; box-shadow:none !important; filter:drop-shadow(0 18px 20px rgba(15,40,30,.24)) !important; z-index:2 !important; }
+#mainApp .dashboard-hero{ margin-top:0 !important; }
+#mainApp .dash-hero-photo{ position:absolute !important; right:2% !important; bottom:0 !important; left:auto !important; top:auto !important; height:100% !important; width:auto !important; max-width:44% !important; object-fit:contain !important; object-position:bottom center !important; background:transparent !important; border:none !important; border-left:none !important; border-radius:0 !important; box-shadow:none !important; filter:none !important; z-index:2 !important; }
 #mainApp .dashboard-hero .dashboard-action{ background:#fff !important; color:#16533c !important; border:1.5px solid #e2e8e3 !important; box-shadow:none !important; }
 #mainApp .dashboard-hero .dashboard-action.primary{ background:linear-gradient(135deg,#1c7a57,#16533c) !important; color:#fff !important; border:none !important; box-shadow:0 10px 22px rgba(28,122,87,.26) !important; }
 #mainApp .dashboard-hero .dashboard-action.primary:hover{ filter:brightness(1.08); }
