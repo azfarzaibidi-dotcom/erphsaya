@@ -3117,16 +3117,16 @@ table.kg-grid th, table.kg-grid td { text-align:center; }
 /* ===== MODUL PBD ===== */
 .pbd-tp-sel { padding:7px 10px; border:1.5px solid rgba(18,57,45,0.18); border-radius:9px; font-family:'Cairo',sans-serif; font-weight:800; font-size:14px; background:#fff; cursor:pointer; min-width:92px; }
 .kh-std.pbd-set { background:#f3f8f4; }
-.pbd-tp { display:inline-block; min-width:40px; text-align:center; padding:3px 8px; border-radius:7px; font-family:'Cairo',sans-serif; font-weight:900; font-size:13px; color:#fff; }
+.pbd-tp { display:inline-block; min-width:28px; text-align:center; padding:2px 6px; border-radius:6px; font-family:'Cairo',sans-serif; font-weight:900; font-size:11px; color:#fff; }
 .pbd-tp-0 { background:#d7dde1; color:#7b858c; }
 .pbd-tp-1 { background:#d64541; } .pbd-tp-2 { background:#e67e22; } .pbd-tp-3 { background:#d9a92b; }
 .pbd-tp-4 { background:#7cb342; } .pbd-tp-5 { background:#2d8a56; } .pbd-tp-6 { background:#1c5639; }
-.pbd-raport-table { width:100%; border-collapse:separate; border-spacing:4px; font-family:'Cairo',sans-serif; min-width:560px; }
-.pbd-raport-table th { font-size:12px; font-weight:900; color:#fff; background:var(--brand-green-2,#1c5639); padding:7px 6px; border-radius:7px; }
+.pbd-raport-table { width:100%; border-collapse:separate; border-spacing:3px; font-family:'Cairo',sans-serif; min-width:460px; }
+.pbd-raport-table th { font-size:10.5px; font-weight:900; color:#fff; background:var(--brand-green-2,#1c5639); padding:5px 5px; border-radius:6px; }
 .pbd-raport-table th:first-child { background:var(--brand-green-1,#123c2d); text-align:left; }
-.pbd-rap-name { font-weight:800; font-size:13.5px; color:#333; padding:6px 10px; background:#f7f5ef; border-radius:7px; cursor:pointer; white-space:nowrap; }
+.pbd-rap-name { font-weight:800; font-size:11.5px; color:#333; padding:4px 8px; background:#f7f5ef; border-radius:6px; cursor:pointer; white-space:nowrap; }
 .pbd-rap-name:hover { background:#efeadd; }
-.pbd-rap-cell { text-align:center; padding:4px; }
+.pbd-rap-cell { text-align:center; padding:2px; }
 .pbd-kes { font-weight:900; }
 .pbd-detail-row td { padding:0 4px 8px; }
 .pbd-detail-box { background:#fbfaf6; border:1px solid rgba(18,57,45,0.12); border-radius:10px; padding:10px 12px; }
@@ -3250,7 +3250,7 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 .side-user{ background:#eef4ef !important; border:1px solid #e3eae5 !important; }
 .side-user span{ color:#123c2d !important; }
 .app-main{ background:#f4f7f3; }
-.app-topbar{ background:rgba(255,255,255,.88) !important; }
+.app-topbar{ background:#ffffff !important; backdrop-filter:none !important; box-shadow:0 2px 12px rgba(18,60,45,.07) !important; border-bottom:1px solid #e8ede9 !important; }
 /* HERO light + pop-out */
 #mainApp .dashboard-hero{ background:linear-gradient(120deg,#ffffff,#e9f3ec) !important; border:1px solid #e8ede9 !important; border-radius:24px !important; overflow:hidden !important; box-shadow:0 14px 36px rgba(18,60,45,.07) !important; position:relative !important; min-height:300px !important; }
 #mainApp .dashboard-hero::after{ content:''; position:absolute; right:4%; bottom:-6px; width:300px; height:300px; max-width:38%; border-radius:50%; background:radial-gradient(circle at 50% 42%,#e7f2ec,#d9e9df); z-index:1; }
@@ -3280,6 +3280,38 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 
 /* Kecikkan paparan dashboard sahaja (~saiz 10) — form RPH kekal */
 #mainApp #pageDashboard{ zoom: 0.62; }
+
+/* ===== SELARAS SAIZ KOMPAK — semua modul guna skala sama ===== */
+/* nama / baris utama */
+#mainApp .kh-std-name, #mainApp .kh-rec-main, #mainApp .kh-abs-name, #mainApp .pbd-rap-name, #mainApp .kh-mark-who{ font-size:12px !important; }
+#mainApp .kg-dayname{ font-size:11px !important; }
+/* nombor & meta kecil */
+#mainApp .kh-std-no, #mainApp .kh-save-msg, #mainApp .kh-allhadir, #mainApp .kh-abs-row, #mainApp .kh-abs-sebab, #mainApp .lt-lewat-wrap, #mainApp .kg-lg{ font-size:11px !important; }
+#mainApp .kh-empty, #mainApp .kg-hint{ font-size:11.5px !important; }
+/* badge & chip status — satu saiz seragam */
+#mainApp .pbd-tp, #mainApp .lt-badge, #mainApp .kh-rec-wk{ font-size:11px !important; padding:2px 9px !important; }
+#mainApp .kh-week-badge{ font-size:12px !important; min-width:52px !important; padding:6px 11px !important; }
+#mainApp .kh-summary{ font-size:12px !important; padding:5px 12px !important; }
+#mainApp .kh-rec-count{ font-size:12px !important; }
+#mainApp .kh-mark-title{ font-size:13px !important; }
+#mainApp .kh-mode-btn{ font-size:12px !important; padding:7px 13px !important; }
+/* baris roster & sel input lebih padat */
+#mainApp .kh-std{ padding:6px 10px !important; gap:8px !important; }
+#mainApp .kh-std-sebab select, #mainApp .kh-std-sebab input{ font-size:12px !important; padding:6px 9px !important; }
+/* grid sel kehadiran (guru & murid) seragam */
+#mainApp .kg-cell{ width:30px !important; height:28px !important; font-size:11px !important; }
+/* kad statistik seragam */
+#mainApp .kg-stat{ padding:9px 6px !important; }
+#mainApp .kg-stat-v, #mainApp .pbd-sc-v{ font-size:17px !important; }
+#mainApp .kg-stat-l, #mainApp .pbd-sc-l{ font-size:10.5px !important; }
+#mainApp .pbd-sc{ padding:11px !important; }
+/* select TP & taburan */
+#mainApp .pbd-tp-sel{ font-size:12px !important; padding:6px 9px !important; min-width:78px !important; }
+#mainApp .pbd-tab-barwrap{ height:22px !important; }
+#mainApp .pbd-tab-bar{ font-size:11px !important; }
+#mainApp .pbd-tab-label, #mainApp .pbd-tab-count{ font-size:11px !important; }
+#mainApp .pbd-detail-bidang{ font-size:12px !important; }
+#mainApp .pbd-detail-tajuk{ font-size:11.5px !important; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
