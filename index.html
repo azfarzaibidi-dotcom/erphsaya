@@ -3450,7 +3450,10 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 #mainApp .kg-grid th.kg-cuti-hdr{ background:#e8b93a !important; color:#5a4410 !important; font-weight:800 !important; }
 #mainApp .kg-cell.kg-cuti-penggal{ background:#fbe9b0 !important; color:#9a7a2e !important; cursor:default !important; font-weight:700 !important; }
 /* ===== Pembantu RPH (AI chat) ===== */
-#rphaiFab{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#1c7a57,#123c2d); color:#fff; border:none; font-size:26px; cursor:pointer; box-shadow:0 8px 22px rgba(18,60,45,.35); z-index:140; transition:transform .15s; }
+#rphaiFab{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#1c7a57,#123c2d); color:#fff; border:none; font-size:26px; cursor:pointer; box-shadow:0 8px 22px rgba(18,60,45,.35); z-index:140; transition:transform .15s; display:flex; align-items:center; justify-content:center; }
+.padu-ava{ display:inline-block; line-height:0; }
+.padu-ava-fab{ width:34px; height:34px; }
+.padu-ava-sm{ width:20px; height:20px; vertical-align:-5px; }
 #rphaiFab:hover{ transform:translateY(-2px); }
 .rphai-panel{ position:fixed; bottom:20px; right:20px; width:390px; max-width:calc(100vw - 32px); height:72vh; max-height:620px; background:#fff; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.3); display:flex; flex-direction:column; overflow:hidden; z-index:141; }
 .rphai-head{ background:linear-gradient(135deg,#1c7a57,#123c2d); color:#fff; padding:11px 15px; display:flex; justify-content:space-between; align-items:center; }
@@ -3468,7 +3471,7 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 .rphai-chips button{ border:1.3px solid #cfe0d6; background:#f3f9f5; color:#1c5639; border-radius:999px; padding:5px 10px; font-size:11px; font-weight:700; cursor:pointer; }
 .rphai-chips button:hover{ background:#e6f1ea; }
 .rphai-input{ display:flex; gap:8px; padding:10px 12px; border-top:1px solid #eef2ee; align-items:flex-end; }
-.rphai-input textarea{ flex:1; border:1.4px solid #d8e0d8; border-radius:12px; padding:8px 11px; font-size:13px; font-family:inherit; resize:none; max-height:90px; box-sizing:border-box; }
+.rphai-input textarea{ flex:1; border:1.4px solid #d8e0d8; border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.45; font-family:inherit; resize:none; min-height:48px; max-height:140px; box-sizing:border-box; }
 #rphaiSendBtn{ background:#1c7a57; color:#fff; border:none; width:38px; height:38px; border-radius:50%; font-size:16px; cursor:pointer; flex:0 0 auto; }
 #rphaiSendBtn:disabled{ opacity:.5; }
 @media (max-width:560px){ .rphai-panel{ bottom:0; right:0; left:0; width:100%; height:82vh; max-width:100%; border-radius:18px 18px 0 0; } #rphaiFab{ bottom:16px; right:16px; } }
@@ -4407,10 +4410,10 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
   </div><!-- /app-shell -->
 
 <!-- PEMBANTU RPH (AI) -->
-<button id="rphaiFab" onclick="rphaiToggle()" title="Pembantu RPH">🤖</button>
+<button id="rphaiFab" onclick="rphaiToggle()" title="Padu — Pembantu RPH"><span class="padu-ava padu-ava-fab"><svg viewBox="0 0 64 64" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><path d="M12 26C12 15 21 8 32 8 43 8 52 15 52 26 47 22 43 20 32 20 21 20 17 22 12 26Z" fill="#e3b53f"/><path d="M32 6 41 20 23 20Z" fill="#f3cf63"/><path d="M32 9 37.5 18 26.5 18Z" fill="#c9941f"/><path d="M12 26C16 23 22 21 32 21 42 21 48 23 52 26L50 30C45 27 40 25 32 25 24 25 19 27 14 30Z" fill="#b97f16"/><path d="M19 27C19 24 24 22 32 22 40 22 45 24 45 27L45 35C45 43 39 48 32 48 25 48 19 43 19 35Z" fill="#f0d9ac"/><circle cx="26" cy="33" r="2.1" fill="#3a2a12"/><circle cx="38" cy="33" r="2.1" fill="#3a2a12"/><path d="M23 29 29 30" stroke="#5a3b1a" stroke-width="1.6" stroke-linecap="round"/><path d="M35 30 41 29" stroke="#5a3b1a" stroke-width="1.6" stroke-linecap="round"/><path d="M22 39C26 43 30 42 32 40 34 42 38 43 42 39 38 42 34 41 32 42 30 41 26 42 22 39Z" fill="#4a3014"/><path d="M16 50C21 46 27 48 32 48 37 48 43 46 48 50L52 62 12 62Z" fill="#1c7a57"/><path d="M29 48 35 48 34 60 30 60Z" fill="#f4faf6"/></svg></span></button>
 <div id="rphaiPanel" class="rphai-panel hidden" dir="ltr">
   <div class="rphai-head">
-    <div><b>🤖 Pembantu RPH</b><span class="rphai-sub">Cadang aktiviti · penilaian · pembelajaran terbeza</span></div>
+    <div><b><span class="padu-ava padu-ava-sm"><svg viewBox="0 0 64 64" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><path d="M12 26C12 15 21 8 32 8 43 8 52 15 52 26 47 22 43 20 32 20 21 20 17 22 12 26Z" fill="#e3b53f"/><path d="M32 6 41 20 23 20Z" fill="#f3cf63"/><path d="M32 9 37.5 18 26.5 18Z" fill="#c9941f"/><path d="M12 26C16 23 22 21 32 21 42 21 48 23 52 26L50 30C45 27 40 25 32 25 24 25 19 27 14 30Z" fill="#b97f16"/><path d="M19 27C19 24 24 22 32 22 40 22 45 24 45 27L45 35C45 43 39 48 32 48 25 48 19 43 19 35Z" fill="#f0d9ac"/><circle cx="26" cy="33" r="2.1" fill="#3a2a12"/><circle cx="38" cy="33" r="2.1" fill="#3a2a12"/><path d="M22 39C26 43 30 42 32 40 34 42 38 43 42 39 38 42 34 41 32 42 30 41 26 42 22 39Z" fill="#4a3014"/><path d="M16 50C21 46 27 48 32 48 37 48 43 46 48 50L52 62 12 62Z" fill="#1c7a57"/><path d="M29 48 35 48 34 60 30 60Z" fill="#f4faf6"/></svg></span> Padu</b><span class="rphai-sub">Pembantu RPH · aktiviti · penilaian · terbeza</span></div>
     <button class="rphai-x" onclick="rphaiToggle()" type="button">✕</button>
   </div>
   <div class="rphai-modelbar">
@@ -4428,7 +4431,7 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
     <button type="button" onclick="rphaiChip('Cadangkan cara penilaian PBD & jangkaan Tahap Penguasaan untuk tajuk ini.')">📊 Cadang PBD</button>
   </div>
   <div class="rphai-input">
-    <textarea id="rphaiInput" rows="1" placeholder="Taip di sini… cth: hari ni nak ajar الصفات الإلهية untuk 4 Ali, apa aktiviti?" onkeydown="rphaiKey(event)"></textarea>
+    <textarea id="rphaiInput" rows="2" placeholder="Taip di sini… cth: hari ni nak ajar الصفات الإلهية untuk 4 Ali, apa aktiviti?" onkeydown="rphaiKey(event)"></textarea>
     <button onclick="rphaiSend()" id="rphaiSendBtn" type="button">➤</button>
   </div>
 </div>
@@ -9050,7 +9053,7 @@ function rphaiToggle(){
 function rphaiKey(e){
   const ta=e.target;
   if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); rphaiSend(); return; }
-  setTimeout(()=>{ ta.style.height='auto'; ta.style.height=Math.min(ta.scrollHeight,90)+'px'; },0);
+  setTimeout(()=>{ ta.style.height='auto'; ta.style.height=Math.min(ta.scrollHeight,140)+'px'; },0);
 }
 function rphaiChip(text){ const i=document.getElementById('rphaiInput'); if(i) i.value=text; rphaiSend(); }
 function rphaiFmt(t){ let s=escapeHtml(t); s=s.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>'); s=s.replace(/\n/g,'<br>'); return s; }
@@ -9058,7 +9061,7 @@ function rphaiRender(typing){
   const box=document.getElementById('rphaiMsgs'); if(!box) return;
   let h='';
   if(!RPHAI_MESSAGES.length){
-    h+=`<div class="rphai-welcome">Assalamualaikum Ustaz! 👋 Saya <b>Pembantu RPH</b>.<br><br>Cuba tanya saya:<br>• "hari ni nak ajar <span dir="rtl">الصفات الإلهية</span> untuk 4 Ali, apa aktiviti?"<br>• "buat aktiviti terbeza ikut rekod PBD kelas"<br>• "macam mana nak nilai TP untuk tajuk ni?"<br><br>Saya tahu DSKP, Standard Pembelajaran & rekod PBD kelas awak.</div>`;
+    h+=`<div class="rphai-welcome">Assalamualaikum Ustaz! 👋 Saya <b>Padu</b>, pembantu RPH awak.<br><br>Cuba tanya saya:<br>• "hari ni nak ajar <span dir="rtl">الصفات الإلهية</span> untuk 4 Ali, apa aktiviti?"<br>• "buat aktiviti terbeza ikut rekod PBD kelas"<br>• "macam mana nak nilai TP untuk tajuk ni?"<br><br>Saya tahu DSKP, Standard Pembelajaran & rekod PBD kelas awak.</div>`;
   }
   h+=RPHAI_MESSAGES.map(m=>`<div class="rphai-msg rphai-${m.role}">${rphaiFmt(m.content)}</div>`).join('');
   if(typing) h+=`<div class="rphai-msg rphai-assistant rphai-typing">● ● ●</div>`;
@@ -9085,7 +9088,7 @@ function rphaiBuildSystemPrompt(){
   }catch(e){}
   let formCtx='';
   try{ const mah=(document.getElementById('mahara')||{}).value; const mau=(document.getElementById('maudhu')||{}).value; const sp=(typeof getSelectedMtItems==='function')?getSelectedMtItems():[]; if(mau) formCtx=`\nBorang RPH sekarang: Mahara=${mah||'-'}, Tajuk=${mau}, SP ditanda=${sp.join(' | ')||'(belum ditanda)'}`; }catch(e){}
-  return `Anda "Pembantu RPH", pembantu pengajaran untuk guru ${meta.subjek||'أصول الدين'} tingkatan ${String(tk).replace('T','')} di sekolah menengah agama Malaysia (KSSM). Tugas: bantu guru rancang PdPc — cadang aktiviti pengajaran, pentaksiran bilik darjah (PBD / Tahap Penguasaan TP1–TP6), dan pembelajaran terbeza.
+  return `Nama anda "Padu" — pembantu pengajaran (RPH) untuk guru ${meta.subjek||'أصول الدين'} tingkatan ${String(tk).replace('T','')} di sekolah menengah agama Malaysia (KSSM). Panggil guru "Ustaz". Tugas: bantu guru rancang PdPc — cadang aktiviti pengajaran, pentaksiran bilik darjah (PBD / Tahap Penguasaan TP1–TP6), dan pembelajaran terbeza.
 
 PERATURAN:
 - Jawab dalam Bahasa Melayu; kekalkan istilah Arab DSKP dalam tulisan Arab.
