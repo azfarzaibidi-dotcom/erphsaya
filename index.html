@@ -3446,6 +3446,9 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 #mainApp .pbd-bukti-nama{ font-weight:700; white-space:nowrap; }
 #mainApp .pbd-bukti-table input{ font-size:12px; border:1.3px solid #d8e0d8; border-radius:7px; padding:4px 7px; font-family:inherit; width:100%; box-sizing:border-box; }
 #mainApp .pbd-bukti-table input.pbd-bukti-tarikh{ min-width:118px; }
+/* Kehadiran Saya: kolum cuti penggal (tidak dikira) */
+#mainApp .kg-grid th.kg-cuti-hdr{ background:#e8b93a !important; color:#5a4410 !important; font-weight:800 !important; }
+#mainApp .kg-cell.kg-cuti-penggal{ background:#fbe9b0 !important; color:#9a7a2e !important; cursor:default !important; font-weight:700 !important; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -5573,8 +5576,7 @@ function initApp() {
   initSchedulePlanner();
   updateDraftInfo();
   refreshTemplatePicker();
-  seed2027Holidays();
-  renderHolidays();
+  loadHolidays();
   switchTab('dashboard');
   loadRoster();
 }
@@ -5722,53 +5724,62 @@ function deleteActivityTemplate() {
   showToast('Templat dipadam');
 }
 
-// ===== TAKWIM CUTI =====
-function holidaySeedKey(){ return `erph_holseed_2027_${(currentUser&&currentUser.username)||'azfar'}`; }
-function seed2027Holidays(){
-  if(localStorage.getItem(holidaySeedKey())) return;
-  const base2027 = [
-    { start:'2027-03-06', end:'2027-03-14', nama:'Cuti Penggal 1' },
-    { start:'2027-05-22', end:'2027-06-06', nama:'Cuti Pertengahan Tahun' },
-    { start:'2027-08-28', end:'2027-09-05', nama:'Cuti Penggal 2' },
-    { start:'2027-12-04', end:'2027-12-31', nama:'Cuti Akhir Tahun' }
-  ];
-  const list = getHolidays();
-  base2027.forEach(h => { if(!list.some(x => x.start===h.start && x.end===h.end)) list.push(h); });
-  list.sort((a,b)=>a.start.localeCompare(b.start));
-  saveHolidaysList(list);
-  localStorage.setItem(holidaySeedKey(), '1');
+// ===== TAKWIM CUTI (Supabase — sync semua peranti) =====
+let HOLIDAYS_CACHE = [];
+const HOL_SEED_2027 = [
+  { start:'2027-03-06', end:'2027-03-14', nama:'Cuti Penggal 1' },
+  { start:'2027-05-22', end:'2027-06-06', nama:'Cuti Pertengahan Tahun' },
+  { start:'2027-08-28', end:'2027-09-05', nama:'Cuti Penggal 2' },
+  { start:'2027-12-04', end:'2027-12-31', nama:'Cuti Akhir Tahun' }
+];
+function getHolidays() { return HOLIDAYS_CACHE; }
+function isHoliday(iso) { return HOLIDAYS_CACHE.find(h => iso >= h.start && iso <= (h.end || h.start)) || null; }
+function holMap(row){ return { id:row.id, start:row.tarikh_mula, end:row.tarikh_akhir||row.tarikh_mula, nama:row.nama||'Cuti' }; }
+async function loadHolidays(){
+  if(!currentUser){ HOLIDAYS_CACHE=[]; renderHolidays(); return; }
+  let rows=[];
+  try{ rows = await sb('GET', `erph_holidays?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=*&order=tarikh_mula.asc`) || []; }
+  catch(e){ rows=[]; }
+  if(!rows.length){
+    // seed 2027 + migrasi cuti localStorage lama (sekali sahaja)
+    let legacy=[]; try{ legacy = JSON.parse(localStorage.getItem(`erph_holidays_${currentUser.username}`)||'[]')||[]; }catch(_){ legacy=[]; }
+    const seedList = HOL_SEED_2027.slice();
+    legacy.forEach(h=>{ if(h&&h.start && !seedList.some(x=>x.start===h.start&&x.end===(h.end||h.start))) seedList.push({start:h.start,end:h.end||h.start,nama:h.nama||'Cuti'}); });
+    try{
+      for(const h of seedList){ await sb('POST','erph_holidays',{ cikgu_username:currentUser.username, tarikh_mula:h.start, tarikh_akhir:h.end||h.start, nama:h.nama||'Cuti' }); }
+      rows = await sb('GET', `erph_holidays?cikgu_username=eq.${encodeURIComponent(currentUser.username)}&select=*&order=tarikh_mula.asc`) || [];
+    }catch(e){ rows=[]; }
+  }
+  HOLIDAYS_CACHE = rows.map(holMap).sort((a,b)=>String(a.start).localeCompare(String(b.start)));
+  renderHolidays();
 }
-function holidayKey() { return `erph_holidays_${(currentUser&&currentUser.username)||'azfar'}`; }
-function getHolidays() { try { return JSON.parse(localStorage.getItem(holidayKey())||'[]')||[]; } catch(_) { return []; } }
-function saveHolidaysList(list) { localStorage.setItem(holidayKey(), JSON.stringify(list)); }
-function isHoliday(iso) { return getHolidays().find(h => iso >= h.start && iso <= (h.end || h.start)) || null; }
-function addHoliday() {
+async function addHoliday() {
   const start = document.getElementById('holStart').value;
   const end = document.getElementById('holEnd').value || start;
   const nama = (document.getElementById('holNama').value || '').trim();
   if(!start) { showToast('⚠️ Pilih tarikh mula'); return; }
-  const list = getHolidays();
-  list.push({ start, end, nama: nama || 'Cuti' });
-  list.sort((a,b)=>a.start.localeCompare(b.start));
-  saveHolidaysList(list);
-  document.getElementById('holNama').value = '';
-  renderHolidays();
-  if(typeof renderWeekSummary === 'function') renderWeekSummary();
-  showToast('✅ Cuti ditambah');
+  try{
+    await sb('POST','erph_holidays',{ cikgu_username:currentUser.username, tarikh_mula:start, tarikh_akhir:end, nama:nama||'Cuti' });
+    document.getElementById('holNama').value = '';
+    document.getElementById('holStart').value = ''; document.getElementById('holEnd').value = '';
+    await loadHolidays();
+    if(typeof renderWeekSummary === 'function') renderWeekSummary();
+    showToast('✅ Cuti ditambah');
+  }catch(e){ showToast('❌ Gagal (jadual erph_holidays belum dibuat di Supabase?)'); }
 }
-function deleteHoliday(idx) {
-  const list = getHolidays();
-  list.splice(idx,1);
-  saveHolidaysList(list);
-  renderHolidays();
-  if(typeof renderWeekSummary === 'function') renderWeekSummary();
+async function deleteHoliday(id) {
+  try{
+    await sb('DELETE', `erph_holidays?id=eq.${encodeURIComponent(id)}`);
+    await loadHolidays();
+    if(typeof renderWeekSummary === 'function') renderWeekSummary();
+  }catch(e){ showToast('❌ Gagal padam cuti'); }
 }
 function renderHolidays() {
   const box = document.getElementById('holidayList');
   if(!box) return;
-  const list = getHolidays();
+  const list = HOLIDAYS_CACHE;
   if(!list.length) { box.innerHTML = '<div style="color:var(--text-light);font-size:14px">Tiada cuti direkod.</div>'; return; }
-  box.innerHTML = list.map((h,i)=>`<div class="hol-row"><span class="hol-date" dir="ltr">${escapeHtml(formatPlannerDate(h.start))}${h.end&&h.end!==h.start?' – '+escapeHtml(formatPlannerDate(h.end)):''}</span><span class="hol-name">${escapeHtml(h.nama)}</span><button type="button" class="hol-del" onclick="deleteHoliday(${i})">✕</button></div>`).join('');
+  box.innerHTML = list.map(h=>`<div class="hol-row"><span class="hol-date" dir="ltr">${escapeHtml(formatPlannerDate(h.start))}${h.end&&h.end!==h.start?' – '+escapeHtml(formatPlannerDate(h.end)):''}</span><span class="hol-name">${escapeHtml(h.nama)}</span><button type="button" class="hol-del" onclick="deleteHoliday(${h.id})">✕</button></div>`).join('');
 }
 
 // ===== EKSPORT WORD =====
@@ -6393,10 +6404,27 @@ function kgStatusFor(iso){
   return o ? o.status : kgDefaultStatus(iso);
 }
 
+// Senarai minggu untuk paparan: minggu persekolahan + minggu cuti penggal (dari lubang takwim)
+function kgDisplayWeeks(){
+  const weeks = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  const out = [];
+  for(let i=0;i<weeks.length;i++){
+    out.push({ week:weeks[i].week, start:weeks[i].start, end:weeks[i].end, cuti:false });
+    const next = weeks[i+1];
+    if(next){
+      let g = kgAddDays(weeks[i].start, 7); let guard=0;
+      while(g < next.start && guard < 12){
+        out.push({ cuti:true, start:g, end:kgAddDays(g,4) });
+        g = kgAddDays(g, 7); guard++;
+      }
+    }
+  }
+  return out;
+}
 function kgRenderGrid(){
   const box = document.getElementById('kgGrid');
   if(!box) return;
-  const weeks = (typeof LEARNING_WEEKS !== 'undefined') ? LEARNING_WEEKS : [];
+  const weeks = kgDisplayWeeks();
   if(!weeks.length){ box.innerHTML = '<div class="kh-empty">Takwim minggu belum diset.</div>'; return; }
   const groups = [];
   weeks.forEach(w => {
@@ -6405,13 +6433,16 @@ function kgRenderGrid(){
     if(last && last.mon === mon) last.weeks.push(w); else groups.push({ mon, weeks:[w] });
   });
   const monthRow = `<tr class="kg-month-row"><th class="kg-corner"></th>${groups.map(g => `<th colspan="${g.weeks.length}">${KG_BULAN[g.mon]}</th>`).join('')}</tr>`;
-  const weekRow = `<tr class="kg-week-row"><th class="kg-corner">Hari</th>${weeks.map(w => `<th title="${w.start} → ${w.end}">M${w.week}</th>`).join('')}</tr>`;
+  const weekRow = `<tr class="kg-week-row"><th class="kg-corner">Hari</th>${weeks.map(w => w.cuti ? `<th class="kg-cuti-hdr" title="Cuti penggal ${w.start} → ${w.end} (tidak dikira)">Cuti</th>` : `<th title="${w.start} → ${w.end}">M${w.week}</th>`).join('')}</tr>`;
   const bodyRows = KG_DAYS.map((dayName, di) => {
     const cells = weeks.map(w => {
       const iso = kgAddDays(w.start, di);
+      const dd = iso.split('-')[2];
+      if(w.cuti){
+        return `<td class="kg-cell kg-cuti-penggal" title="${dayName} ${khFmtTarikh(iso)} — Cuti penggal (tidak dikira)">${dd}</td>`;
+      }
       const st = kgStatusFor(iso);
       const locked = (st === 'cutiSekolah');
-      const dd = iso.split('-')[2];
       const hasNote = !!(KG_MAP[iso] && KG_MAP[iso].catatan);
       const stLabel = (st === 'cutiSekolah') ? 'Cuti Sekolah' : KG_STATUS[st].label;
       const title = `${dayName} ${khFmtTarikh(iso)} — ${stLabel}${hasNote ? ' ('+KG_MAP[iso].catatan+')' : ''}`;
