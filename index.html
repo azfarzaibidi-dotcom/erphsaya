@@ -6838,7 +6838,7 @@ function pbdAvgTP(arr){ if(!arr || !arr.length) return 0; return Math.round(arr.
 function pbdTpBadge(tp){ return `<span class="pbd-tp pbd-tp-${tp||0}">${tp?('TP'+tp):'—'}</span>`; }
 
 function pbdFillKelas(ids){
-  const kelasList = getAllKelas();
+  const kelasList = getAllKelas().filter(k => khTingkatanForKelas(k) !== 'T6'); // T6 tiada TP/PBD
   ids.forEach(([id, head]) => {
     const sel = document.getElementById(id); if(!sel) return;
     const cur = sel.value;
@@ -6894,14 +6894,14 @@ async function pbdLoadMarking(){
   pbdRenderRoster(kelas, map);
   document.getElementById('pbdMarkWho').textContent = `· ${kelas}`;
   document.getElementById('pbdSaveMsg').textContent = existing ? '✏️ Mengedit penilaian sedia ada' : '';
-  // rubrik TP
+  // rubrik TP — papar segera guna default/cache, kemudian muat versi tersimpan di latar
   pbdRubrikEditing=false;
   document.getElementById('pbdRubrikSaveBtn').classList.add('hidden');
   document.getElementById('pbdRubrikEditBtn').textContent='✏️ Edit rubrik';
   document.getElementById('pbdRubrikMsg').textContent='';
-  try{ await pbdLoadRubrik(tk); }catch(e){}
   pbdRenderRubrik(tk, false);
   const card=document.getElementById('pbdMarkCard'); card.classList.remove('hidden'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  pbdLoadRubrik(tk).then(()=>{ if(!pbdRubrikEditing) pbdRenderRubrik(tk, false); }).catch(()=>{});
 }
 function pbdRenderRoster(kelas, map){
   const roster=(adamData[kelas]||[]).slice();
@@ -7008,8 +7008,10 @@ async function pbdSaveRubrik(){
   }catch(e){ msg.textContent='❌ Gagal (jadual erph_pbd_rubrik belum dibuat?)'; }
 }
 function pbdSPForTajuk(tk,bidang,tajuk){
-  const b=pbdDBFor(tk)[bidang]||{}; const sks=(b.mc&&b.mc[tajuk])||[]; let items=[];
-  sks.forEach(sk=>{ const sp=(b.mt&&b.mt[sk])||[]; sp.forEach(x=>items.push(x)); });
+  const b=pbdDBFor(tk)[bidang]||{};
+  let sks=(b.mc&&b.mc[tajuk]); if(!sks) sks=[]; if(!Array.isArray(sks)) sks=[sks];
+  const items=[];
+  sks.forEach(sk=>{ let sp=(b.mt&&b.mt[sk]); if(!sp) sp=[]; if(!Array.isArray(sp)) sp=[sp]; sp.forEach(x=>{ if(x) items.push(x); }); });
   return items;
 }
 function pbdOpenCheck(i){
