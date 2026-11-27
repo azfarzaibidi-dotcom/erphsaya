@@ -3423,6 +3423,29 @@ body{ background:#f4f7f3 !important; background-image:none !important; }
 #mainApp .pbd-check-foot{ padding:11px 16px; border-top:1px solid #eef2ee; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
 #mainApp .pbd-check-suggest{ font-weight:800; font-size:13px; color:#1c5639; }
 #mainApp .pbd-check-btns{ display:flex; gap:8px; }
+/* ===== RPH: kecilkan item borang (semua tingkatan) ===== */
+#pageForm .field label{ font-size:14px !important; }
+#pageForm .field input, #pageForm .field select, #pageForm .field textarea{ font-size:14px !important; padding:7px 10px !important; }
+#mainApp #mtCheckboxes{ gap:6px !important; }
+#mainApp #mtCheckboxes label{ padding:6px 10px !important; border-radius:10px !important; box-shadow:0 3px 8px rgba(18,57,45,0.05) !important; }
+#mainApp #mtCheckboxes label span{ font-size:12.5px !important; line-height:1.3 !important; }
+#mainApp #mtCheckboxes label input{ width:15px !important; height:15px !important; }
+#mainApp #mcCheckboxes label{ padding:6px 10px !important; border-radius:10px !important; }
+#mainApp #mcCheckboxes label span{ font-size:12.5px !important; line-height:1.3 !important; }
+#mainApp #objektifAuto{ font-size:14px !important; padding:9px 11px !important; }
+/* PBD: tarikh/ulasan + jadual bukti */
+#mainApp .pbd-detail-meta{ font-size:11px; color:#6a7a70; padding:0 0 5px; direction:rtl; text-align:right; }
+#mainApp .pbd-check-meta{ display:flex; gap:10px; padding:9px 16px; border-top:1px solid #eef2ee; flex-wrap:wrap; }
+#mainApp .pbd-meta-fld{ display:flex; flex-direction:column; gap:3px; font-size:11px; font-weight:800; color:#1c5639; }
+#mainApp .pbd-meta-fld.pbd-meta-wide{ flex:1; min-width:180px; }
+#mainApp .pbd-meta-fld input{ font-size:12.5px; border:1.4px solid #d8e0d8; border-radius:8px; padding:6px 9px; font-family:inherit; font-weight:600; }
+#mainApp .kh-std.pbd-has-note .pbd-chk-btn{ background:#e9f3ed !important; border-color:#1c5639 !important; color:#1c5639 !important; }
+#mainApp .pbd-bukti-table{ width:100%; border-collapse:separate; border-spacing:0; font-size:12px; min-width:720px; }
+#mainApp .pbd-bukti-table th{ background:var(--brand-green-2,#1c5639); color:#fff; font-weight:800; font-size:11px; padding:7px 8px; }
+#mainApp .pbd-bukti-table td{ padding:5px 8px; border-bottom:1px solid #eef2ee; vertical-align:middle; }
+#mainApp .pbd-bukti-nama{ font-weight:700; white-space:nowrap; }
+#mainApp .pbd-bukti-table input{ font-size:12px; border:1.3px solid #d8e0d8; border-radius:7px; padding:4px 7px; font-family:inherit; width:100%; box-sizing:border-box; }
+#mainApp .pbd-bukti-table input.pbd-bukti-tarikh{ min-width:118px; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -4255,6 +4278,7 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
       <button id="pbdTabRekod" class="kh-mode-btn active" onclick="pbdSwitchMode('rekod')" type="button">✍️ Rekod TP</button>
       <button id="pbdTabLaporan" class="kh-mode-btn" onclick="pbdSwitchMode('laporan')" type="button">📋 Laporan Murid</button>
       <button id="pbdTabTaburan" class="kh-mode-btn" onclick="pbdSwitchMode('taburan')" type="button">📊 Taburan TP</button>
+      <button id="pbdTabBukti" class="kh-mode-btn" onclick="pbdSwitchMode('bukti')" type="button">📄 Bukti</button>
     </div>
 
     <!-- MOD REKOD -->
@@ -4293,10 +4317,14 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
           <div class="pbd-modal-head"><span id="pbdCheckWho">Checklist SP</span><button class="pbd-modal-x" type="button" onclick="pbdCloseCheck()">✕</button></div>
           <div class="pbd-modal-sub" id="pbdCheckTajuk"></div>
           <div id="pbdCheckList" class="pbd-check-list"></div>
+          <div class="pbd-check-meta">
+            <label class="pbd-meta-fld"><span>📅 Tarikh</span><input type="date" id="pbdCheckTarikh"></label>
+            <label class="pbd-meta-fld pbd-meta-wide"><span>💬 Ulasan / bukti</span><input type="text" id="pbdCheckUlasan" placeholder="cth: kuasai lisan, perlu kukuh bertulis / pemerhatian sikap…"></label>
+          </div>
           <div class="pbd-check-foot">
             <div class="pbd-check-suggest" id="pbdCheckSuggest">—</div>
             <div class="pbd-check-btns">
-              <button class="btn kh-save-btn" type="button" onclick="pbdApplyCheck()">✔️ Guna cadangan TP</button>
+              <button class="btn kh-save-btn" type="button" onclick="pbdApplyCheck()">✔️ Simpan (TP + catatan)</button>
               <button class="btn btn-outline" type="button" onclick="pbdCloseCheck()">Batal</button>
             </div>
           </div>
@@ -4333,6 +4361,20 @@ Rabu | 4C | T4 | Usul | 11:30 | 12:30"></textarea>
         </div>
       </div>
       <div id="pbdTaburan"></div>
+    </div>
+
+    <!-- MOD BUKTI -->
+    <div id="pbdModeBukti" class="hidden" dir="ltr">
+      <div class="kh-rec-head">
+        <div class="kh-filter-bar">
+          <label style="font-family:'Cairo',sans-serif;font-weight:800;color:var(--brand-green-1,#123c2d)">Kelas</label>
+          <select id="pbdBuktiKelas" onchange="pbdLoadBukti()"></select>
+          <button class="btn kh-save-btn" onclick="pbdSaveBukti()" type="button">💾 Simpan ubahan</button>
+          <button class="btn btn-outline kh-xls-btn" onclick="pbdBuktiExport()" type="button">📊 Export Excel</button>
+        </div>
+      </div>
+      <div class="kg-hint">Rekod bukti PBD untuk pencerapan — tiap murid × tajuk: TP, tarikh & ulasan. Tarikh & ulasan boleh diedit terus di sini.</div>
+      <div id="pbdBukti" class="kg-grid-wrap"></div>
     </div>
   </div>
     </div><!-- /app-main -->
@@ -6848,16 +6890,17 @@ function pbdFillKelas(ids){
 }
 function initPBD(){
   if(!currentUser) return;
-  pbdFillKelas([['pbdKelas','<option value="">-- Pilih Kelas --</option>'],['pbdFilterKelas','<option value="">Semua Kelas</option>'],['pbdRaportKelas','<option value="">-- Pilih Kelas --</option>'],['pbdTaburanKelas','<option value="">-- Pilih Kelas --</option>']]);
+  pbdFillKelas([['pbdKelas','<option value="">-- Pilih Kelas --</option>'],['pbdFilterKelas','<option value="">Semua Kelas</option>'],['pbdRaportKelas','<option value="">-- Pilih Kelas --</option>'],['pbdTaburanKelas','<option value="">-- Pilih Kelas --</option>'],['pbdBuktiKelas','<option value="">-- Pilih Kelas --</option>']]);
   pbdLoadRecords();
 }
 function pbdSwitchMode(mode){
-  [['rekod','pbdModeRekod','pbdTabRekod'],['laporan','pbdModeLaporan','pbdTabLaporan'],['taburan','pbdModeTaburan','pbdTabTaburan']].forEach(([m,pane,tab])=>{
+  [['rekod','pbdModeRekod','pbdTabRekod'],['laporan','pbdModeLaporan','pbdTabLaporan'],['taburan','pbdModeTaburan','pbdTabTaburan'],['bukti','pbdModeBukti','pbdTabBukti']].forEach(([m,pane,tab])=>{
     document.getElementById(pane).classList.toggle('hidden', m!==mode);
     document.getElementById(tab).classList.toggle('active', m===mode);
   });
   if(mode==='laporan') pbdLoadRaport();
   if(mode==='taburan') pbdLoadTaburan();
+  if(mode==='bukti') pbdLoadBukti();
 }
 
 async function pbdFetch(){
@@ -6889,8 +6932,8 @@ async function pbdLoadMarking(){
   const tk=khTingkatanForKelas(kelas);
   PBD_CUR_SP = pbdSPForTajuk(tk, bidang, tajuk);
   const existing = PBD_RECORDS.find(r=>r.kelas===kelas && r.bidang===bidang && r.tajuk===tajuk);
-  const map={};
-  if(existing && Array.isArray(existing.penilaian)) existing.penilaian.forEach(p=>{ if(p&&p.nama) map[p.nama]=p.tp; });
+  const map={}; PBD_MARK_META={};
+  if(existing && Array.isArray(existing.penilaian)) existing.penilaian.forEach(p=>{ if(p&&p.nama){ map[p.nama]=p.tp; PBD_MARK_META[p.nama]={tarikh:p.tarikh||'', ulasan:p.ulasan||''}; } });
   pbdRenderRoster(kelas, map);
   document.getElementById('pbdMarkWho').textContent = `· ${kelas}`;
   document.getElementById('pbdSaveMsg').textContent = existing ? '✏️ Mengedit penilaian sedia ada' : '';
@@ -6927,10 +6970,12 @@ function pbdRecalc(){
   document.getElementById('pbdJumlah').textContent=rows.length;
 }
 function pbdGather(){
-  const out=[];
+  const out=[]; const today=new Date().toISOString().slice(0,10);
   document.querySelectorAll('#pbdRoster .kh-std').forEach(row=>{
     const sel=row.querySelector('.pbd-tp-sel'); if(!sel||!sel.value) return;
-    out.push({ nama:row.querySelector('.kh-std-name').textContent, tp:parseInt(sel.value) });
+    const nama=row.querySelector('.kh-std-name').textContent;
+    const meta=PBD_MARK_META[nama]||{};
+    out.push({ nama, tp:parseInt(sel.value), tarikh: meta.tarikh||today, ulasan: meta.ulasan||'' });
   });
   return out;
 }
@@ -6966,6 +7011,7 @@ let PBD_RUBRIK_CACHE = {};
 let PBD_CUR_SP = [];
 let PBD_CHECK_I = null;
 let pbdRubrikEditing = false;
+let PBD_MARK_META = {};  // nama -> {tarikh, ulasan}
 function pbdRubrikFor(tk){ return Object.assign({}, PBD_RUBRIK_DEFAULT, PBD_RUBRIK_CACHE[tk]||{}); }
 async function pbdLoadRubrik(tk){
   try{
@@ -7019,12 +7065,17 @@ function pbdOpenCheck(i){
   const tajuk=document.getElementById('pbdTajuk').value;
   const rows=document.querySelectorAll('#pbdRoster .kh-std');
   const nameEl=rows[i] ? rows[i].querySelector('.kh-std-name') : null;
-  document.getElementById('pbdCheckWho').textContent='📋 '+(nameEl?nameEl.textContent:'Murid');
+  const nama=nameEl?nameEl.textContent:'Murid';
+  document.getElementById('pbdCheckWho').textContent='📋 '+nama;
   document.getElementById('pbdCheckTajuk').textContent=tajuk;
   const list=document.getElementById('pbdCheckList'); const items=PBD_CUR_SP||[];
-  if(!items.length){ list.innerHTML='<div class="kh-empty">Tiada item Standard Pembelajaran untuk tajuk ini. Guna Rubrik TP sebagai panduan.</div>'; }
+  if(!items.length){ list.innerHTML='<div class="kh-empty">Tiada item Standard Pembelajaran untuk tajuk ini (mungkin item afektif/penghayatan). Nilai melalui pemerhatian & catat di ruang ulasan; pilih TP guna Rubrik TP sebagai panduan.</div>'; }
   else list.innerHTML=items.map((it,k)=>`<div class="pbd-check-item"><input type="checkbox" id="pbdChk${k}" onchange="pbdCheckRecalc()"><label for="pbdChk${k}">${escapeHtml(it)}</label></div>`).join('');
   const sug=document.getElementById('pbdCheckSuggest'); sug.dataset.tp=''; sug.textContent=items.length?`Tanda item yang murid kuasai… (0/${items.length})`:'';
+  // tarikh + ulasan (default hari ini)
+  const meta=PBD_MARK_META[nama]||{};
+  document.getElementById('pbdCheckTarikh').value = meta.tarikh || new Date().toISOString().slice(0,10);
+  document.getElementById('pbdCheckUlasan').value = meta.ulasan || '';
   document.getElementById('pbdCheckModal').classList.remove('hidden');
 }
 function pbdCheckRecalc(){
@@ -7036,12 +7087,14 @@ function pbdCheckRecalc(){
   else { sug.dataset.tp=''; sug.textContent=`Belum tanda apa-apa (0/${total})`; }
 }
 function pbdApplyCheck(){
+  const rows=document.querySelectorAll('#pbdRoster .kh-std'); const row=rows[PBD_CHECK_I];
+  const nama=row?row.querySelector('.kh-std-name').textContent:null;
+  if(nama){ PBD_MARK_META[nama]={ tarikh:document.getElementById('pbdCheckTarikh').value||'', ulasan:document.getElementById('pbdCheckUlasan').value.trim() }; }
   const tp=document.getElementById('pbdCheckSuggest').dataset.tp;
-  if(!tp){ showToast('⚠️ Tanda sekurang-kurangnya satu item'); return; }
-  const rows=document.querySelectorAll('#pbdRoster .kh-std'); const sel=rows[PBD_CHECK_I] ? rows[PBD_CHECK_I].querySelector('.pbd-tp-sel') : null;
-  if(sel){ sel.value=String(tp); pbdOnTp(sel); }
+  if(tp && row){ const sel=row.querySelector('.pbd-tp-sel'); if(sel){ sel.value=String(tp); pbdOnTp(sel); } }
+  if(row && nama){ row.classList.toggle('pbd-has-note', !!(PBD_MARK_META[nama] && PBD_MARK_META[nama].ulasan)); }
   pbdCloseCheck();
-  showToast(`✔️ Dicadang TP${tp}`);
+  showToast(tp?`✔️ TP${tp} + catatan disimpan`:'✔️ Catatan disimpan');
 }
 function pbdCloseCheck(){ document.getElementById('pbdCheckModal').classList.add('hidden'); PBD_CHECK_I=null; }
 
@@ -7098,7 +7151,7 @@ function pbdAggregate(kelas){
     (r.penilaian||[]).forEach(p=>{
       if(!p||!p.nama) return;
       (data[p.nama]=data[p.nama]||{});
-      (data[p.nama][r.bidang]=data[p.nama][r.bidang]||[]).push({tajuk:r.tajuk, tp:p.tp});
+      (data[p.nama][r.bidang]=data[p.nama][r.bidang]||[]).push({tajuk:r.tajuk, tp:p.tp, tarikh:p.tarikh||'', ulasan:p.ulasan||''});
     });
   });
   const names = roster.length ? roster.slice() : Object.keys(data);
@@ -7136,12 +7189,80 @@ function pbdDetailHtml(s, bidangs){
   bidangs.forEach(b=>{
     const arr=(s.detail[b]||[]); if(!arr.length) return; any=true;
     h+=`<div class="pbd-detail-bidang" dir="rtl">${escapeHtml(b)} ${pbdTpBadge(s.byBidang[b])}</div>`;
-    arr.forEach(x=>{ h+=`<div class="pbd-detail-tajuk"><span dir="rtl">${escapeHtml(x.tajuk)}</span>${pbdTpBadge(x.tp)}</div>`; });
+    arr.forEach(x=>{
+      h+=`<div class="pbd-detail-tajuk"><span dir="rtl">${escapeHtml(x.tajuk)}</span>${pbdTpBadge(x.tp)}</div>`;
+      if(x.tarikh||x.ulasan) h+=`<div class="pbd-detail-meta">${x.tarikh?`📅 ${escapeHtml(x.tarikh)}`:''}${x.tarikh&&x.ulasan?' · ':''}${x.ulasan?`💬 ${escapeHtml(x.ulasan)}`:''}</div>`;
+    });
   });
   if(!any) h+='<div style="color:var(--text-light)">Belum ada penilaian.</div>';
   return h+'</div>';
 }
 function pbdToggleDetail(i){ const el=document.getElementById('pbdDetail'+i); if(el) el.classList.toggle('hidden'); }
+
+// --- BUKTI (rekod terperinci: TP + tarikh + ulasan) ---
+let PBD_BUKTI_ROWS = [];
+async function pbdLoadBukti(){
+  const kelas=document.getElementById('pbdBuktiKelas').value;
+  const box=document.getElementById('pbdBukti'); if(!box) return;
+  if(!kelas){ box.innerHTML='<div class="kh-empty">Pilih kelas untuk lihat bukti.</div>'; return; }
+  try{ await pbdFetch(); }catch(e){ box.innerHTML='<div class="kh-empty">Ralat memuat.</div>'; return; }
+  const recs=PBD_RECORDS.filter(r=>r.kelas===kelas);
+  PBD_BUKTI_ROWS=[];
+  recs.forEach(r=>{ (r.penilaian||[]).forEach(p=>{ if(p&&p.nama) PBD_BUKTI_ROWS.push({recId:r.id, bidang:r.bidang, tajuk:r.tajuk, nama:p.nama, tp:p.tp, tarikh:p.tarikh||'', ulasan:p.ulasan||''}); }); });
+  if(!PBD_BUKTI_ROWS.length){ box.innerHTML='<div class="kh-empty">Belum ada rekod penilaian untuk kelas ini.</div>'; return; }
+  PBD_BUKTI_ROWS.sort((a,b)=> String(a.nama).localeCompare(String(b.nama)) || String(a.bidang).localeCompare(String(b.bidang)) || String(a.tajuk).localeCompare(String(b.tajuk)));
+  const rows=PBD_BUKTI_ROWS.map((x,i)=>`<tr>
+      <td class="pbd-bukti-nama">${escapeHtml(x.nama)}</td>
+      <td dir="rtl">${escapeHtml(x.bidang)}</td>
+      <td dir="rtl">${escapeHtml(x.tajuk)}</td>
+      <td style="text-align:center">${pbdTpBadge(x.tp)}</td>
+      <td><input type="date" class="pbd-bukti-tarikh" data-i="${i}" value="${escapeHtml(x.tarikh)}"></td>
+      <td><input type="text" class="pbd-bukti-ulasan" data-i="${i}" value="${escapeHtml(x.ulasan)}" placeholder="ulasan / bukti…"></td>
+    </tr>`).join('');
+  box.innerHTML=`<table class="pbd-bukti-table"><thead><tr><th>Murid</th><th>Bidang</th><th>Tajuk</th><th>TP</th><th>Tarikh</th><th>Ulasan</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function pbdBuktiPullEdits(){
+  document.querySelectorAll('.pbd-bukti-tarikh').forEach(inp=>{ const i=+inp.dataset.i; if(PBD_BUKTI_ROWS[i]) PBD_BUKTI_ROWS[i].tarikh=inp.value||''; });
+  document.querySelectorAll('.pbd-bukti-ulasan').forEach(inp=>{ const i=+inp.dataset.i; if(PBD_BUKTI_ROWS[i]) PBD_BUKTI_ROWS[i].ulasan=inp.value.trim(); });
+}
+async function pbdSaveBukti(){
+  if(!PBD_BUKTI_ROWS.length){ showToast('⚠️ Tiada rekod'); return; }
+  pbdBuktiPullEdits();
+  const byRec={}; PBD_BUKTI_ROWS.forEach(x=>{ (byRec[x.recId]=byRec[x.recId]||[]).push(x); });
+  let n=0;
+  try{
+    for(const recId of Object.keys(byRec)){
+      const penilaian=byRec[recId].map(x=>({nama:x.nama, tp:x.tp, tarikh:x.tarikh||'', ulasan:x.ulasan||''}));
+      await sb('PATCH', `erph_pbd?id=eq.${encodeURIComponent(recId)}`, {penilaian});
+      n++;
+    }
+    showToast(`✅ Bukti dikemaskini (${n} rekod)`);
+    await pbdFetch();
+  }catch(e){ showToast('❌ Gagal simpan: '+String(e.message||'').slice(0,80)); }
+}
+function pbdBuktiExport(){
+  const kelas=document.getElementById('pbdBuktiKelas').value;
+  if(!PBD_BUKTI_ROWS.length){ showToast('⚠️ Tiada bukti'); return; }
+  pbdBuktiPullEdits();
+  const H=['Murid','Bidang','Tajuk','TP','Tarikh','Ulasan'];
+  const cStr=(c,r,s,v)=>`<c r="${khColLetter(c)}${r}"${s!=null?` s="${s}"`:''} t="inlineStr"><is><t xml:space="preserve">${khXmlEsc(v==null?'':String(v))}</t></is></c>`;
+  const rows=[]; let r=0;
+  r++; rows.push(`<row r="${r}">${H.map((h,i)=>cStr(i,r,1,h)).join('')}</row>`);
+  PBD_BUKTI_ROWS.forEach(x=>{ r++; rows.push(`<row r="${r}">`+cStr(0,r,null,x.nama)+cStr(1,r,null,x.bidang)+cStr(2,r,null,x.tajuk)+cStr(3,r,null,'TP'+x.tp)+cStr(4,r,null,x.tarikh)+cStr(5,r,null,x.ulasan)+`</row>`); });
+  const cols=`<cols><col min="1" max="1" width="26"/><col min="2" max="3" width="30"/><col min="4" max="5" width="12"/><col min="6" max="6" width="42"/></cols>`;
+  const sheet=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${cols}<sheetData>${rows.join('')}</sheetData></worksheet>`;
+  const enc=new TextEncoder(); const files=[];
+  files.push({name:'[Content_Types].xml', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`)});
+  files.push({name:'_rels/.rels', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`)});
+  files.push({name:'xl/workbook.xml', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Bukti PBD" sheetId="1" r:id="rId1"/></sheets></workbook>`)});
+  files.push({name:'xl/_rels/workbook.xml.rels', data:enc.encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`)});
+  files.push({name:'xl/styles.xml', data:enc.encode(KH_STYLES_XML)});
+  files.push({name:'xl/worksheets/sheet1.xml', data:enc.encode(sheet)});
+  const zip=khZip(files); const blob=new Blob([zip],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='bukti_pbd_'+String(kelas||'kelas').replace(/\s+/g,'_')+'.xlsx';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(()=>URL.revokeObjectURL(url),1500);
+  showToast('📊 Bukti PBD dieksport (.xlsx)');
+}
 
 // --- TABURAN TP ---
 async function pbdLoadTaburan(){
